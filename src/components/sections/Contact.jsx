@@ -89,7 +89,7 @@ export function Contact() {
   )
 }
 
-/** Pequenos nós conectados estilo rede (IT) */
+/** Pequenos nós conectados estilo rede (IT) — piscam como luzes */
 function NetworkNodes({ accentBlend }) {
   const positions = [
     [10, 20], [88, 15], [50, 40], [25, 70], [75, 65], [15, 85], [90, 90],
@@ -99,10 +99,11 @@ function NetworkNodes({ accentBlend }) {
       {positions.map(([left, top], i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 rounded-full bg-[var(--color-accent)]"
+          className="absolute w-2 h-2 rounded-full bg-[var(--color-accent)] node-flicker"
           style={{
             left: `${left}%`,
             top: `${top}%`,
+            animationDelay: `${i * 0.35}s`,
           }}
           initial={{ scale: 0, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 0.6 }}

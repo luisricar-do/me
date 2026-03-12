@@ -36,3 +36,13 @@ body {
 .terminal-cursor {
   animation: blink 1s step-end infinite;
 }
+
+/* Bolinhas do Contato: só sobem e descem (sem piscar) */
+@keyframes node-float {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 1; }
+}
+
+.node-flicker {
+  animation: node-float 3s ease-in-out infinite;
+}
