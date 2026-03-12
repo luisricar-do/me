@@ -15,7 +15,7 @@ export function Header() {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 right-0 z-50 bg-[var(--color-paper)]/90 backdrop-blur-md border-b border-[var(--color-ink)]/10"
+      className="fixed top-0 left-0 right-0 z-50 glass-subtle border-b border-[var(--glass-border)]"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -52,7 +52,7 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="md:hidden absolute top-full left-0 right-0 bg-[var(--color-paper)] border-b border-[var(--color-ink)]/5"
+            className="md:hidden absolute top-full left-0 right-0 glass border-b border-[var(--glass-border)]"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

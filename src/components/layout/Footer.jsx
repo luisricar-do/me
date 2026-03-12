@@ -12,7 +12,7 @@ const social = [
 export function Footer() {
   return (
     <motion.footer
-      className="border-t border-[var(--color-ink)]/10 bg-[var(--color-paper-elevated)]"
+      className="border-t border-[var(--glass-border)] glass-subtle"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}

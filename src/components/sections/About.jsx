@@ -26,7 +26,7 @@ export function About() {
     <section
       id="sobre"
       ref={ref}
-      className="relative py-24 md:py-32 overflow-x-hidden bg-[var(--color-paper)]"
+      className="relative py-24 md:py-32 overflow-x-hidden"
     >
       {/* Grid de circuitos animado (fundo) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -85,8 +85,8 @@ export function About() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="relative z-10 rounded-xl overflow-hidden border border-[var(--color-ink)]/10 bg-[var(--color-paper-elevated)] min-w-0">
-              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[var(--color-ink)]/10 bg-[var(--color-paper)]/50">
+            <div className="relative z-10 rounded-xl overflow-hidden glass min-w-0">
+              <div className="flex items-center gap-2 px-4 py-2.5 glass-subtle border-b border-[var(--glass-border)]">
                 <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]" />
                 <span className="text-xs font-mono text-[var(--color-muted)]">
                   stack.js

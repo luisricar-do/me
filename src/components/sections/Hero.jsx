@@ -22,6 +22,7 @@ export function Hero() {
   const nameOpacity = useTransform(scrollYProgress, [0.12, 0.18], [0, 1])
   const taglineOpacity = useTransform(scrollYProgress, [0.16, 0.22], [0, 1])
   const ctaOpacity = useTransform(scrollYProgress, [0.2, 0.26], [0, 1])
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.12], [0, 0.5])
 
   // Terminal levemente “travado” ao cursor
   useEffect(() => {
@@ -44,7 +45,20 @@ export function Hero() {
       ref={ref}
       className="relative min-h-[300vh] flex items-start justify-center pt-32 pb-20"
     >
-      <div className="sticky top-24 left-0 right-0 flex justify-center items-center min-h-[calc(100vh-6rem)] px-4">
+      <div className="sticky top-24 left-0 right-0 flex justify-center items-center min-h-[calc(100vh-6rem)] px-4 relative z-10 overflow-hidden">
+        {/* Glow verde: fixo junto com o terminal, depois solta com o scroll */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none flex items-center justify-center"
+          style={{ opacity: glowOpacity }}
+        >
+          <div
+            className="w-[80%] max-w-2xl aspect-square rounded-full opacity-40"
+            style={{
+              background: "var(--color-accent)",
+              filter: "blur(80px)",
+            }}
+          />
+        </motion.div>
         <motion.div
           className="relative w-full max-w-2xl"
           style={{
@@ -54,9 +68,9 @@ export function Hero() {
           transition={{ type: "spring", damping: 25, stiffness: 200 }}
         >
           {/* Janela do terminal */}
-          <div className="rounded-xl overflow-hidden border border-[var(--color-ink)]/10 bg-[var(--color-paper-elevated)] shadow-2xl shadow-black/40">
+          <div className="rounded-xl overflow-hidden glass-strong shadow-2xl shadow-black/40">
             {/* Barra de título */}
-            <div className="flex items-center gap-2 px-4 py-2.5 bg-[var(--color-paper)]/80 border-b border-[var(--color-ink)]/10">
+            <div className="flex items-center gap-2 px-4 py-2.5 glass border-b border-[var(--glass-border)]">
               <span className="w-3 h-3 rounded-full bg-[#ef4444]/80" />
               <span className="w-3 h-3 rounded-full bg-[#eab308]/80" />
               <span className="w-3 h-3 rounded-full bg-[#22c55e]/80" />
@@ -98,7 +112,7 @@ export function Hero() {
               </motion.div>
               <motion.div
                 style={{ opacity: ctaOpacity }}
-                className="flex flex-wrap gap-3 mt-6 pt-4 border-t border-[var(--color-ink)]/10"
+                className="flex flex-wrap gap-3 mt-6 pt-4 border-t border-[var(--glass-border)]"
               >
                 <Button href="#projetos">Ver projetos</Button>
                 <Button href="#contato" variant="outline">

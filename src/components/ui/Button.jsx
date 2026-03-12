@@ -4,7 +4,7 @@ const variants = {
   primary:
     "bg-[var(--color-accent)] text-[var(--color-paper)] hover:bg-[var(--color-accent-muted)] border-transparent",
   outline:
-    "bg-transparent border-2 border-[var(--color-ink)] text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)]",
+    "glass border border-[var(--glass-border)] text-[var(--color-ink)] hover:border-[var(--color-accent)]/40 hover:bg-[var(--color-accent)]/10",
 }
 
 export function Button({

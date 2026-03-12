@@ -82,7 +82,7 @@ export function Contact() {
                 href={href}
                 target={href.startsWith("mailto") ? undefined : "_blank"}
                 rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                className="inline-flex items-center gap-3 px-4 py-3 rounded-lg border border-[var(--color-ink)]/10 bg-[var(--color-ink)]/5 backdrop-blur-md hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/10 transition-all group shadow-[0_4px_24px_rgba(0,0,0,0.12)]"
+                className="inline-flex items-center gap-3 px-4 py-3 rounded-lg glass hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/10 transition-all group"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
