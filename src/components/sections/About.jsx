@@ -33,15 +33,15 @@ export function About() {
         <CircuitBackground pathProgress={pathProgress} glowOpacity={glowOpacity} />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6">
+      <div className="relative mx-auto w-full min-w-0 max-w-6xl px-6 pr-8 sm:pr-6">
         <SectionTitle
           eyebrow="Sobre"
           title="Um pouco sobre mim"
           className="mb-12"
         />
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start min-w-0">
           <motion.div
-            className="space-y-6 text-[var(--color-ink)]/85 leading-relaxed min-w-0"
+            className="space-y-6 text-[var(--color-ink)]/85 leading-relaxed min-w-0 break-words overflow-visible"
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -66,13 +66,13 @@ export function About() {
             </div>
           </motion.div>
           <motion.div
-            className="relative"
+            className="relative min-w-0"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="relative z-10 rounded-xl overflow-hidden border border-[var(--color-ink)]/10 bg-[var(--color-paper-elevated)]">
+            <div className="relative z-10 rounded-xl overflow-hidden border border-[var(--color-ink)]/10 bg-[var(--color-paper-elevated)] min-w-0">
               <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[var(--color-ink)]/10 bg-[var(--color-paper)]/50">
                 <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]" />
                 <span className="text-xs font-mono text-[var(--color-muted)]">

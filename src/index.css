@@ -12,13 +12,15 @@
   --color-accent-muted: #4ade80;
   --color-accent-orange: #ea580c;
   --color-muted: #8b8b8b;
-  /* Contato: segundo tom (transição no scroll) */
-  --color-contact-bg: #0a1628;
-  --color-contact-accent: #3b82f6;
+  /* Contato: tom verde escuro (alinhado à seção About) */
+  --color-contact-bg: #0a1612;
+  --color-contact-accent: #22c55e;
 }
 
 html {
   scroll-behavior: smooth;
+  /* Reserva espaço para a scrollbar para não cortar o conteúdo no mobile */
+  scrollbar-gutter: stable;
 }
 
 body {

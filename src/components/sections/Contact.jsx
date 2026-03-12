@@ -20,16 +20,17 @@ export function Contact() {
     offset: ["start end", "end start"],
   })
 
-  // Transição de fundo: do tom do site (paper) para contact-bg (azul escuro)
+  // Transição de fundo: do tom do site (paper) para contact-bg (verde escuro, como About)
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 0.4, 0.7],
     [
       "rgb(13, 13, 15)",   // --color-paper
-      "rgb(18, 20, 28)",   // intermediário
-      "rgb(10, 22, 40)",   // --color-contact-bg
+      "rgb(14, 20, 16)",   // intermediário (toque verde)
+      "rgb(10, 22, 18)",   // --color-contact-bg (verde escuro)
     ]
   )
+  const glowOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 0.5])
   const accentBlend = useTransform(scrollYProgress, [0.3, 0.8], [0, 1])
 
   return (
@@ -39,6 +40,21 @@ export function Contact() {
       className="relative py-24 md:py-32 overflow-hidden min-h-[80vh]"
       style={{ backgroundColor }}
     >
+      {/* Glow verde (igual à seção About) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ opacity: glowOpacity }}
+        >
+          <div
+            className="w-[80%] max-w-2xl aspect-square rounded-full opacity-40"
+            style={{
+              background: "var(--color-accent)",
+              filter: "blur(80px)",
+            }}
+          />
+        </motion.div>
+      </div>
       {/* Nós de rede animados (fundo) */}
       <NetworkNodes accentBlend={accentBlend} />
 
@@ -66,7 +82,7 @@ export function Contact() {
                 href={href}
                 target={href.startsWith("mailto") ? undefined : "_blank"}
                 rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                className="inline-flex items-center gap-3 px-4 py-3 rounded-lg border border-[var(--color-ink)]/10 hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/5 transition-all group"
+                className="inline-flex items-center gap-3 px-4 py-3 rounded-lg border border-[var(--color-ink)]/10 bg-[var(--color-ink)]/5 backdrop-blur-md hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/10 transition-all group shadow-[0_4px_24px_rgba(0,0,0,0.12)]"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
