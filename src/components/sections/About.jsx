@@ -29,8 +29,21 @@ export function About() {
       className="relative py-24 md:py-32 overflow-x-hidden bg-[var(--color-paper)]"
     >
       {/* Grid de circuitos animado (fundo) */}
-      <div className="absolute inset-0 pointer-events-none">
-        <CircuitBackground pathProgress={pathProgress} glowOpacity={glowOpacity} />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <CircuitBackground pathProgress={pathProgress} />
+        {/* Glow verde em div (igual Contact) — evita círculo sólido no Safari com SVG */}
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ opacity: glowOpacity }}
+        >
+          <div
+            className="w-[80%] max-w-2xl aspect-square rounded-full opacity-40"
+            style={{
+              background: "var(--color-accent)",
+              filter: "blur(80px)",
+            }}
+          />
+        </motion.div>
       </div>
 
       <div className="relative mx-auto w-full min-w-0 max-w-6xl px-6 pr-8 sm:pr-6">
@@ -88,7 +101,7 @@ export function About() {
   )
 }
 
-function CircuitBackground({ pathProgress, glowOpacity }) {
+function CircuitBackground({ pathProgress }) {
   const path1Offset = useTransform(pathProgress, [0, 1], [1200, 0])
   const path2Offset = useTransform(pathProgress, [0.2, 0.7], [800, 0])
   const circle2Opacity = useTransform(pathProgress, [0.3, 0.6], [0, 1])
@@ -102,13 +115,6 @@ function CircuitBackground({ pathProgress, glowOpacity }) {
           <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.6" />
           <stop offset="100%" stopColor="var(--color-accent-muted)" stopOpacity="0.2" />
         </linearGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-          <feMerge>
-            <feMergeNode in="coloredBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
       </defs>
       {/* Linhas tipo circuito que “desenham” no scroll */}
       <motion.path
@@ -142,14 +148,6 @@ function CircuitBackground({ pathProgress, glowOpacity }) {
         r="4"
         fill="var(--color-accent-muted)"
         style={{ opacity: circle2Opacity }}
-      />
-      <motion.ellipse
-        cx="50%"
-        cy="50%"
-        rx="40%"
-        ry="30%"
-        fill="var(--color-accent)"
-        style={{ opacity: glowOpacity, filter: "blur(80px)" }}
       />
     </svg>
   )
