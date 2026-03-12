@@ -17,8 +17,8 @@ export const projects = [
     description: "Plataforma de cursos de programação do zero ao código. Cursos em markdown, slides em PDF e trilhas de aprendizado.",
     tags: ["JavaScript", "React", "Vite", "Education"],
     href: "https://github.com/luisricar-do/codear",
-    date: "2026-03-04",
-    dateFormatted: () => format(new Date("2026-03-04"), "MMMM yyyy", { locale: ptBR }),
+    date: "2026-01-04",
+    dateFormatted: () => format(new Date("2026-01-04"), "MMMM yyyy", { locale: ptBR }),
   },
   {
     id: "me",
@@ -35,7 +35,7 @@ export const projects = [
     description: "Sistema configurável via low code, desenvolvido para otimizar a gestão e acompanhamento de atividades. Projeto da tech4humans-brasil.",
     tags: ["TypeScript", "Low code"],
     href: "https://github.com/tech4humans-brasil/streamline",
-    date: "2026-03-02",
-    dateFormatted: () => format(new Date("2026-03-02"), "MMMM yyyy", { locale: ptBR }),
+    date: "2024-11-02",
+    dateFormatted: () => format(new Date("2024-11-02"), "MMMM yyyy", { locale: ptBR }),
   },
 ]

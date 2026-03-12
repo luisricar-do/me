@@ -20,7 +20,7 @@ export function Footer() {
     >
       <div className="mx-auto max-w-6xl px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
         <p className="text-sm text-[var(--color-muted)]">
-          © {new Date().getFullYear()} {site.name}. Feito por mim com React + Vite.
+          © {new Date().getFullYear()} {site.name}. Feito por mim.
         </p>
         <ul className="flex items-center gap-6">
           {social.map(({ href, icon: Icon, label }) => (

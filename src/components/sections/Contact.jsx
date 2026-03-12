@@ -55,7 +55,7 @@ export function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-[var(--color-muted)]">
+          <p className="text-[var(--color-ink)]/85">
             Estou aberto a novas oportunidades, projetos e conversas. Envie um
             email ou acesse os links abaixo.
           </p>
