@@ -26,7 +26,7 @@ export function About() {
     <section
       id="sobre"
       ref={ref}
-      className="relative py-24 md:py-32 overflow-hidden bg-[var(--color-paper)]"
+      className="relative py-24 md:py-32 overflow-x-hidden bg-[var(--color-paper)]"
     >
       {/* Grid de circuitos animado (fundo) */}
       <div className="absolute inset-0 pointer-events-none">
@@ -39,9 +39,9 @@ export function About() {
           title="Um pouco sobre mim"
           className="mb-12"
         />
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
           <motion.div
-            className="space-y-6 text-[var(--color-ink)]/85 leading-relaxed"
+            className="space-y-6 text-[var(--color-ink)]/85 leading-relaxed min-w-0"
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
