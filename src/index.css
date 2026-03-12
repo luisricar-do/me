@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Tema escuro */
+  --color-ink: #e8e6e3;
+  --color-paper: #0d0d0f;
+  --color-paper-elevated: #141416;
+  --color-accent: #22c55e;
+  --color-accent-dim: #16a34a;
+  --color-accent-muted: #4ade80;
+  --color-accent-orange: #ea580c;
+  --color-muted: #8b8b8b;
+  /* Contato: segundo tom (transição no scroll) */
+  --color-contact-bg: #0a1628;
+  --color-contact-accent: #3b82f6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  overflow-x: hidden;
+}
+
+/* Cursor do terminal */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
+}
