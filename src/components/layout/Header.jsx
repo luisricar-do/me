@@ -6,6 +6,8 @@ import { site } from "../../data/site"
 const navLinks = [
   { href: "#hero", label: "Início" },
   { href: "#sobre", label: "Sobre" },
+  { href: "#destaques", label: "Destaques" },
+  { href: "#trajetoria", label: "Trajetória" },
   { href: "#projetos", label: "Projetos" },
   { href: "#contato", label: "Contato" },
 ]
