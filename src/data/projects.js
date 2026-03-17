@@ -14,9 +14,9 @@ export const projects = [
   {
     id: "codear",
     title: "Codear",
-    description: "Plataforma de cursos de programação do zero ao código. Cursos em markdown, slides em PDF e trilhas de aprendizado.",
+    description: "Iniciativa para cursos de programação do zero ao código. Cursos em markdown, slides em PDF e trilhas de aprendizado.",
     tags: ["JavaScript", "React", "Vite", "Education"],
-    href: "https://github.com/luisricar-do/codear",
+    href: "https://codear.luisr.com.br",
     date: "2026-01-04",
     dateFormatted: () => format(new Date("2026-01-04"), "MMMM yyyy", { locale: ptBR }),
   },
