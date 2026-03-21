@@ -100,7 +100,7 @@ function HighlightCard({ item, delay }) {
             target="_blank"
             rel="noopener noreferrer"
             className="text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors"
-            aria-label={`Ver ${item.title} no GitHub`}
+            aria-label={`Abrir ${item.title} em nova aba`}
           >
             <ExternalLink size={15} />
           </a>
