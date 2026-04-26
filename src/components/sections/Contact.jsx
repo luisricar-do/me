@@ -1,12 +1,11 @@
 import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Mail, Github, Linkedin, MessageCircle } from "lucide-react"
+import { Mail, Github, Linkedin } from "lucide-react"
 import { SectionTitle } from "../ui/SectionTitle"
 import { site } from "../../data/site"
 
 const links = [
   { href: `mailto:${site.email}`, icon: Mail, label: "Email", text: site.email },
-  { href: `https://wa.me/${site.whatsapp}`, icon: MessageCircle, label: "WhatsApp", text: "(35) 8875-1001" },
   { href: site.github, icon: Github, label: "GitHub", text: "github.com" },
   { href: site.linkedin, icon: Linkedin, label: "LinkedIn", text: "linkedin.com" },
 ]
