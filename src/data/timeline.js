@@ -101,15 +101,6 @@ export const timelineEntries = [
     icon: Briefcase,
   },
   {
-    id: "devops-nao-sei",
-    date: "2022",
-    year: 2022,
-    title: "“Não sei nada, mas vamos descobrir junto”",
-    subtitle: "A frase que me deu a vaga de DevOps. Zero cursos de DevOps antes de aceitar.",
-    category: "work",
-    icon: Briefcase,
-  },
-  {
     id: "cats-fim-mandato",
     date: "Novembro 2022",
     year: 2022,
