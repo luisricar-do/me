@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- A régua de autonomia: três níveis crescentes, verde só no terceiro -->
-  <rect width="32" height="32" rx="7" fill="#14151a"/>
-  <rect x="5" y="5" width="10" height="5" rx="1" fill="#e9e9e6"/>
-  <rect x="5" y="14" width="16" height="5" rx="1" fill="#e9e9e6"/>
-  <rect x="5" y="23" width="22" height="5" rx="1" fill="#4ade80"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#14151a" rx="7"/><rect width="10" height="5" x="5" y="5" fill="#e9e9e6" rx="1"/><rect width="16" height="5" x="5" y="14" fill="#e9e9e6" rx="1"/><rect width="22" height="5" x="5" y="23" fill="#4ade80" rx="1"/></svg>
