@@ -1,87 +1,249 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────
+   Tokens de tema (claro/escuro via light-dark())
+   O tema segue o sistema por padrão; data-theme no <html> força.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: light dark;
+
+  --ink: light-dark(#1a1917, #edece8);
+  --ink-soft: light-dark(#403e3a, #c6c4be);
+  --muted: light-dark(#78756e, #8d8b85);
+
+  --paper: light-dark(#faf9f6, #0b0b0d);
+  --surface: light-dark(#ffffff, #131316);
+  --surface-2: light-dark(#f2f0ea, #1a1a1e);
+
+  --line: light-dark(rgba(26, 25, 23, 0.14), rgba(255, 255, 255, 0.12));
+  --line-soft: light-dark(rgba(26, 25, 23, 0.07), rgba(255, 255, 255, 0.06));
+
+  --accent: light-dark(#146c43, #4ade80);
+  --accent-ink: light-dark(#ffffff, #06140c);
+  --accent-tint: light-dark(rgba(20, 108, 67, 0.08), rgba(74, 222, 128, 0.1));
+
+  /* Terminal: mantém o tom escuro nos dois temas (bloco de código) */
+  --term-bg: #14151a;
+  --term-head: #1b1c22;
+  --term-ink: #e9e9e6;
+  --term-muted: #8f8f8c;
+  --term-accent: #4ade80;
+  --term-line: rgba(255, 255, 255, 0.09);
+
+  /* Categorias da linha do tempo */
+  --cat-education: light-dark(#a16207, #fbbf24);
+  --cat-work: light-dark(#146c43, #4ade80);
+  --cat-community: light-dark(#6d28d9, #a78bfa);
+  --cat-project: light-dark(#1d4ed8, #60a5fa);
+  --cat-speaking: light-dark(#b3541e, #fb923c);
+  --cat-achievement: light-dark(#0e7490, #22d3ee);
+
+  --shadow-card: 0 1px 2px light-dark(rgba(26, 25, 23, 0.05), rgba(0, 0, 0, 0.4)),
+    0 16px 40px -24px light-dark(rgba(26, 25, 23, 0.28), rgba(0, 0, 0, 0.7));
+}
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
 @theme {
-  --font-sans: "DM Sans", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  /* Tema escuro */
-  --color-ink: #e8e6e3;
-  --color-paper: #0d0d0f;
-  --color-paper-elevated: #141416;
-  --color-accent: #22c55e;
-  --color-accent-muted: #4ade80;
-  --color-muted: #8b8b8b;
-  /* Contato: tom verde escuro (alinhado à seção About) */
-  --color-contact-bg: #0a1612;
-  --color-contact-accent: #22c55e;
-  /* Liquid glass (estilo Apple) */
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-bg-strong: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-border-subtle: rgba(255, 255, 255, 0.06);
-  --glass-blur: 24px;
-  --glass-blur-strong: 40px;
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
-  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-tint: var(--accent-tint);
+
+  --color-term: var(--term-bg);
+  --color-term-head: var(--term-head);
+  --color-term-ink: var(--term-ink);
+  --color-term-muted: var(--term-muted);
+  --color-term-accent: var(--term-accent);
+  --color-term-line: var(--term-line);
 }
 
 html {
   scroll-behavior: smooth;
-  /* Reserva espaço para a scrollbar para não cortar o conteúdo no mobile */
   scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-ink);
-  background: radial-gradient(ellipse 120% 80% at 50% 0%, var(--color-paper-elevated) 0%, var(--color-paper) 50%);
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: radial-gradient(110% 60% at 50% -8%, var(--accent-tint) 0%, transparent 62%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   overflow-x: hidden;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Liquid glass: fundo translúcido + blur + borda sutil + highlight */
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-highlight), var(--glass-shadow);
-}
-.glass-strong {
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(var(--glass-blur-strong));
-  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-highlight), var(--glass-shadow);
-}
-.glass-subtle {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border-subtle);
-}
-/* Vidro no tom do terminal (cinza escuro) */
-.glass-terminal {
-  background: rgba(20, 20, 22, 0.5);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border-subtle);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+/* Granulado sutil por cima de tudo, dá textura de impresso */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Cursor do terminal */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+@layer components {
+  /* Títulos editoriais em Fraunces */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-optical-sizing: auto;
+    /* SOFT arredonda os terminais, WONK ativa as formas alternativas da Fraunces */
+    font-variation-settings: "SOFT" 32, "WONK" 1;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  /* Rótulo mono em caixa alta usado nos eyebrows */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* Link com sublinhado que cresce no hover */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  .terminal-cursor {
+    animation: blink 1.05s step-end infinite;
+  }
+}
+
 @keyframes blink {
   50% { opacity: 0; }
 }
 
-.terminal-cursor {
-  animation: blink 1s step-end infinite;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
-/* Bolinhas do Contato: só sobem e descem (sem piscar) */
-@keyframes node-float {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(-12px); opacity: 1; }
+@layer components {
+  /* Revelação ao entrar no viewport: o JS só liga [data-visible] */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  }
+  [data-reveal][data-visible] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Etapas ligadas ao scroll: --p (0 a 1) é escrito pelo JS na seção pai */
+  [data-stage] {
+    opacity: clamp(0, calc((var(--p, 1) - var(--stage-from, 0)) / 0.06), 1);
+  }
+
+  /* Mesma ideia, no sentido inverso: some conforme o scroll avança */
+  [data-stage-out] {
+    opacity: clamp(0, calc((var(--stage-until, 0.6) - var(--p, 0)) / 0.25), 1);
+  }
+
+  /* Parallax do cursor: o JS escreve as vars, o CSS suaviza */
+  [data-tilt] {
+    transform: translate3d(var(--tilt-x, 0px), var(--tilt-y, 0px), 0);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Barra de progresso de leitura */
+  [data-scrollbar] {
+    transform: scaleX(var(--scroll, 0));
+    transform-origin: left;
+  }
 }
 
-.node-flicker {
-  animation: node-float 3s ease-in-out infinite;
+/* Transição circular do tema, saindo do próprio botão */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  [data-stage],
+  [data-stage-out] {
+    opacity: 1 !important;
+  }
+  [data-tilt] {
+    transform: none !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+@layer components {
+  /* Troca suave ao filtrar listas */
+  .fade-swap {
+    animation: fade-in 0.3s ease-out both;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

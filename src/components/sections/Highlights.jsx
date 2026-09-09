@@ -1,170 +1,172 @@
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { ExternalLink, Youtube } from "lucide-react"
+import { ArrowUpRight, FileText, Youtube } from "lucide-react"
+import { Link } from "react-router-dom"
 import { SectionTitle } from "../ui/SectionTitle"
+import { Reveal } from "../ui/Reveal"
 import { highlights } from "../../data/highlights"
-
-const badgeStyles = {
-  amber: {
-    pill: "bg-amber-400/15 text-amber-300 border border-amber-400/30",
-    border: "border-amber-400/40",
-    hoverBorder: "hover:border-amber-400/70",
-    metric: "text-amber-300",
-    glow: "rgba(251,191,36,0.12)",
-  },
-  green: {
-    pill: "bg-[var(--color-accent)]/15 text-[var(--color-accent)] border border-[var(--color-accent)]/30",
-    border: "border-[var(--color-accent)]/40",
-    hoverBorder: "hover:border-[var(--color-accent)]/70",
-    metric: "text-[var(--color-accent)]",
-    glow: "rgba(34,197,94,0.12)",
-  },
-}
+import { publications } from "../../data/publications"
 
 export function Highlights() {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  })
-  const glowOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 0.5])
-
   return (
-    <section
-      id="destaques"
-      ref={ref}
-      className="relative py-24 md:py-32 overflow-hidden"
-    >
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ opacity: glowOpacity }}
-        >
-          <div
-            className="w-[80%] max-w-2xl aspect-square rounded-full opacity-30"
-            style={{
-              background: "var(--color-accent)",
-              filter: "blur(100px)",
-            }}
-          />
-        </motion.div>
+    <section id="destaques" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <SectionTitle
+        index="02"
+        eyebrow="Destaques"
+        title="Dois projetos que saíram do papel."
+        lead="Um virou publicação internacional; o outro roda todo dia dentro da empresa."
+      />
+
+      <div className="mt-14 md:mt-20">
+        {highlights.map((item, i) => (
+          <HighlightRow key={item.id} item={item} index={i} />
+        ))}
       </div>
 
-      <div className="relative z-10 mx-auto max-w-4xl px-6">
-        <SectionTitle
-          eyebrow="Destaques"
-          title="Projetos de impacto"
-          className="mb-16"
-        />
+      <Reveal className="mt-16">
+        <p className="label text-muted">Publicações</p>
+        <ul className="mt-5">
+          {publications.map((paper) => (
+            <li
+              key={paper.id}
+              className="grid gap-2 border-t border-line-soft py-5 last:border-b sm:grid-cols-[9rem_1fr] sm:gap-6"
+            >
+              <div>
+                <p className="label text-accent">{paper.venue}</p>
+                <p className="mt-1.5 font-mono text-[11px] text-muted">{paper.dateLabel}</p>
+              </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {highlights.map((item, i) => (
-            <HighlightCard key={item.id} item={item} delay={i * 0.15} />
+              <div className="min-w-0">
+                <p className="text-pretty text-[0.95rem] font-medium leading-snug text-ink">
+                  {paper.title}
+                </p>
+                {paper.subtitle && (
+                  <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">
+                    {paper.subtitle}
+                  </p>
+                )}
+                <p className="mt-2 text-xs text-muted">
+                  {paper.venueFull} · {paper.place}
+                </p>
+                <p className="mt-1.5 font-mono text-[11px] text-muted">{paper.status}</p>
+
+                <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+                  {paper.href && (
+                    <a
+                      href={paper.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-soft transition-colors hover:text-accent"
+                    >
+                      <FileText size={13} />
+                      IEEE Xplore
+                    </a>
+                  )}
+                  {paper.caseHref && (
+                    <Link
+                      to={paper.caseHref}
+                      className="inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-soft transition-colors hover:text-accent"
+                    >
+                      <ArrowUpRight size={13} />
+                      case
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </li>
           ))}
-        </div>
-      </div>
+        </ul>
+      </Reveal>
     </section>
   )
 }
 
-function HighlightCard({ item, delay }) {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.9", "start 0.5"],
-  })
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1])
-  const y = useTransform(scrollYProgress, [0, 0.4], [20, 0])
-
-  const style = badgeStyles[item.badgeColor]
+function HighlightRow({ item, index }) {
   const Icon = item.badgeIcon
 
   return (
-    <motion.div ref={ref} style={{ opacity, y }}>
-      <motion.div
-        className={`group rounded-xl glass-strong p-6 border ${style.border} ${style.hoverBorder} transition-colors duration-300 h-full flex flex-col`}
-        whileHover={{
-          y: -4,
-          boxShadow: `0 8px 40px ${style.glow}, 0 0 0 1px ${style.glow}`,
-        }}
-        transition={{ duration: 0.2 }}
-      >
-        {/* Badge + external link */}
-        <div className="flex items-center justify-between mb-4">
-          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium ${style.pill}`}>
-            <Icon size={11} />
+    <Reveal
+      as="article"
+      delay={index * 0.06}
+      className="grid gap-6 border-t border-line py-10 last:border-b md:grid-cols-[4rem_1fr] md:gap-10 md:py-14"
+    >
+      <span className="label text-muted tabular-nums">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 font-mono text-[11px] text-ink-soft">
+            {Icon && <Icon size={11} className="text-accent" />}
             {item.badge}
           </span>
+          <span className="font-mono text-[11px] text-muted">{item.context}</span>
+        </div>
+
+        <h3 className="display mt-5 text-[clamp(2rem,4.5vw,3.25rem)] text-ink">
           <a
             href={item.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors"
-            aria-label={`Abrir ${item.title} em nova aba`}
+            className="group inline-flex items-start gap-3 transition-colors hover:text-accent"
           >
-            <ExternalLink size={15} />
-          </a>
-        </div>
-
-        {/* Title + context */}
-        <a
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/title"
-        >
-          <h3 className="text-xl font-semibold text-[var(--color-ink)] group-hover/title:text-[var(--color-accent)] transition-colors mb-1">
             {item.title}
-          </h3>
-        </a>
-        <p className="text-xs font-mono text-[var(--color-muted)] mb-4">
-          {item.context}
-        </p>
+            <ArrowUpRight
+              size={22}
+              className="mt-2 shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent"
+            />
+          </a>
+        </h3>
 
-        {/* Description */}
-        <p className="text-sm text-[var(--color-muted)] leading-relaxed mb-5">
+        <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted">
           {item.description}
         </p>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-3 gap-3 mb-5 p-3 rounded-lg bg-[var(--glass-bg)] border border-[var(--glass-border)]">
-          {item.metrics.map((m) => (
-            <div key={m.label} className="text-center">
-              <p className={`text-sm font-semibold font-mono ${style.metric}`}>
-                {m.value}
-              </p>
-              <p className="text-[10px] text-[var(--color-muted)] mt-0.5 leading-tight">
-                {m.label}
-              </p>
+        <dl className="mt-8 grid max-w-xl grid-cols-3 gap-6 border-t border-line-soft pt-5">
+          {item.metrics.map((metric) => (
+            <div key={metric.label}>
+              <dd className="font-mono text-lg text-accent">{metric.value}</dd>
+              <dt className="mt-1 text-[11px] leading-snug text-muted">{metric.label}</dt>
             </div>
           ))}
-        </div>
+        </dl>
 
-        {/* Tags */}
-        <ul className="flex flex-wrap gap-1.5">
-          {item.tags.map((tag) => (
-            <li
-              key={tag}
-              className="px-2 py-0.5 text-xs font-mono rounded bg-[var(--color-accent)]/10 text-[var(--color-accent-muted)]"
-            >
-              {tag}
-            </li>
-          ))}
-        </ul>
-
-        {/* Video link */}
-        {item.videoHref && (
-          <a
-            href={item.videoHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-xs font-mono text-[var(--color-muted)] hover:text-[#ff4444] transition-colors"
+        {item.caseHref && (
+          <Link
+            to={item.caseHref}
+            className="group/case mt-7 inline-flex items-center gap-2 text-sm font-medium text-ink transition-colors hover:text-accent"
           >
-            <Youtube size={14} />
-            Ver apresentação
-          </a>
+            <span className="link-underline">Ler o case completo</span>
+            <ArrowUpRight
+              size={16}
+              className="transition-transform duration-300 group-hover/case:-translate-y-0.5 group-hover/case:translate-x-0.5"
+            />
+          </Link>
         )}
-      </motion.div>
-    </motion.div>
+
+        <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <ul className="flex flex-wrap gap-2">
+            {item.tags.map((tag) => (
+              <li
+                key={tag}
+                className="rounded-full border border-line px-3 py-1 font-mono text-[11px] text-muted"
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
+
+          {item.videoHref && (
+            <a
+              href={item.videoHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-mono text-[11px] text-muted transition-colors hover:text-ink"
+            >
+              <Youtube size={14} />
+              Ver apresentação
+            </a>
+          )}
+        </div>
+      </div>
+    </Reveal>
   )
 }

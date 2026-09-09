@@ -1,195 +1,76 @@
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
 import { SectionTitle } from "../ui/SectionTitle"
-import { site } from "../../data/site"
+import { Reveal } from "../ui/Reveal"
+import { about } from "../../data/about"
 
-const codeSnippet = `// stack.js
-const stack = {
-  frontend: ['React.js', 'TypeScript'],
-  backend: ['Node.js', 'PostgreSQL', 'MongoDB', 'Redis'],
-  cloud: ['AWS', 'Azure', 'Azure SignalR'],
-  devops: ['CI/CD', 'Microservices', 'Observabilidade'],
-  governance: ['DPO', 'LGPD']
-};
-export default stack;`
+const stats = [
+  { value: String(about.yearsAtCompany), label: "anos na Tech for Humans" },
+  { value: "2", label: "artigos no IEEE (IISA 2025 e 2026)" },
+  { value: "MSc", label: "IA na UNIFEI, em andamento" },
+]
 
 export function About() {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  })
-  const pathProgress = useTransform(scrollYProgress, [0.1, 0.5], [0, 1])
-  const glowOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 0.6])
-
   return (
-    <section
-      id="sobre"
-      ref={ref}
-      className="relative py-24 md:py-32 overflow-x-hidden"
-    >
-      {/* Grid de circuitos animado (fundo) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <CircuitBackground pathProgress={pathProgress} />
-        {/* Glow verde em div (igual Contact) — evita círculo sólido no Safari com SVG */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ opacity: glowOpacity }}
-        >
-          <div
-            className="w-[80%] max-w-2xl aspect-square rounded-full opacity-40"
-            style={{
-              background: "var(--color-accent)",
-              filter: "blur(80px)",
-            }}
-          />
-        </motion.div>
-      </div>
+    <section id="sobre" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <SectionTitle
+        index="01"
+        eyebrow="Sobre"
+        title="Engenharia com governança no centro."
+      />
 
-      <div className="relative mx-auto w-full min-w-0 max-w-6xl px-6 pr-8 sm:pr-6">
-        <SectionTitle
-          eyebrow="Sobre"
-          title="Um pouco sobre mim"
-          className="mb-12"
-        />
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start min-w-0">
-          <motion.div
-            className="space-y-6 text-[var(--color-ink)]/85 leading-relaxed min-w-0 break-words overflow-visible"
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="space-y-4">
-            <p>
-              Atuo como <strong className="text-[var(--color-accent)]">Software Engineer</strong>,{" "}
-              <strong className="text-[var(--color-accent)]">Cloud Architect</strong> e{" "}
-              <strong className="text-[var(--color-accent)]">DevOps</strong>, com mais de 4 anos na{" "}
-              <strong className="text-[var(--color-accent)]">Tech for Humans</strong>. Minha atuação une
-              planejamento estratégico e execução técnica: arquitetura em nuvem, automação, CI/CD e
-              observabilidade, além de <strong className="text-[var(--color-accent)]">Governança de Dados (DPO)</strong> e
-              conformidade com a LGPD.
+      <div className="mt-14 grid gap-12 md:mt-20 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
+        <div className="min-w-0">
+          <Reveal className="space-y-5">
+            <p className="text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
+              Sou <strong className="font-medium text-ink">Gerente de Governança de TI e IA</strong> na{" "}
+              <strong className="font-medium text-ink">Tech for Humans</strong>, onde entrei como
+              estagiário em 2021. Minha atuação une planejamento estratégico e execução
+              técnica: arquitetura em nuvem, automação, CI/CD e observabilidade, com
+              governança de dados e conformidade à LGPD como parte do desenho, não como
+              remendo no final.
             </p>
-            <p>
-              Formado em Sistemas de Informação pela <strong className="text-[var(--color-accent)]">UNIFEI</strong>, com
-              mestrado em andamento em Ciência e Tecnologia da Computação (IA). De estagiário a
-              DevOps Manager, passei por desenvolvimento fullstack (Node.js, React, PostgreSQL, Redis,
-              Azure SignalR), mentoria técnica e hoje lidero a visão de DevOps e SDLC na empresa.
+            <p className="text-pretty leading-relaxed text-muted">
+              Formado em Sistemas de Informação pela <span className="text-ink-soft">UNIFEI</span>,
+              com mestrado em andamento em Ciência e Tecnologia da Computação (IA). No caminho
+              entre estágio e gestão passei por desenvolvimento fullstack, fundei a área de
+              DevOps da empresa, assumi o papel de DPO e hoje conduzo a agenda de governança
+              e de IA aplicada à engenharia, com um time de 8 pessoas.
             </p>
-            </div>
-          </motion.div>
-          <motion.div
-            className="relative min-w-0"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            <div className="relative z-10 rounded-xl overflow-hidden glass min-w-0">
-              <div className="flex items-center gap-2 px-4 py-2.5 glass-subtle border-b border-[var(--glass-border)]">
-                <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]" />
-                <span className="text-xs font-mono text-[var(--color-muted)]">
-                  stack.js
-                </span>
+          </Reveal>
+
+          <Reveal delay={0.1} className="mt-12 grid grid-cols-3 gap-6 border-t border-line pt-8">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <p className="display text-4xl text-accent md:text-5xl">{stat.value}</p>
+                <p className="mt-2 text-xs leading-snug text-muted">{stat.label}</p>
               </div>
-              <CodeBlock code={codeSnippet} />
-            </div>
-          </motion.div>
+            ))}
+          </Reveal>
         </div>
+
+        <Reveal delay={0.08} className="min-w-0">
+          <p className="label text-muted">Stack</p>
+          <dl className="mt-5">
+            {about.stack.map((group) => (
+              <div
+                key={group.area}
+                className="grid grid-cols-[6.5rem_1fr] gap-4 border-t border-line-soft py-4 last:border-b"
+              >
+                <dt className="label pt-1 text-muted">{group.area}</dt>
+                <dd className="flex flex-wrap gap-x-2 gap-y-1 text-sm text-ink-soft">
+                  {group.items.map((item, i) => (
+                    <span key={item}>
+                      {item}
+                      {i < group.items.length - 1 && (
+                        <span className="ml-2 text-muted">·</span>
+                      )}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
       </div>
     </section>
-  )
-}
-
-function CircuitBackground({ pathProgress }) {
-  const path1Offset = useTransform(pathProgress, [0, 1], [1200, 0])
-  const path2Offset = useTransform(pathProgress, [0.2, 0.7], [800, 0])
-  const circle2Opacity = useTransform(pathProgress, [0.3, 0.6], [0, 1])
-  return (
-    <svg
-      className="absolute inset-0 w-full h-full text-[var(--color-accent)]"
-      aria-hidden
-    >
-      <defs>
-        <linearGradient id="circuit-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="var(--color-accent-muted)" stopOpacity="0.2" />
-        </linearGradient>
-      </defs>
-      {/* Linhas tipo circuito que “desenham” no scroll */}
-      <motion.path
-        d="M 0 120 Q 200 80 400 120 T 800 120 T 1200 120"
-        fill="none"
-        stroke="url(#circuit-grad)"
-        strokeWidth="1"
-        strokeDasharray="1200"
-        style={{ strokeDashoffset: path1Offset }}
-        opacity={0.4}
-      />
-      <motion.path
-        d="M 100 400 L 400 400 L 400 280 L 700 280 L 700 400 L 1100 400"
-        fill="none"
-        stroke="var(--color-accent)"
-        strokeWidth="1"
-        strokeDasharray="800"
-        style={{ strokeDashoffset: path2Offset }}
-        opacity={0.35}
-      />
-      <motion.circle
-        cx="400"
-        cy="120"
-        r="4"
-        fill="var(--color-accent)"
-        style={{ opacity: pathProgress }}
-      />
-      <motion.circle
-        cx="700"
-        cy="280"
-        r="4"
-        fill="var(--color-accent-muted)"
-        style={{ opacity: circle2Opacity }}
-      />
-    </svg>
-  )
-}
-
-function CodeBlock({ code }) {
-  const lines = code.trim().split("\n")
-  return (
-    <pre className="p-4 text-xs md:text-sm font-mono overflow-x-auto">
-      {lines.map((line, i) => (
-        <motion.span
-          key={i}
-          className="block"
-          initial={{ opacity: 0, x: -10 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: i * 0.06 }}
-        >
-          <LineContent line={line} />
-        </motion.span>
-      ))}
-    </pre>
-  )
-}
-
-function LineContent({ line }) {
-  const comment = line.trim().startsWith("//")
-  const key = /^\s*(const|let|var|export|default)/.test(line)
-  const string = /['"`]/.test(line)
-  return (
-    <span
-      className={
-        comment
-          ? "text-[var(--color-muted)]"
-          : key
-            ? "text-[var(--color-accent-muted)]"
-            : string
-              ? "text-amber-400/90"
-              : "text-[var(--color-ink)]/90"
-      }
-    >
-      {line}
-    </span>
   )
 }

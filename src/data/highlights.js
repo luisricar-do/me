@@ -8,9 +8,10 @@ export const highlights = [
     badgeIcon: Star,
     badgeColor: "amber",
     href: "https://ieeexplore.ieee.org/document/11311235/",
-    context: "TCC — UNIFEI · Publicado na IEEE IISA 2025, Atenas",
+    caseHref: "/eduflow",
+    context: "TCC na UNIFEI · Publicado na IEEE IISA 2025, Atenas",
     description:
-      "Sistema low-code configurável para gestão de TCCs — submissão, avaliação em múltiplas etapas e acompanhamento de projetos finais. Desenvolvido como Trabalho de Conclusão de Curso, foi aprovado na International Symposium on INnovations in Intelligent SysTems and Applications (IISA) e publicado no IEEE, com alcance internacional.",
+      "Sistema low-code configurável para gestão de TCCs: submissão, avaliação em múltiplas etapas e acompanhamento de projetos finais. Desenvolvido como Trabalho de Conclusão de Curso, foi aprovado na International Symposium on INnovations in Intelligent SysTems and Applications (IISA) e publicado no IEEE, com alcance internacional.",
     metrics: [
       { label: "Facilidade de uso", value: "92,4%" },
       { label: "Utilidade percebida", value: "94%" },
@@ -21,14 +22,14 @@ export const highlights = [
   {
     id: "streamline",
     title: "Streamline",
-    badge: "Em produção · Tech4Humans",
+    badge: "Em produção · Tech for Humans",
     badgeIcon: Zap,
     badgeColor: "green",
     href: "https://github.com/tech4humans-brasil/streamline",
     videoHref: "https://www.youtube.com/watch?v=P6d1OfvwTRE",
-    context: "Tech4Humans · Em uso ativo",
+    context: "Tech for Humans · Em uso ativo",
     description:
-      "Plataforma configurável via low-code para gestão e acompanhamento de atividades internas. Criado para resolver necessidades reais da Tech4Humans, o Streamline é utilizado ativamente pela equipe no dia a dia, otimizando fluxos operacionais e reduzindo overhead de gerenciamento de tarefas.",
+      "Plataforma configurável via low-code para gestão e acompanhamento de atividades internas. Criado para resolver necessidades reais da Tech for Humans, o Streamline é utilizado ativamente pela equipe no dia a dia, otimizando fluxos operacionais e reduzindo overhead de gerenciamento de tarefas.",
     metrics: [
       { label: "Status", value: "Produção" },
       { label: "Uso", value: "Diário" },

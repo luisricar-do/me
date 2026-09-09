@@ -1,22 +1,26 @@
-import { motion } from "framer-motion"
+import { Reveal } from "./Reveal"
 
-export function SectionTitle({ eyebrow, title, className = "" }) {
+/**
+ * Cabeçalho editorial de seção: número, eyebrow em mono, título em serifa
+ * e um lead opcional, sempre apoiados numa linha fina.
+ */
+export function SectionTitle({ index, eyebrow, title, lead, className = "" }) {
   return (
-    <motion.div
-      className={`max-w-2xl ${className}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-    >
-      {eyebrow && (
-        <p className="text-sm font-mono text-[var(--color-accent)] uppercase tracking-wider mb-2">
-          {eyebrow}
-        </p>
-      )}
-      <h2 className="text-3xl md:text-4xl font-semibold text-[var(--color-ink)]">
+    <Reveal className={`border-t border-line pt-5 ${className}`}>
+      <div className="flex items-baseline gap-4">
+        {index && (
+          <span className="label text-muted tabular-nums">{index}</span>
+        )}
+        {eyebrow && <span className="label text-accent">{eyebrow}</span>}
+      </div>
+      <h2 className="display mt-5 max-w-3xl text-balance text-[clamp(2.25rem,6vw,4rem)] text-ink">
         {title}
       </h2>
-    </motion.div>
+      {lead && (
+        <p className="mt-5 max-w-xl text-pretty text-[0.975rem] leading-relaxed text-muted">
+          {lead}
+        </p>
+      )}
+    </Reveal>
   )
 }

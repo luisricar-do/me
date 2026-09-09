@@ -1,188 +1,66 @@
-import { useRef, useState, useEffect } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { Mail, Github, Linkedin } from "lucide-react"
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react"
 import { SectionTitle } from "../ui/SectionTitle"
+import { Reveal } from "../ui/Reveal"
 import { site } from "../../data/site"
 
 const links = [
   { href: `mailto:${site.email}`, icon: Mail, label: "Email", text: site.email },
-  { href: site.github, icon: Github, label: "GitHub", text: "github.com" },
-  { href: site.linkedin, icon: Linkedin, label: "LinkedIn", text: "linkedin.com" },
+  { href: site.github, icon: Github, label: "GitHub", text: "github.com/luisricar-do" },
+  { href: site.linkedin, icon: Linkedin, label: "LinkedIn", text: "linkedin.com/in/luisricar-do" },
 ]
 
-const TYPING_TEXT = "Enviar mensagem..."
-
 export function Contact() {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  })
-
-  // Transição de fundo: do tom do site (paper) para contact-bg (verde escuro, como About)
-  const backgroundColor = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.7],
-    [
-      "rgb(13, 13, 15)",   // --color-paper
-      "rgb(14, 20, 16)",   // intermediário (toque verde)
-      "rgb(10, 22, 18)",   // --color-contact-bg (verde escuro)
-    ]
-  )
-  const glowOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 0.5])
-  const accentBlend = useTransform(scrollYProgress, [0.3, 0.8], [0, 1])
-
   return (
-    <motion.section
-      id="contato"
-      ref={ref}
-      className="relative py-24 md:py-32 overflow-hidden min-h-[80vh]"
-      style={{ backgroundColor }}
-    >
-      {/* Glow verde (igual à seção About) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ opacity: glowOpacity }}
-        >
-          <div
-            className="w-[80%] max-w-2xl aspect-square rounded-full opacity-40"
-            style={{
-              background: "var(--color-accent)",
-              filter: "blur(80px)",
-            }}
-          />
-        </motion.div>
-      </div>
-      {/* Nós de rede animados (fundo) */}
-      <NetworkNodes accentBlend={accentBlend} />
+    <section id="contato" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <SectionTitle index="06" eyebrow="Contato" title="Vamos conversar?" />
 
-      <div className="relative mx-auto max-w-6xl px-6">
-        <SectionTitle
-          eyebrow="Contato"
-          title="Vamos conversar?"
-          className="mb-16"
-        />
-        <motion.div
-          className="max-w-xl space-y-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+      <Reveal className="mt-10 max-w-2xl">
+        <p className="text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
+          Estou aberto a novas oportunidades, projetos, palestras e conversas
+          sobre engenharia, governança e IA. O caminho mais curto é o email.
+        </p>
+      </Reveal>
+
+      <Reveal delay={0.08} className="mt-12">
+        <a
+          href={`mailto:${site.email}`}
+          className="group inline-flex items-start gap-3 text-ink transition-colors hover:text-accent"
         >
-          <p className="text-[var(--color-ink)]/85">
-            Estou aberto a novas oportunidades, projetos e conversas. Envie um
-            email ou acesse os links abaixo.
-          </p>
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-            {links.map(({ href, icon: Icon, label, text }) => (
-              <motion.a
-                key={label}
+          <span className="display text-[clamp(1.75rem,5.5vw,3.5rem)] break-all">
+            {site.email}
+          </span>
+          <ArrowUpRight
+            size={24}
+            className="mt-2 shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent"
+          />
+        </a>
+      </Reveal>
+
+      <Reveal delay={0.14} className="mt-14">
+        <ul className="grid gap-0 sm:grid-cols-3">
+          {links.map(({ href, icon: Icon, label, text }) => (
+            <li key={label} className="border-t border-line">
+              <a
                 href={href}
                 target={href.startsWith("mailto") ? undefined : "_blank"}
                 rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                className="inline-flex items-center gap-3 px-4 py-3 rounded-lg glass hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-accent)]/10 transition-all group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="group flex items-center gap-3 py-5 pr-4 transition-colors"
               >
                 <Icon
-                  size={20}
-                  className="text-[var(--color-accent)] group-hover:scale-110 transition-transform"
+                  size={16}
+                  className="shrink-0 text-muted transition-colors group-hover:text-accent"
                 />
-                <span className="text-sm font-medium text-[var(--color-ink)]">
-                  {text}
+                <span className="min-w-0">
+                  <span className="label block text-muted">{label}</span>
+                  <span className="mt-1 block truncate text-sm text-ink-soft transition-colors group-hover:text-ink">
+                    {text}
+                  </span>
                 </span>
-              </motion.a>
-            ))}
-          </div>
-          <div className="mt-6">
-            <TypingIndicator text={TYPING_TEXT} />
-          </div>
-        </motion.div>
-      </div>
-    </motion.section>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+    </section>
   )
 }
-
-/** Pequenos nós conectados estilo rede (IT) — piscam como luzes */
-function NetworkNodes({ accentBlend }) {
-  const positions = [
-    [10, 20], [88, 15], [50, 40], [25, 70], [75, 65], [15, 85], [90, 90],
-  ]
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {positions.map(([left, top], i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 rounded-full bg-[var(--color-accent)] node-flicker"
-          style={{
-            left: `${left}%`,
-            top: `${top}%`,
-            animationDelay: `${i * 0.35}s`,
-          }}
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.6 }}
-          viewport={{ once: true }}
-          transition={{ delay: i * 0.05, duration: 0.4 }}
-        />
-      ))}
-      {/* Linhas entre nós */}
-      <svg className="absolute inset-0 w-full h-full opacity-20">
-        <motion.line
-          x1="10%"
-          y1="20%"
-          x2="50%"
-          y2="40%"
-          stroke="var(--color-accent)"
-          strokeWidth="0.5"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        />
-        <motion.line
-          x1="50%"
-          y1="40%"
-          x2="88%"
-          y2="15%"
-          stroke="var(--color-accent)"
-          strokeWidth="0.5"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-        />
-        <motion.line
-          x1="25%"
-          y1="70%"
-          x2="75%"
-          y2="65%"
-          stroke="var(--color-contact-accent)"
-          strokeWidth="0.5"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        />
-      </svg>
-    </div>
-  )
-}
-
-/** Texto digitando estilo terminal */
-function TypingIndicator({ text }) {
-  const [visible, setVisible] = useState(0)
-  useEffect(() => {
-    if (visible >= text.length) return
-    const t = setTimeout(() => setVisible((v) => v + 1), 80)
-    return () => clearTimeout(t)
-  }, [visible, text.length])
-  return (
-    <span className="text-xs font-mono text-[var(--color-muted)]">
-      <span className="text-[var(--color-accent)]">&gt;</span>{" "}
-      {text.slice(0, visible)}
-      <span className="terminal-cursor inline-block w-2 h-3 bg-[var(--color-accent)] ml-0.5 align-middle" />
-    </span>
-  )
-}
-

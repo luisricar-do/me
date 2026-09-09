@@ -1,0 +1,87 @@
+/**
+ * Palestras, mentorias e presenças em evento.
+ * `photo` fica null enquanto não existe arquivo em public/images/talks/ —
+ * o componente simplesmente não renderiza imagem nesse caso.
+ */
+export const talks = [
+  {
+    id: "hacktown-2026",
+    kind: "palestra",
+    title: "Onde a IA não deve entrar",
+    subtitle: "A decisão mais AI First que você vai tomar",
+    event: "HackTown 2026 · #CorporateAI",
+    location: "Santa Rita do Sapucaí, MG",
+    date: "2026-09-06",
+    dateLabel: "6 de setembro de 2026",
+    thesis: "AI-first não é colocar IA em tudo. É saber onde ela não entra.",
+    photo: "/images/talks/hacktown-2026.jpg",
+    toolHref: "/ia",
+    toolLabel: "Rodar a régua de autonomia",
+    slidesHref: null,
+    videoHref: null,
+  },
+  {
+    id: "jobshop-unifei",
+    kind: "palestra",
+    title: "A IA não vai te contratar. Eu vou.",
+    subtitle: "Como construir carreira em tech quando ninguém sabe o que vem aí",
+    event: "JobShop UNIFEI 2026",
+    location: "Itajubá, MG",
+    date: "2026-08-25",
+    dateLabel: "25 de agosto de 2026",
+    thesis: "Executar ficou barato. Repertório e julgamento ficaram caros.",
+    photo: "/images/talks/jobshop-unifei.jpg",
+    slidesHref: null,
+    videoHref: null,
+  },
+  {
+    id: "startup-weekend-maker",
+    kind: "mentoria",
+    title: "Startup Weekend Maker Itajubá",
+    subtitle: "Mentoria de times ao longo dos três dias do evento",
+    event: "Startup Weekend Maker",
+    location: "Itajubá, MG",
+    date: "2026-08-29",
+    dateLabel: "29 a 31 de agosto de 2026",
+    photo: null,
+  },
+  {
+    id: "hardtech-innovation",
+    kind: "stand",
+    title: "HardTech Innovation",
+    subtitle: "Apresentando a Tech for Humans no stand do evento",
+    event: "HardTech Innovation",
+    location: "Itajubá, MG",
+    date: "2026-08-01",
+    dateLabel: "agosto de 2026",
+    photo: null,
+  },
+  {
+    id: "mentor-nasa",
+    kind: "mentoria",
+    title: "NASA Space Apps Challenge",
+    subtitle: "Mentoria internacional de times",
+    event: "NASA Space Apps Challenge",
+    location: "Itajubá, MG",
+    date: "2025-09-01",
+    dateLabel: "setembro de 2025",
+    photo: null,
+  },
+  {
+    id: "mentor-startup-weekend",
+    kind: "mentoria",
+    title: "Startup Weekend Itajubá",
+    subtitle: "Mentoria de times em hackathon de startups",
+    event: "Startup Weekend",
+    location: "Itajubá, MG",
+    date: "2024-06-01",
+    dateLabel: "junho de 2024",
+    photo: null,
+  },
+]
+
+export const talkKinds = {
+  palestra: "Palestra",
+  mentoria: "Mentoria",
+  stand: "Stand",
+}

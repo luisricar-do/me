@@ -1,152 +1,120 @@
-import { useRef, useState, useEffect } from "react"
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
+import { useRef } from "react"
 import { ArrowDown } from "lucide-react"
 import { site } from "../../data/site"
 import { Button } from "../ui/Button"
+import { Reveal } from "../ui/Reveal"
+import { useTerminalScroll } from "../../hooks/useTerminalScroll"
+import { useCursorTilt } from "../../hooks/useCursorTilt"
 
-const COMMAND = "cat ~/me.txt"
 const PROMPT = "$ "
+const COMMAND = "cat ~/me.txt"
 
-export function Hero() {
-  const ref = useRef(null)
-  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 })
+const OUTPUT = [
+  { kind: "comment", text: "# whoami" },
+  { kind: "strong", text: `${site.role} · ${site.company}` },
+  { kind: "muted", text: "DPO: governança de dados e conformidade com a LGPD" },
+  { kind: "blank", text: "" },
+  { kind: "comment", text: "# no que trabalho" },
+  { kind: "muted", text: "Arquitetura em nuvem, CI/CD, observabilidade" },
+  { kind: "muted", text: "e IA aplicada a processos de engenharia." },
+]
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  })
-
-  // Animação concentrada nos primeiros ~25% do scroll; depois tudo fica fixo em 1
-  const commandChars = useTransform(scrollYProgress, [0, 0.1], [0, COMMAND.length])
-  const outputOpacity = useTransform(scrollYProgress, [0.08, 0.15], [0, 1])
-  const nameOpacity = useTransform(scrollYProgress, [0.12, 0.18], [0, 1])
-  const taglineOpacity = useTransform(scrollYProgress, [0.16, 0.22], [0, 1])
-  const ctaOpacity = useTransform(scrollYProgress, [0.2, 0.26], [0, 1])
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.12], [0, 0.5])
-
-  // Terminal levemente “travado” ao cursor
-  useEffect(() => {
-    const onMove = (e) => {
-      setMouse({
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight,
-      })
-    }
-    window.addEventListener("mousemove", onMove)
-    return () => window.removeEventListener("mousemove", onMove)
-  }, [])
-
-  const terminalX = (mouse.x - 0.5) * 24
-  const terminalY = (mouse.y - 0.5) * 16
-
-  return (
-    <section
-      id="hero"
-      ref={ref}
-      className="relative min-h-[300vh] flex items-start justify-center pt-32 pb-20"
-    >
-      <div className="sticky top-24 left-0 right-0 flex justify-center items-center min-h-[calc(100vh-6rem)] px-4 relative z-10 overflow-hidden">
-        {/* Glow verde: fixo junto com o terminal, depois solta com o scroll */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none flex items-center justify-center"
-          style={{ opacity: glowOpacity }}
-        >
-          <div
-            className="w-[80%] max-w-2xl aspect-square rounded-full opacity-40"
-            style={{
-              background: "var(--color-accent)",
-              filter: "blur(80px)",
-            }}
-          />
-        </motion.div>
-        <motion.div
-          className="relative w-full max-w-2xl"
-          style={{
-            x: terminalX,
-            y: terminalY,
-          }}
-          transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        >
-          {/* Janela do terminal */}
-          <div className="rounded-xl overflow-hidden glass-strong shadow-2xl shadow-black/40">
-            {/* Barra de título */}
-            <div className="flex items-center gap-2 px-4 py-2.5 glass border-b border-[var(--glass-border)]">
-              <span className="w-3 h-3 rounded-full bg-[#ef4444]/80" />
-              <span className="w-3 h-3 rounded-full bg-[#eab308]/80" />
-              <span className="w-3 h-3 rounded-full bg-[#22c55e]/80" />
-              <span className="flex-1 text-center text-xs font-mono text-[var(--color-muted)]">
-                terminal — zsh
-              </span>
-            </div>
-            {/* Corpo do terminal */}
-            <div className="p-5 font-mono text-sm min-h-[280px] md:min-h-[320px]">
-              <div className="flex flex-wrap items-center gap-0.5">
-                <span className="text-[var(--color-accent)]">{PROMPT}</span>
-                <TerminalTyping count={commandChars} text={COMMAND} />
-                <span className="terminal-cursor inline-block w-2 h-4 bg-[var(--color-accent)] ml-0.5 align-middle" />
-              </div>
-              <motion.div
-                style={{ opacity: outputOpacity }}
-                className="mt-4 space-y-1 text-[var(--color-muted)]"
-              >
-                <p className="text-[var(--color-ink)]/80"># about me</p>
-                <motion.p
-                  style={{ opacity: nameOpacity }}
-                  className="text-xl md:text-2xl font-semibold text-[var(--color-ink)]"
-                >
-                  {site.name}
-                </motion.p>
-                <motion.p
-                  style={{ opacity: taglineOpacity }}
-                  className="text-[var(--color-accent-muted)]"
-                >
-                  {site.tagline}
-                </motion.p>
-                <motion.p
-                  style={{ opacity: taglineOpacity }}
-                  className="text-[var(--color-muted)] pt-1"
-                >
-                  DevOps Manager & DPO na Tech for Humans. Arquitetura em nuvem,
-                  CI/CD e governança de dados (LGPD).
-                </motion.p>
-              </motion.div>
-              <motion.div
-                style={{ opacity: ctaOpacity }}
-                className="flex flex-wrap gap-3 mt-6 pt-4 border-t border-[var(--glass-border)]"
-              >
-                <Button href="#projetos">Ver projetos</Button>
-                <Button href="#contato" variant="outline">
-                  Contato
-                </Button>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      <motion.a
-        href="#sobre"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        aria-label="Rolar para Sobre"
-      >
-        <motion.span
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          className="inline-block"
-        >
-          <ArrowDown size={28} />
-        </motion.span>
-      </motion.a>
-    </section>
-  )
+const OUTPUT_CLASS = {
+  comment: "text-term-accent",
+  strong: "text-term-ink",
+  muted: "text-term-muted",
+  blank: "text-term-muted",
 }
 
-/** Mostra os primeiros N caracteres do texto (N vem de useTransform) */
-function TerminalTyping({ count, text }) {
-  const [chars, setChars] = useState(0)
-  useMotionValueEvent(count, "change", (v) => setChars(Math.round(v)))
-  return <span>{text.slice(0, chars)}</span>
+export function Hero() {
+  const sectionRef = useRef(null)
+  const terminalRef = useRef(null)
+  const chars = useTerminalScroll(sectionRef, COMMAND.length)
+  useCursorTilt(terminalRef)
+
+  return (
+    <section id="hero" ref={sectionRef} className="relative min-h-[125vh] md:min-h-[150vh]">
+      <div className="sticky top-0 flex min-h-svh items-center overflow-hidden">
+        <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 pb-24 pt-28 md:grid-cols-[1.05fr_0.95fr] md:items-center md:gap-14 md:pb-20">
+          {/* Coluna editorial: aparece no load, não depende de scroll */}
+          <div className="min-w-0">
+            <Reveal as="p" className="label flex items-center gap-3 text-muted">
+              <span className="h-px w-8 bg-accent" aria-hidden />
+              {site.tagline}
+            </Reveal>
+
+            <Reveal
+              as="h1"
+              delay={0.08}
+              className="display mt-6 text-[clamp(3rem,10vw,7rem)] leading-[0.95] text-ink"
+            >
+              <span className="block">Luis Ricardo</span>
+              <span className="block italic text-accent">Santos</span>
+            </Reveal>
+
+            <Reveal
+              as="p"
+              delay={0.2}
+              className="mt-7 max-w-md text-pretty leading-relaxed text-ink-soft"
+            >
+              {site.role} na {site.company}. Trabalho onde estratégia e execução se
+              encontram: nuvem, automação, dados e IA, com governança de verdade por trás.
+            </Reveal>
+
+            <Reveal delay={0.3} className="mt-9 flex flex-wrap gap-3">
+              <Button href="#palestras">Ver palestras</Button>
+              <Button to="/ia" variant="outline">
+                Régua de IA
+              </Button>
+            </Reveal>
+          </div>
+
+          {/* Terminal: este sim vai aparecendo conforme o scroll */}
+          <div ref={terminalRef} data-tilt className="min-w-0">
+            <div className="overflow-hidden rounded-xl border border-term-line bg-term shadow-[var(--shadow-card)]">
+              <div className="flex items-center gap-2 border-b border-term-line bg-term-head px-4 py-2.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+                <span className="flex-1 text-center font-mono text-[11px] text-term-muted">
+                  ~/me.txt · zsh
+                </span>
+              </div>
+
+              <div className="min-h-[280px] p-5 font-mono text-[13px] leading-6 md:min-h-[320px]">
+                <p className="flex flex-wrap items-center">
+                  <span className="text-term-accent">{PROMPT}</span>
+                  <span className="text-term-ink">{COMMAND.slice(0, chars)}</span>
+                  <span className="terminal-cursor ml-0.5 inline-block h-3.5 w-1.5 bg-term-accent align-middle" />
+                </p>
+
+                <div className="mt-4 space-y-0.5">
+                  {OUTPUT.map((line, i) => (
+                    <p
+                      key={i}
+                      data-stage
+                      style={{ "--stage-from": 0.2 + i * 0.028 }}
+                      className={OUTPUT_CLASS[line.kind]}
+                    >
+                      {line.text || " "}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a
+          href="#sobre"
+          data-stage-out
+          className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-muted transition-colors hover:text-accent"
+          aria-label="Rolar para a seção Sobre"
+        >
+          <span className="label">rolar</span>
+          <ArrowDown size={16} className="animate-bounce" />
+        </a>
+      </div>
+    </section>
+  )
 }
