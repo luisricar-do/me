@@ -1,5 +1,6 @@
 import { ArrowUp, Github, Linkedin, Mail } from "lucide-react"
 import { site } from "../../data/site"
+import { build, formattedBuildDate } from "../../lib/build"
 
 const social = [
   { href: site.github, icon: Github, label: "GitHub" },
@@ -7,22 +8,8 @@ const social = [
   { href: `mailto:${site.email}`, icon: Mail, label: "Email" },
 ]
 
-// Injetados no build pelo define do Vite
-const sha = __BUILD_SHA__
-const ref = __BUILD_REF__
-const builtAt = __BUILT_AT__
-
 export function Footer() {
-  const deployedAt = (() => {
-    try {
-      return new Intl.DateTimeFormat("pt-BR", {
-        dateStyle: "medium",
-        timeStyle: "short",
-      }).format(new Date(builtAt))
-    } catch {
-      return null
-    }
-  })()
+  const deployedAt = formattedBuildDate()
 
   return (
     <footer className="border-t border-line">
@@ -36,15 +23,15 @@ export function Footer() {
           {/* Um site de DevOps que não mostra o próprio deploy é uma piada perdida */}
           <p className="mt-5 font-mono text-[11px] text-muted">
             <a
-              href={`${site.repo}/commit/${sha}`}
+              href={`${site.repo}/commit/${build.sha}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-ink-soft transition-colors hover:text-accent"
             >
-              {sha}
+              {build.sha}
             </a>
             <span className="mx-1.5">·</span>
-            {ref}
+            {build.ref}
             {deployedAt && (
               <>
                 <span className="mx-1.5">·</span>

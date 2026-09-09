@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
 import { Header } from "./components/layout/Header"
 import { Footer } from "./components/layout/Footer"
+import { CommandPalette } from "./components/ui/CommandPalette"
 import { Home } from "./pages/Home"
 import { AiRuler } from "./pages/AiRuler"
 import { Eduflow } from "./pages/Eduflow"
@@ -35,6 +36,7 @@ function App() {
         Pular para o conteúdo
       </a>
       <ScrollManager />
+      <CommandPalette />
       <Header />
       <main id="conteudo">
         <Routes>

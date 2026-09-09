@@ -1,13 +1,16 @@
 import { useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { Check, Copy, RotateCcw } from "lucide-react"
+import { Check, Copy, Download, RotateCcw } from "lucide-react"
 import { questions, levels } from "../../data/aiRuler"
 import { decodeAnswers, encodeAnswers, evaluate } from "../../lib/aiRuler"
+import { downloadBlob, drawResultCard } from "../../lib/shareCard"
 
 export function AutonomyRuler() {
   const [params, setParams] = useSearchParams()
   const [answers, setAnswers] = useState(() => decodeAnswers(params.get("r")))
   const [copied, setCopied] = useState(false)
+  const [task, setTask] = useState("")
+  const [drawing, setDrawing] = useState(false)
 
   const result = useMemo(() => evaluate(answers), [answers])
   const answered = questions.filter((question) => answers[question.id] != null).length
@@ -16,7 +19,7 @@ export function AutonomyRuler() {
     const next = { ...answers, [id]: index }
     setAnswers(next)
     const code = encodeAnswers(next)
-    setParams(code.includes("-") ? {} : { r: code }, { replace: true })
+    setParams(code.replace(/-/g, "") ? { r: code } : {}, { replace: true })
     setCopied(false)
   }
 
@@ -24,6 +27,16 @@ export function AutonomyRuler() {
     setAnswers({})
     setParams({}, { replace: true })
     setCopied(false)
+  }
+
+  async function downloadCard() {
+    setDrawing(true)
+    try {
+      const blob = await drawResultCard({ result, task: task.trim(), levels })
+      if (blob) downloadBlob(blob, "regua-de-autonomia.png")
+    } finally {
+      setDrawing(false)
+    }
   }
 
   async function copyLink() {
@@ -44,7 +57,21 @@ export function AutonomyRuler() {
         </p>
       </div>
 
-      <ol className="mt-8">
+      <div className="mt-8">
+        <label htmlFor="ruler-task" className="label text-muted">
+          A tarefa (opcional)
+        </label>
+        <input
+          id="ruler-task"
+          value={task}
+          onChange={(event) => setTask(event.target.value)}
+          placeholder="ex.: aprovar reembolso sem revisão humana"
+          maxLength={110}
+          className="mt-3 w-full border-b border-line bg-transparent pb-2 text-lg text-ink caret-accent outline-none transition-colors placeholder:text-muted focus:border-accent"
+        />
+      </div>
+
+      <ol className="mt-10">
         {questions.map((question, index) => (
           <li key={question.id} className="border-b border-line-soft py-8 first:pt-0">
             <div className="flex items-baseline gap-4">
@@ -113,6 +140,11 @@ export function AutonomyRuler() {
             </div>
           ) : (
             <article className="rounded-xl border border-accent bg-surface p-6 md:p-8">
+              {task.trim() && (
+                <p className="mb-5 border-b border-line-soft pb-4 font-mono text-[11px] text-muted">
+                  &gt; {task.trim()}
+                </p>
+              )}
               <div className="flex flex-wrap items-baseline justify-between gap-4">
                 <p className="label text-accent">Nível recomendado</p>
                 <p className="label text-muted tabular-nums">
@@ -154,6 +186,15 @@ export function AutonomyRuler() {
           )}
 
           <div className="mt-8 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={downloadCard}
+              disabled={drawing}
+              className="inline-flex items-center gap-2 rounded-full border border-ink bg-ink px-4 py-2 font-mono text-[11px] text-paper transition-colors hover:border-accent hover:bg-accent hover:text-accent-ink disabled:opacity-60"
+            >
+              <Download size={13} />
+              {drawing ? "gerando..." : "baixar card"}
+            </button>
             <button
               type="button"
               onClick={copyLink}

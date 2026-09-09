@@ -5,31 +5,24 @@ import { Button } from "../ui/Button"
 import { Reveal } from "../ui/Reveal"
 import { useTerminalScroll } from "../../hooks/useTerminalScroll"
 import { useCursorTilt } from "../../hooks/useCursorTilt"
+import { Terminal } from "../terminal/Terminal"
 
-const PROMPT = "$ "
 const COMMAND = "cat ~/me.txt"
 
 const OUTPUT = [
-  { kind: "comment", text: "# whoami" },
-  { kind: "strong", text: `${site.role} · ${site.company}` },
+  { kind: "accent", text: "# whoami" },
+  { kind: "out", text: `${site.role} · ${site.company}` },
   { kind: "muted", text: "DPO: governança de dados e conformidade com a LGPD" },
   { kind: "blank", text: "" },
-  { kind: "comment", text: "# no que trabalho" },
+  { kind: "accent", text: "# no que trabalho" },
   { kind: "muted", text: "Arquitetura em nuvem, CI/CD, observabilidade" },
   { kind: "muted", text: "e IA aplicada a processos de engenharia." },
 ]
 
-const OUTPUT_CLASS = {
-  comment: "text-term-accent",
-  strong: "text-term-ink",
-  muted: "text-term-muted",
-  blank: "text-term-muted",
-}
-
 export function Hero() {
   const sectionRef = useRef(null)
   const terminalRef = useRef(null)
-  const chars = useTerminalScroll(sectionRef, COMMAND.length)
+  const [chars, completeIntro] = useTerminalScroll(sectionRef, COMMAND.length)
   useCursorTilt(terminalRef)
 
   return (
@@ -69,39 +62,14 @@ export function Hero() {
             </Reveal>
           </div>
 
-          {/* Terminal: este sim vai aparecendo conforme o scroll */}
+          {/* Terminal: abre com o scroll e vira shell de verdade no primeiro clique */}
           <div ref={terminalRef} data-tilt className="min-w-0">
-            <div className="overflow-hidden rounded-xl border border-term-line bg-term shadow-[var(--shadow-card)]">
-              <div className="flex items-center gap-2 border-b border-term-line bg-term-head px-4 py-2.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-                <span className="flex-1 text-center font-mono text-[11px] text-term-muted">
-                  ~/me.txt · zsh
-                </span>
-              </div>
-
-              <div className="min-h-[280px] p-5 font-mono text-[13px] leading-6 md:min-h-[320px]">
-                <p className="flex flex-wrap items-center">
-                  <span className="text-term-accent">{PROMPT}</span>
-                  <span className="text-term-ink">{COMMAND.slice(0, chars)}</span>
-                  <span className="terminal-cursor ml-0.5 inline-block h-3.5 w-1.5 bg-term-accent align-middle" />
-                </p>
-
-                <div className="mt-4 space-y-0.5">
-                  {OUTPUT.map((line, i) => (
-                    <p
-                      key={i}
-                      data-stage
-                      style={{ "--stage-from": 0.2 + i * 0.028 }}
-                      className={OUTPUT_CLASS[line.kind]}
-                    >
-                      {line.text || " "}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <Terminal
+              typed={COMMAND.slice(0, chars)}
+              command={COMMAND}
+              intro={OUTPUT}
+              onActivate={completeIntro}
+            />
           </div>
         </div>
 

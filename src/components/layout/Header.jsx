@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, Scale, X } from "lucide-react"
+import { Menu, Scale, Search, X } from "lucide-react"
 import { site } from "../../data/site"
+import { Mark } from "../ui/Mark"
 import { ThemeToggle } from "../ui/ThemeToggle"
 import { useActiveSection } from "../../hooks/useActiveSection"
 import { useScrollBar } from "../../hooks/useScrollBar"
+import { openCommandPalette } from "../../lib/palette"
 
 const navLinks = [
   { id: "sobre", label: "Sobre" },
@@ -53,7 +55,11 @@ export function Header() {
           to="/"
           className="group flex items-center gap-2.5 text-sm font-medium tracking-tight text-ink"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-accent transition-transform duration-300 group-hover:scale-150" />
+          <Mark
+            size={20}
+            className="transition-transform duration-300 group-hover:-translate-y-0.5"
+            title={`${site.name}, início`}
+          />
           {site.name}
         </Link>
 
@@ -75,6 +81,17 @@ export function Header() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={openCommandPalette}
+            aria-label="Buscar no site"
+            title="Buscar (⌘K)"
+            className="hidden items-center gap-2 rounded-full border border-line px-3 py-1.5 font-mono text-[11px] text-muted transition-colors hover:border-accent hover:text-accent sm:inline-flex"
+          >
+            <Search size={12} />
+            <span className="hidden md:inline">buscar</span>
+            <kbd className="rounded border border-line px-1 py-0.5 text-[10px]">⌘K</kbd>
+          </button>
           <Link
             to="/ia"
             className={`hidden items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-[11px] transition-colors md:inline-flex ${
