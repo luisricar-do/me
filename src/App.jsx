@@ -20,7 +20,8 @@ function ScrollManager() {
         return
       }
     }
-    window.scrollTo(0, 0)
+    // instant: o html tem scroll-behavior smooth e isso animaria a volta ao topo
+    window.scrollTo({ top: 0, behavior: "instant" })
   }, [pathname, hash])
 
   return null

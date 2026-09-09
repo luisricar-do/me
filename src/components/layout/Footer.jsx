@@ -1,5 +1,6 @@
 import { ArrowUp, Github, Linkedin, Mail } from "lucide-react"
 import { site } from "../../data/site"
+import { Mark } from "../ui/Mark"
 import { build, formattedBuildDate } from "../../lib/build"
 
 const social = [
@@ -15,7 +16,10 @@ export function Footer() {
     <footer className="border-t border-line">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="display text-2xl text-ink">{site.name}</p>
+          <div className="flex items-center gap-3">
+            <Mark size={26} />
+            <p className="display text-2xl text-ink">{site.name}</p>
+          </div>
           <p className="mt-1 text-sm text-muted">
             © {new Date().getFullYear()} · {site.tagline}
           </p>

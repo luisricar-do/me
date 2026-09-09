@@ -1,0 +1,13 @@
+{
+  "name": "Luis Ricardo Santos",
+  "short_name": "Luis Ricardo",
+  "description": "Gerente de Governança de TI e IA. Nuvem, automação, dados e IA, com governança por trás.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#faf9f6",
+  "theme_color": "#0b0b0d",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

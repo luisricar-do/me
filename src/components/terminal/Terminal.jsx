@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react"
-import { createPortal } from "react-dom"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { createPortal, flushSync } from "react-dom"
 import { useNavigate } from "react-router-dom"
 import { Maximize2, Minimize2 } from "lucide-react"
 import { runCommand } from "../../lib/terminal"
@@ -7,6 +7,7 @@ import { evaluate } from "../../lib/aiRuler"
 import { questions } from "../../data/aiRuler"
 import { site } from "../../data/site"
 import { useTheme } from "../../hooks/useTheme"
+import { prefersReducedMotion } from "../../lib/motion"
 
 const LINE_CLASS = {
   out: "text-term-ink",
@@ -82,6 +83,34 @@ export function Terminal({ typed, command, intro, onActivate }) {
   const scrollRef = useRef(null)
   const navigate = useNavigate()
   const { toggle } = useTheme()
+  const activated = useRef(false)
+
+  const activate = useCallback(() => {
+    if (activated.current) return
+    activated.current = true
+    setActive(true)
+    onActivate?.()
+  }, [onActivate])
+
+  /**
+   * A janela sai do hero e vai para um portal. Como o view-transition-name é
+   * o mesmo nos dois estados, o browser interpola posição e tamanho em vez de
+   * trocar seco. flushSync garante que o React já commitou quando o snapshot
+   * do estado novo é tirado.
+   */
+  const animateExpanded = useCallback(
+    (next) => {
+      activate()
+      const commit = () => flushSync(() => setExpanded(next))
+
+      if (typeof document.startViewTransition !== "function" || prefersReducedMotion()) {
+        commit()
+        return
+      }
+      document.startViewTransition(commit)
+    },
+    [activate]
+  )
 
   useEffect(() => {
     const box = scrollRef.current
@@ -95,7 +124,7 @@ export function Terminal({ typed, command, intro, onActivate }) {
       if (event.key !== "Escape") return
       // Se a paleta ⌘K está aberta, o esc é dela: ela está por cima
       if (document.querySelector('[role="dialog"]')) return
-      setExpanded(false)
+      animateExpanded(false)
     }
 
     const frame = requestAnimationFrame(() => inputRef.current?.focus())
@@ -108,18 +137,7 @@ export function Terminal({ typed, command, intro, onActivate }) {
       document.body.style.overflow = previous
       window.removeEventListener("keydown", onKey)
     }
-  }, [expanded])
-
-  function toggleExpanded() {
-    activate()
-    setExpanded((current) => !current)
-  }
-
-  function activate() {
-    if (active) return
-    setActive(true)
-    onActivate?.()
-  }
+  }, [expanded, animateExpanded])
 
   function push(...entries) {
     setHistory((current) => [...current, ...entries])
@@ -145,10 +163,10 @@ export function Terminal({ typed, command, intro, onActivate }) {
         window.location.href = `mailto:${site.email}`
         break
       case "expand":
-        setExpanded(true)
+        animateExpanded(true)
         break
       case "collapse":
-        setExpanded(false)
+        animateExpanded(false)
         break
       case "ruler":
         setMode("ruler")
@@ -231,7 +249,7 @@ export function Terminal({ typed, command, intro, onActivate }) {
     if (event.key === "Escape" && expanded) {
       event.preventDefault()
       event.stopPropagation()
-      setExpanded(false)
+      animateExpanded(false)
       return
     }
     if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return
@@ -252,7 +270,7 @@ export function Terminal({ typed, command, intro, onActivate }) {
 
   const windowEl = (
     <div
-      className={`overflow-hidden rounded-xl border border-term-line bg-term shadow-[var(--shadow-card)] ${
+      className={`terminal-window overflow-hidden rounded-xl border border-term-line bg-term shadow-[var(--shadow-card)] ${
         expanded ? "flex h-full flex-col" : ""
       }`}
     >
@@ -262,7 +280,7 @@ export function Terminal({ typed, command, intro, onActivate }) {
         {/* Afordância de mouse: redundante com o botão rotulado à direita */}
         <button
           type="button"
-          onClick={toggleExpanded}
+          onClick={() => animateExpanded(!expanded)}
           tabIndex={-1}
           aria-hidden
           className="h-2.5 w-2.5 rounded-full bg-[#28c840] transition-transform duration-200 hover:scale-125"
@@ -272,7 +290,7 @@ export function Terminal({ typed, command, intro, onActivate }) {
         </span>
         <button
           type="button"
-          onClick={toggleExpanded}
+          onClick={() => animateExpanded(!expanded)}
           aria-label={expanded ? "Restaurar o terminal" : "Expandir o terminal em tela cheia"}
           title={expanded ? "Restaurar (esc)" : "Expandir"}
           className="shrink-0 text-term-muted transition-colors hover:text-term-accent"
@@ -373,9 +391,9 @@ export function Terminal({ typed, command, intro, onActivate }) {
       {createPortal(
         <div
           onClick={(event) => {
-            if (event.target === event.currentTarget) setExpanded(false)
+            if (event.target === event.currentTarget) animateExpanded(false)
           }}
-          className="fixed inset-0 z-[80] bg-paper/80 p-4 backdrop-blur-sm md:p-8"
+          className="terminal-backdrop fixed inset-0 z-[80] bg-paper/90 p-4 md:p-8"
         >
           {windowEl}
         </div>,

@@ -247,3 +247,34 @@ section[id] {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* Terminal em tela cheia: a janela morfa entre o hero e o portal.
+   O mesmo view-transition-name nos dois estados faz o browser interpolar
+   posição e tamanho; o fundo, que só existe no estado expandido, entra e
+   sai em fade por conta própria. */
+.terminal-window {
+  view-transition-name: terminal;
+}
+.terminal-backdrop {
+  view-transition-name: terminal-backdrop;
+}
+
+::view-transition-group(terminal),
+::view-transition-group(terminal-backdrop) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Ordem explícita: sem isso o fundo pode ser pintado sobre a janela.
+   E nada de backdrop-filter aqui: dentro de um snapshot o filtro não tem
+   o que amostrar e o resultado é uma tela preta durante a transição. */
+::view-transition-group(terminal-backdrop) {
+  z-index: 10;
+}
+::view-transition-group(terminal) {
+  z-index: 20;
+}
+::view-transition-old(terminal),
+::view-transition-new(terminal) {
+  animation-duration: 240ms;
+}
