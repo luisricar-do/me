@@ -65,6 +65,8 @@ const HELP = [
   ["open <seção>", "rola até a seção"],
   ["ia", "abre a régua de autonomia"],
   ["ia --run", "roda a régua aqui no terminal"],
+  ["expand", "abre o terminal em tela cheia"],
+  ["collapse", "volta ao tamanho normal (ou esc)"],
   ["theme", "alterna claro e escuro"],
   ["contato", "meu email"],
   ["clear", "limpa a tela"],
@@ -162,6 +164,21 @@ export function runCommand(raw) {
         effect: { type: "navigate", to: "/ia" },
       }
 
+    case "expand":
+    case "fullscreen":
+      return {
+        lines: [{ kind: "muted", text: "expandindo. esc volta ao normal." }],
+        effect: { type: "expand" },
+      }
+
+    case "collapse":
+    case "exit":
+    case "quit":
+      return {
+        lines: [{ kind: "muted", text: "voltando ao tamanho normal." }],
+        effect: { type: "collapse" },
+      }
+
     case "theme":
       return {
         lines: [{ kind: "muted", text: "trocando o tema..." }],
@@ -186,9 +203,6 @@ export function runCommand(raw) {
 
     case "rm":
       return { lines: [{ kind: "error", text: "rm: permissão negada. quem responde pelo resultado antes de ele ter efeito?" }] }
-
-    case "exit":
-      return { lines: [{ kind: "muted", text: "o terminal fica. você pode continuar rolando a página." }] }
 
     default:
       return {

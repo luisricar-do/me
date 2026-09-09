@@ -114,7 +114,7 @@ export function CommandPalette() {
 
   return (
     <div
-      className="fixed inset-0 z-[70] flex items-start justify-center px-4 pt-[12vh]"
+      className="fixed inset-0 z-[90] flex items-start justify-center px-4 pt-[12vh]"
       role="dialog"
       aria-modal="true"
       aria-label="Buscar no site"

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react"
+import { createPortal } from "react-dom"
 import { useNavigate } from "react-router-dom"
+import { Maximize2, Minimize2 } from "lucide-react"
 import { runCommand } from "../../lib/terminal"
 import { evaluate } from "../../lib/aiRuler"
 import { questions } from "../../data/aiRuler"
@@ -74,6 +76,7 @@ export function Terminal({ typed, command, intro, onActivate }) {
   const [recall, setRecall] = useState([])
   const [recallAt, setRecallAt] = useState(-1)
   const [active, setActive] = useState(false)
+  const [expanded, setExpanded] = useState(false)
 
   const inputRef = useRef(null)
   const scrollRef = useRef(null)
@@ -84,6 +87,33 @@ export function Terminal({ typed, command, intro, onActivate }) {
     const box = scrollRef.current
     if (box) box.scrollTop = box.scrollHeight
   }, [history, showIntro])
+
+  useEffect(() => {
+    if (!expanded) return
+
+    const onKey = (event) => {
+      if (event.key !== "Escape") return
+      // Se a paleta ⌘K está aberta, o esc é dela: ela está por cima
+      if (document.querySelector('[role="dialog"]')) return
+      setExpanded(false)
+    }
+
+    const frame = requestAnimationFrame(() => inputRef.current?.focus())
+    const previous = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", onKey)
+
+    return () => {
+      cancelAnimationFrame(frame)
+      document.body.style.overflow = previous
+      window.removeEventListener("keydown", onKey)
+    }
+  }, [expanded])
+
+  function toggleExpanded() {
+    activate()
+    setExpanded((current) => !current)
+  }
 
   function activate() {
     if (active) return
@@ -113,6 +143,12 @@ export function Terminal({ typed, command, intro, onActivate }) {
         break
       case "mail":
         window.location.href = `mailto:${site.email}`
+        break
+      case "expand":
+        setExpanded(true)
+        break
+      case "collapse":
+        setExpanded(false)
         break
       case "ruler":
         setMode("ruler")
@@ -192,6 +228,12 @@ export function Terminal({ typed, command, intro, onActivate }) {
   }
 
   function onKeyDown(event) {
+    if (event.key === "Escape" && expanded) {
+      event.preventDefault()
+      event.stopPropagation()
+      setExpanded(false)
+      return
+    }
     if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return
     if (!recall.length) return
     event.preventDefault()
@@ -208,15 +250,35 @@ export function Terminal({ typed, command, intro, onActivate }) {
 
   const introDone = typed.length >= command.length
 
-  return (
-    <div className="overflow-hidden rounded-xl border border-term-line bg-term shadow-[var(--shadow-card)]">
+  const windowEl = (
+    <div
+      className={`overflow-hidden rounded-xl border border-term-line bg-term shadow-[var(--shadow-card)] ${
+        expanded ? "flex h-full flex-col" : ""
+      }`}
+    >
       <div className="flex items-center gap-2 border-b border-term-line bg-term-head px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+        <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+        <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+        {/* Afordância de mouse: redundante com o botão rotulado à direita */}
+        <button
+          type="button"
+          onClick={toggleExpanded}
+          tabIndex={-1}
+          aria-hidden
+          className="h-2.5 w-2.5 rounded-full bg-[#28c840] transition-transform duration-200 hover:scale-125"
+        />
         <span className="flex-1 text-center font-mono text-[11px] text-term-muted">
           ~/me.txt · zsh
         </span>
+        <button
+          type="button"
+          onClick={toggleExpanded}
+          aria-label={expanded ? "Restaurar o terminal" : "Expandir o terminal em tela cheia"}
+          title={expanded ? "Restaurar (esc)" : "Expandir"}
+          className="shrink-0 text-term-muted transition-colors hover:text-term-accent"
+        >
+          {expanded ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
+        </button>
       </div>
 
       <div
@@ -226,7 +288,9 @@ export function Terminal({ typed, command, intro, onActivate }) {
           activate()
           inputRef.current?.focus()
         }}
-        className="h-[300px] cursor-text overflow-y-auto p-5 font-mono text-[13px] leading-6 md:h-[340px]"
+        className={`cursor-text overflow-y-auto p-5 font-mono text-[13px] leading-6 ${
+          expanded ? "min-h-0 flex-1" : "h-[300px] md:h-[340px]"
+        }`}
       >
         {showIntro && (
           <>
@@ -296,5 +360,27 @@ export function Terminal({ typed, command, intro, onActivate }) {
         </form>
       </div>
     </div>
+  )
+
+  if (!expanded) return windowEl
+
+  return (
+    <>
+      {/* Segura o espaço no grid do hero enquanto a janela está em tela cheia */}
+      <div className="grid h-[352px] place-items-center rounded-xl border border-dashed border-line md:h-[392px]">
+        <p className="font-mono text-[11px] text-muted">terminal em tela cheia · esc para voltar</p>
+      </div>
+      {createPortal(
+        <div
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setExpanded(false)
+          }}
+          className="fixed inset-0 z-[80] bg-paper/80 p-4 backdrop-blur-sm md:p-8"
+        >
+          {windowEl}
+        </div>,
+        document.body
+      )}
+    </>
   )
 }
