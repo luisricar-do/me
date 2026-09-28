@@ -3,23 +3,37 @@ import { SectionTitle } from "../ui/SectionTitle"
 import { Reveal } from "../ui/Reveal"
 import { timelineEntries } from "../../data/timeline"
 
-const CATEGORY = {
-  work: { token: "--cat-work", label: "Trabalho" },
+/**
+ * Três grupos visuais em vez de seis cores: o dado guarda a categoria fina,
+ * a tela mostra só o que ajuda a ler a trajetória.
+ */
+const GROUP = {
+  work: { token: "--cat-work", label: "Trabalho e projetos" },
   education: { token: "--cat-education", label: "Formação" },
-  project: { token: "--cat-project", label: "Projeto" },
-  speaking: { token: "--cat-speaking", label: "Palestra" },
-  community: { token: "--cat-community", label: "Comunidade" },
-  achievement: { token: "--cat-achievement", label: "Conquista" },
+  stage: { token: "--cat-speaking", label: "Palco e comunidade" },
 }
 
-const FILTERS = Object.entries(CATEGORY).map(([key, value]) => ({ key, ...value }))
+const GROUP_OF = {
+  work: "work",
+  project: "work",
+  education: "education",
+  speaking: "stage",
+  community: "stage",
+  achievement: "stage",
+}
+
+const FILTERS = Object.entries(GROUP).map(([key, value]) => ({ key, ...value }))
+
+/** Quantos anos aparecem antes de "ver tudo": o recente conta a história. */
+const RECENT_YEARS = 3
 
 export function Timeline() {
   const [filter, setFilter] = useState(null)
+  const [expanded, setExpanded] = useState(false)
 
   const groups = useMemo(() => {
     const visible = filter
-      ? timelineEntries.filter((entry) => entry.category === filter)
+      ? timelineEntries.filter((entry) => GROUP_OF[entry.category] === filter)
       : timelineEntries
 
     const byYear = new Map()
@@ -31,6 +45,9 @@ export function Timeline() {
     // Mais recente primeiro; dentro do ano, mantém a ordem cronológica
     return [...byYear.entries()].sort((a, b) => b[0] - a[0])
   }, [filter])
+
+  const visibleGroups = expanded ? groups : groups.slice(0, RECENT_YEARS)
+  const hidden = groups.length - visibleGroups.length
 
   return (
     <section id="trajetoria" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
@@ -63,7 +80,7 @@ export function Timeline() {
       </Reveal>
 
       <div key={filter ?? "all"} className="fade-swap mt-10">
-        {groups.map(([year, entries]) => (
+        {visibleGroups.map(([year, entries]) => (
           <div
             key={year}
             className="grid gap-4 border-t border-line py-8 md:grid-cols-[7rem_1fr] md:gap-10"
@@ -83,6 +100,21 @@ export function Timeline() {
           <p className="border-t border-line py-10 text-sm text-muted">
             Nada nessa categoria ainda.
           </p>
+        )}
+
+        {hidden > 0 && (
+          <div className="border-t border-line pt-8">
+            <button
+              type="button"
+              onClick={() => setExpanded(true)}
+              className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm text-ink-soft transition-colors hover:border-accent hover:text-accent"
+            >
+              Ver linha do tempo completa
+              <span className="font-mono text-[11px] text-muted">
+                +{hidden} {hidden === 1 ? "ano" : "anos"}
+              </span>
+            </button>
+          </div>
         )}
       </div>
     </section>
@@ -106,7 +138,7 @@ function FilterChip({ active, token, onClick, children }) {
 }
 
 function TimelineEntry({ entry }) {
-  const category = CATEGORY[entry.category]
+  const category = GROUP[GROUP_OF[entry.category]]
   const Icon = entry.icon
   const color = `var(${category.token})`
 

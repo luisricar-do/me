@@ -6,10 +6,10 @@ import { projects } from "../data/projects"
 import { timelineEntries } from "../data/timeline"
 
 const SECTIONS = [
-  ["sobre", "quem sou e o que faço"],
-  ["destaques", "projetos de impacto e publicações"],
+  ["atuacao", "onde eu posso ajudar"],
   ["palestras", "palcos, mentorias e presenças"],
-  ["projetos", "trabalhos recentes"],
+  ["sobre", "quem sou"],
+  ["destaques", "projetos de impacto e publicações"],
   ["trajetoria", "linha do tempo"],
   ["contato", "como me achar"],
 ]

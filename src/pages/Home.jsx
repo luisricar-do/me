@@ -1,8 +1,8 @@
 import { Hero } from "../components/sections/Hero"
+import { Services } from "../components/sections/Services"
+import { Talks } from "../components/sections/Talks"
 import { About } from "../components/sections/About"
 import { Highlights } from "../components/sections/Highlights"
-import { Talks } from "../components/sections/Talks"
-import { Projects } from "../components/sections/Projects"
 import { Timeline } from "../components/sections/Timeline"
 import { Contact } from "../components/sections/Contact"
 import { BuiltWith } from "../components/sections/BuiltWith"
@@ -12,25 +12,25 @@ import { quotes } from "../data/quotes"
 import { usePageMeta } from "../hooks/usePageMeta"
 import { site } from "../data/site"
 
+// Tese → prova → o que ofereço → quem sou → como me chamar
 export function Home() {
   usePageMeta(
-    `${site.name} | Software Engineer · Cloud Architect · DevOps`,
-    "Portfólio de Luis Ricardo Santos. Gerente de Governança de TI e IA na Tech for Humans: arquitetura em nuvem, CI/CD, observabilidade e governança de dados."
+    `${site.name} | Governança de TI e IA · Palestras`,
+    "Luis Ricardo Santos, Gerente de Governança de TI e IA na Tech for Humans. Palestras e mentoria sobre IA na engenharia: onde ela acelera, onde não deve entrar e como governar."
   )
 
   return (
     <>
       <Hero />
-      <About />
-      <PullQuote {...quotes.repertorio} />
-      <Highlights />
+      <Services />
       <Talks />
-      <PullQuote {...quotes.aiFirst} />
       <RulerTeaser />
-      <Projects />
+      <PullQuote {...quotes.repertorio} />
+      <About />
+      <Highlights />
       <Timeline />
-      <BuiltWith />
       <Contact />
+      <BuiltWith />
     </>
   )
 }

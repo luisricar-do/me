@@ -13,7 +13,7 @@ export function Talks() {
   return (
     <section id="palestras" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle
-        index="03"
+        index="02"
         eyebrow="Palestras"
         title="O que eu levei para o palco."
         lead="Duas palestras em 2026, mais mentorias em hackathon e maratona de inovação."

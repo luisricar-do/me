@@ -30,13 +30,10 @@
   --term-accent: #4ade80;
   --term-line: rgba(255, 255, 255, 0.09);
 
-  /* Categorias da linha do tempo */
+  /* Grupos da linha do tempo */
   --cat-education: light-dark(#a16207, #fbbf24);
   --cat-work: light-dark(#146c43, #4ade80);
-  --cat-community: light-dark(#6d28d9, #a78bfa);
-  --cat-project: light-dark(#1d4ed8, #60a5fa);
   --cat-speaking: light-dark(#b3541e, #fb923c);
-  --cat-achievement: light-dark(#0e7490, #22d3ee);
 
   --shadow-card: 0 1px 2px light-dark(rgba(26, 25, 23, 0.05), rgba(0, 0, 0, 0.4)),
     0 16px 40px -24px light-dark(rgba(26, 25, 23, 0.28), rgba(0, 0, 0, 0.7));
@@ -181,14 +178,9 @@ section[id] {
     transform: none;
   }
 
-  /* Etapas ligadas ao scroll: --p (0 a 1) é escrito pelo JS na seção pai */
+  /* Etapas da abertura do terminal: --p (0 a 1) é escrito pelo JS na seção pai */
   [data-stage] {
     opacity: clamp(0, calc((var(--p, 1) - var(--stage-from, 0)) / 0.06), 1);
-  }
-
-  /* Mesma ideia, no sentido inverso: some conforme o scroll avança */
-  [data-stage-out] {
-    opacity: clamp(0, calc((var(--stage-until, 0.6) - var(--p, 0)) / 0.25), 1);
   }
 
   /* Parallax do cursor: o JS escreve as vars, o CSS suaviza */
@@ -223,8 +215,7 @@ section[id] {
     transform: none !important;
     transition: none !important;
   }
-  [data-stage],
-  [data-stage-out] {
+  [data-stage] {
     opacity: 1 !important;
   }
   [data-tilt] {

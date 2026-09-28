@@ -1,4 +1,4 @@
-import { Star, Zap } from "lucide-react"
+import { Star } from "lucide-react"
 
 export const highlights = [
   {
@@ -18,23 +18,5 @@ export const highlights = [
       { label: "Reconhecimento", value: "Internacional" },
     ],
     tags: ["Low-code", "Education", "IEEE", "TCC", "React", "Node.js"],
-  },
-  {
-    id: "streamline",
-    title: "Streamline",
-    badge: "Em produção · Tech for Humans",
-    badgeIcon: Zap,
-    badgeColor: "green",
-    href: "https://github.com/tech4humans-brasil/streamline",
-    videoHref: "https://www.youtube.com/watch?v=P6d1OfvwTRE",
-    context: "Tech for Humans · Em uso ativo",
-    description:
-      "Plataforma configurável via low-code para gestão e acompanhamento de atividades internas. Criado para resolver necessidades reais da Tech for Humans, o Streamline é utilizado ativamente pela equipe no dia a dia, otimizando fluxos operacionais e reduzindo overhead de gerenciamento de tarefas.",
-    metrics: [
-      { label: "Status", value: "Produção" },
-      { label: "Uso", value: "Diário" },
-      { label: "Impacto", value: "Operacional" },
-    ],
-    tags: ["TypeScript", "Low-code", "Interno", "Gestão"],
   },
 ]

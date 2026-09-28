@@ -13,11 +13,10 @@ function yearsSince(date) {
 export const about = {
   yearsAtCompany: yearsSince(START_AT_COMPANY),
   stack: [
-    { area: "Frontend", items: ["React", "TypeScript"] },
-    { area: "Backend", items: ["Node.js", "PostgreSQL", "MongoDB", "Redis"] },
-    { area: "Cloud", items: ["AWS", "Azure", "Azure SignalR"] },
+    { area: "Governança", items: ["Governança de TI", "Segurança da informação", "LGPD", "DPO", "SDLC"] },
+    { area: "IA", items: ["IA aplicada à engenharia", "LLMs", "Régua de autonomia"] },
+    { area: "Cloud", items: ["AWS", "Azure"] },
     { area: "DevOps", items: ["CI/CD", "Microsserviços", "Observabilidade"] },
-    { area: "IA", items: ["IA aplicada", "Mestrado em andamento"] },
-    { area: "Governança", items: ["DPO", "LGPD", "SDLC"] },
+    { area: "Engenharia", items: ["React", "TypeScript", "Node.js", "PostgreSQL"] },
   ],
 }

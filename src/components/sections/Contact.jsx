@@ -1,7 +1,7 @@
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react"
 import { SectionTitle } from "../ui/SectionTitle"
 import { Reveal } from "../ui/Reveal"
-import { site } from "../../data/site"
+import { site, contactIntents, mailto } from "../../data/site"
 
 const links = [
   { href: `mailto:${site.email}`, icon: Mail, label: "Email", text: site.email },
@@ -12,13 +12,35 @@ const links = [
 export function Contact() {
   return (
     <section id="contato" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-      <SectionTitle index="06" eyebrow="Contato" title="Vamos conversar?" />
+      <SectionTitle index="06" eyebrow="Contato" title="Me chama para o próximo palco." />
 
       <Reveal className="mt-10 max-w-2xl">
         <p className="text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
-          Estou aberto a novas oportunidades, projetos, palestras e conversas
-          sobre engenharia, governança e IA. O caminho mais curto é o email.
+          Palestra, mentoria, banca ou uma conversa sobre governança de IA. Escolha o
+          motivo e o email já sai com o assunto certo. Respondo pessoalmente.
         </p>
+      </Reveal>
+
+      <Reveal delay={0.04} className="mt-10">
+        <ul className="grid gap-3 md:grid-cols-3">
+          {contactIntents.map((intent) => (
+            <li key={intent.id}>
+              <a
+                href={mailto(intent.subject)}
+                className="group flex h-full items-start justify-between gap-4 rounded-xl border border-line p-5 transition-colors hover:border-accent hover:bg-accent-tint"
+              >
+                <span className="min-w-0">
+                  <span className="block font-medium text-ink">{intent.label}</span>
+                  <span className="mt-1 block text-sm text-muted">{intent.hint}</span>
+                </span>
+                <ArrowUpRight
+                  size={18}
+                  className="mt-0.5 shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
       </Reveal>
 
       <Reveal delay={0.08} className="mt-12">

@@ -9,15 +9,15 @@ import { useScrollBar } from "../../hooks/useScrollBar"
 import { openCommandPalette } from "../../lib/palette"
 
 const navLinks = [
+  { id: "atuacao", label: "Atuação" },
+  { id: "palestras", label: "Palestras" },
   { id: "sobre", label: "Sobre" },
   { id: "destaques", label: "Destaques" },
-  { id: "palestras", label: "Palestras" },
-  { id: "projetos", label: "Projetos" },
   { id: "trajetoria", label: "Trajetória" },
-  { id: "contato", label: "Contato" },
 ]
 
-const sectionIds = ["hero", ...navLinks.map((link) => link.id)]
+// Contato fica fora da lista: no desktop ele é o botão, não mais um link
+const sectionIds = ["hero", ...navLinks.map((link) => link.id), "contato"]
 
 export function Header() {
   const [open, setOpen] = useState(false)
@@ -103,6 +103,13 @@ export function Header() {
             <Scale size={12} />
             Régua de IA
           </Link>
+          <SectionLink
+            id="contato"
+            isHome={isHome}
+            className="hidden rounded-full border border-ink bg-ink px-4 py-1.5 text-[13px] font-medium text-paper transition-colors hover:border-accent hover:bg-accent hover:text-accent-ink sm:inline-flex"
+          >
+            Contato
+          </SectionLink>
           <ThemeToggle />
           <button
             type="button"
@@ -149,6 +156,16 @@ export function Header() {
               </SectionLink>
             </li>
           ))}
+          <li>
+            <SectionLink
+              id="contato"
+              isHome={isHome}
+              className="my-4 flex items-center justify-center rounded-full border border-ink bg-ink py-3 text-base font-medium text-paper"
+              onClick={() => setOpen(false)}
+            >
+              Contato
+            </SectionLink>
+          </li>
         </ul>
       </div>
     </header>

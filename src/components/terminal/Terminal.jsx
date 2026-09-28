@@ -65,7 +65,7 @@ function verdictLines(result) {
 }
 
 /**
- * Terminal do hero. A abertura (o `cat ~/me.txt`) é dirigida pelo scroll;
+ * Terminal do hero. A abertura (o `cat ~/me.txt`) roda sozinha no load;
  * a partir do primeiro clique ou tecla, vira um shell de verdade.
  */
 export function Terminal({ typed, command, intro, onActivate }) {

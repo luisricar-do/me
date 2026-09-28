@@ -12,28 +12,35 @@ export function About() {
   return (
     <section id="sobre" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle
-        index="01"
+        index="03"
         eyebrow="Sobre"
-        title="Engenharia com governança no centro."
+        title="Cheguei por engano. Fiquei por escolha."
       />
 
       <div className="mt-14 grid gap-12 md:mt-20 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
         <div className="min-w-0">
           <Reveal className="space-y-5">
             <p className="text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
-              Sou <strong className="font-medium text-ink">Gerente de Governança de TI e IA</strong> na{" "}
-              <strong className="font-medium text-ink">Tech for Humans</strong>, onde entrei como
-              estagiário em 2021. Minha atuação une planejamento estratégico e execução
-              técnica: arquitetura em nuvem, automação, CI/CD e observabilidade, com
-              governança de dados e conformidade à LGPD como parte do desenho, não como
-              remendo no final.
+              Entrei em tecnologia sem querer. Me matriculei no técnico achando que era
+              Eletrônica e descobri no primeiro dia que a vaga era de Informática. Fiquei.
             </p>
             <p className="text-pretty leading-relaxed text-muted">
-              Formado em Sistemas de Informação pela <span className="text-ink-soft">UNIFEI</span>,
-              com mestrado em andamento em Ciência e Tecnologia da Computação (IA). No caminho
-              entre estágio e gestão passei por desenvolvimento fullstack, fundei a área de
-              DevOps da empresa, assumi o papel de DPO e hoje conduzo a agenda de governança
-              e de IA aplicada à engenharia, com um time de 8 pessoas.
+              Em 2021, um hackathon pediu praticamente o projeto que eu tinha feito de TCC:
+              chat, WebSocket, Node e React. Ganhamos, e o prêmio era um estágio na{" "}
+              <span className="text-ink-soft">Tech for Humans</span>. {about.yearsAtCompany} anos
+              depois, sou <strong className="font-medium text-ink">Gerente de Governança de TI e IA</strong>{" "}
+              lá, com um time de 8 pessoas.
+            </p>
+            <p className="text-pretty leading-relaxed text-muted">
+              No caminho escrevi código fullstack, fundei a área de DevOps, assumi o papel de
+              DPO e aprendi uma coisa: governança boa entra no desenho, não chega no fim como
+              checklist. Hoje aplico isso à IA, decidindo onde ela acelera o time e onde ela não
+              deve entrar.
+            </p>
+            <p className="text-pretty leading-relaxed text-muted">
+              Em paralelo, faço mestrado em IA na <span className="text-ink-soft">UNIFEI</span>,
+              publiquei dois artigos no IEEE e mentoro times em hackathons, do Startup Weekend ao
+              NASA Space Apps.
             </p>
           </Reveal>
 
@@ -48,7 +55,7 @@ export function About() {
         </div>
 
         <Reveal delay={0.08} className="min-w-0">
-          <p className="label text-muted">Stack</p>
+          <p className="label text-muted">Onde eu atuo</p>
           <dl className="mt-5">
             {about.stack.map((group) => (
               <div

@@ -9,10 +9,10 @@ export function Highlights() {
   return (
     <section id="destaques" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle
-        index="02"
+        index="04"
         eyebrow="Destaques"
-        title="Dois projetos que saíram do papel."
-        lead="Um virou publicação internacional; o outro roda todo dia dentro da empresa."
+        title="Pesquisa que saiu do papel."
+        lead="Um TCC que virou publicação internacional, e a pesquisa que continuou depois dele."
       />
 
       <div className="mt-14 md:mt-20">
@@ -120,14 +120,17 @@ function HighlightRow({ item, index }) {
           {item.description}
         </p>
 
-        <dl className="mt-8 grid max-w-xl grid-cols-3 gap-6 border-t border-line-soft pt-5">
-          {item.metrics.map((metric) => (
-            <div key={metric.label}>
-              <dd className="font-mono text-lg text-accent">{metric.value}</dd>
-              <dt className="mt-1 text-[11px] leading-snug text-muted">{metric.label}</dt>
-            </div>
-          ))}
-        </dl>
+        {/* Só aparece com número de verdade: métrica vazia tira crédito da real */}
+        {item.metrics && (
+          <dl className="mt-8 grid max-w-xl grid-cols-3 gap-6 border-t border-line-soft pt-5">
+            {item.metrics.map((metric) => (
+              <div key={metric.label}>
+                <dd className="font-mono text-lg text-accent">{metric.value}</dd>
+                <dt className="mt-1 text-[11px] leading-snug text-muted">{metric.label}</dt>
+              </div>
+            ))}
+          </dl>
+        )}
 
         {item.caseHref && (
           <Link

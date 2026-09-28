@@ -5,10 +5,10 @@ import { projects } from "../data/projects"
 import { timelineEntries } from "../data/timeline"
 
 const SECTIONS = [
+  ["atuacao", "Atuação"],
+  ["palestras", "Palestras"],
   ["sobre", "Sobre"],
   ["destaques", "Destaques e publicações"],
-  ["palestras", "Palestras"],
-  ["projetos", "Projetos"],
   ["trajetoria", "Trajetória"],
   ["contato", "Contato"],
 ]
