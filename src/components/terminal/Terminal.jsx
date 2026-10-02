@@ -2,20 +2,13 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { createPortal, flushSync } from "react-dom"
 import { useNavigate } from "react-router-dom"
 import { Maximize2, Minimize2 } from "lucide-react"
-import { runCommand } from "../../lib/terminal"
+import { LINE_CLASS, runCommand } from "../../lib/terminal"
+import { openDesktop } from "../../lib/desktop"
 import { evaluate } from "../../lib/aiRuler"
 import { questions } from "../../data/aiRuler"
 import { site } from "../../data/site"
 import { useTheme } from "../../hooks/useTheme"
 import { prefersReducedMotion } from "../../lib/motion"
-
-const LINE_CLASS = {
-  out: "text-term-ink",
-  muted: "text-term-muted",
-  accent: "text-term-accent",
-  error: "text-[#ff9a8b]",
-  blank: "text-term-muted",
-}
 
 const PROMPT = { shell: "$", ruler: "ia>" }
 
@@ -161,6 +154,11 @@ export function Terminal({ typed, command, intro, onActivate }) {
         break
       case "mail":
         window.location.href = `mailto:${site.email}`
+        break
+      case "desktop":
+        // O desktop cobre a tela inteira: sai do fullscreen sem animar por baixo dele
+        setExpanded(false)
+        openDesktop()
         break
       case "expand":
         animateExpanded(true)

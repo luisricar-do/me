@@ -269,3 +269,59 @@ section[id] {
 ::view-transition-new(terminal) {
   animation-duration: 240ms;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Modo desktop
+   ───────────────────────────────────────────────────────────── */
+.desk-wallpaper {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(70% 55% at 18% 8%, var(--accent-tint) 0%, transparent 70%),
+    radial-gradient(60% 50% at 88% 92%, var(--accent-tint) 0%, transparent 70%),
+    radial-gradient(var(--line-soft) 1px, transparent 1px);
+  background-size: auto, auto, 22px 22px;
+}
+
+.desk-enter {
+  animation: fade-in 0.24s ease-out both;
+}
+
+.desk-pop {
+  animation: desk-pop 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* backwards e não both: depois de abrir, o transform fica livre para o arraste */
+.desk-open {
+  animation: desk-open 0.24s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.desk-minimize {
+  animation: desk-minimize 0.3s cubic-bezier(0.55, 0, 0.75, 0.2) forwards;
+  pointer-events: none;
+}
+.desk-close {
+  animation: desk-close 0.16s ease-in forwards;
+  pointer-events: none;
+}
+
+.dock-item {
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.15s,
+    border-color 0.15s;
+}
+.dock-item:hover {
+  transform: translateY(-4px) scale(1.12);
+}
+
+@keyframes desk-pop {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+}
+@keyframes desk-open {
+  from { opacity: 0; transform: scale(0.96); }
+}
+@keyframes desk-minimize {
+  to { opacity: 0; transform: translateY(60vh) scale(0.15); }
+}
+@keyframes desk-close {
+  to { opacity: 0; transform: scale(0.96); }
+}

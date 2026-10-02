@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { CornerDownLeft, Search } from "lucide-react"
 import { buildIndex, search } from "../../lib/searchIndex"
 import { useTheme } from "../../hooks/useTheme"
+import { closeDesktop, openDesktop } from "../../lib/desktop"
 
 const index = buildIndex()
 
@@ -63,7 +64,13 @@ export function CommandPalette() {
     setOpen(false)
     const { action } = item
 
+    // Rolar ou navegar acontece na página, que fica por baixo do desktop
+    if (action.type === "scroll" || action.type === "route") closeDesktop()
+
     switch (action.type) {
+      case "desktop":
+        openDesktop()
+        break
       case "scroll":
         if (pathname === "/") {
           document.getElementById(action.to)?.scrollIntoView({ block: "start" })
@@ -118,6 +125,7 @@ export function CommandPalette() {
       role="dialog"
       aria-modal="true"
       aria-label="Buscar no site"
+      data-palette
     >
       <button
         type="button"

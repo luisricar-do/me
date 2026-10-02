@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom"
 import { Header } from "./components/layout/Header"
 import { Footer } from "./components/layout/Footer"
 import { CommandPalette } from "./components/ui/CommandPalette"
+import { Desktop } from "./components/desktop/Desktop"
 import { Home } from "./pages/Home"
 import { AiRuler } from "./pages/AiRuler"
 import { Eduflow } from "./pages/Eduflow"
@@ -38,6 +39,7 @@ function App() {
       </a>
       <ScrollManager />
       <CommandPalette />
+      <Desktop />
       <Header />
       <main id="conteudo">
         <Routes>

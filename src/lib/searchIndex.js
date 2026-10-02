@@ -62,6 +62,12 @@ export function buildIndex() {
     })),
     {
       group: "Ações",
+      label: "Modo desktop",
+      hint: "o site como um sistema operacional",
+      action: { type: "desktop" },
+    },
+    {
+      group: "Ações",
       label: "Alternar tema",
       hint: "claro e escuro",
       action: { type: "theme" },

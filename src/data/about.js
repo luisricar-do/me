@@ -1,4 +1,4 @@
-const START_AT_COMPANY = new Date("2021-09-01T12:00:00")
+export const START_AT_COMPANY = new Date("2021-09-01T12:00:00")
 
 function yearsSince(date) {
   const now = new Date()

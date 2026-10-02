@@ -5,6 +5,15 @@ import { publications } from "../data/publications"
 import { projects } from "../data/projects"
 import { timelineEntries } from "../data/timeline"
 
+/** Cor de cada tipo de linha, compartilhada pelo terminal do hero e o do desktop. */
+export const LINE_CLASS = {
+  out: "text-term-ink",
+  muted: "text-term-muted",
+  accent: "text-term-accent",
+  error: "text-[#ff9a8b]",
+  blank: "text-term-muted",
+}
+
 const SECTIONS = [
   ["atuacao", "onde eu posso ajudar"],
   ["palestras", "palcos, mentorias e presenças"],
@@ -65,6 +74,7 @@ const HELP = [
   ["open <seção>", "rola até a seção"],
   ["ia", "abre a régua de autonomia"],
   ["ia --run", "roda a régua aqui no terminal"],
+  ["desktop", "abre o modo desktop"],
   ["expand", "abre o terminal em tela cheia"],
   ["collapse", "volta ao tamanho normal (ou esc)"],
   ["theme", "alterna claro e escuro"],
@@ -162,6 +172,12 @@ export function runCommand(raw) {
       return {
         lines: [{ kind: "muted", text: "abrindo a régua de autonomia..." }],
         effect: { type: "navigate", to: "/ia" },
+      }
+
+    case "desktop":
+      return {
+        lines: [{ kind: "muted", text: "abrindo o desktop. esc ou exit para sair." }],
+        effect: { type: "desktop" },
       }
 
     case "expand":
