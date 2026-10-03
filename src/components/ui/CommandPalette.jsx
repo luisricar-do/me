@@ -75,7 +75,7 @@ export function CommandPalette() {
         break
       case "scroll":
         if (!simple) navigate(APP[SECTION_APP[action.to]].path)
-        else if (pathname === SIMPLE_BASE) {
+        else if (pathname.replace(/\/+$/, "") === SIMPLE_BASE) {
           document.getElementById(action.to)?.scrollIntoView({ block: "start" })
         } else {
           navigate(`${SIMPLE_BASE}#${action.to}`)

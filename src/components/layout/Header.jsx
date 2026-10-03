@@ -24,7 +24,8 @@ export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
-  const isHome = pathname === SIMPLE_BASE
+  // O GitHub Pages serve /simples como /simples/
+  const isHome = pathname.replace(/\/+$/, "") === SIMPLE_BASE
   const active = useActiveSection(sectionIds)
   useScrollBar()
 
@@ -104,7 +105,7 @@ export function Header() {
           <Link
             to={`${SIMPLE_BASE}/ia`}
             className={`hidden items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-[11px] transition-colors md:inline-flex ${
-              pathname === `${SIMPLE_BASE}/ia`
+              pathname.replace(/\/+$/, "") === `${SIMPLE_BASE}/ia`
                 ? "border-accent bg-accent-tint text-accent"
                 : "border-line text-ink-soft hover:border-accent hover:text-accent"
             }`}
