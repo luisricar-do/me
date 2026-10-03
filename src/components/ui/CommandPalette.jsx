@@ -3,7 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { CornerDownLeft, Search } from "lucide-react"
 import { buildIndex, search } from "../../lib/searchIndex"
 import { useTheme } from "../../hooks/useTheme"
-import { closeDesktop, openDesktop } from "../../lib/desktop"
+import { SECTION_APP } from "../../lib/desktop"
+import { SIMPLE_BASE, isSimplePath } from "../../lib/siteMode"
+import { APP } from "../desktop/apps"
 
 const index = buildIndex()
 
@@ -64,22 +66,23 @@ export function CommandPalette() {
     setOpen(false)
     const { action } = item
 
-    // Rolar ou navegar acontece na página, que fica por baixo do desktop
-    if (action.type === "scroll" || action.type === "route") closeDesktop()
+    // Na versão simples, seção é âncora; na interativa, é o app que mostra o mesmo conteúdo
+    const simple = isSimplePath(pathname)
 
     switch (action.type) {
-      case "desktop":
-        openDesktop()
+      case "switch":
+        navigate(simple ? "/" : SIMPLE_BASE)
         break
       case "scroll":
-        if (pathname === "/") {
+        if (!simple) navigate(APP[SECTION_APP[action.to]].path)
+        else if (pathname === SIMPLE_BASE) {
           document.getElementById(action.to)?.scrollIntoView({ block: "start" })
         } else {
-          navigate(`/#${action.to}`)
+          navigate(`${SIMPLE_BASE}#${action.to}`)
         }
         break
       case "route":
-        navigate(action.to)
+        navigate(simple ? `${SIMPLE_BASE}${action.to}` : action.to)
         break
       case "external":
         window.open(action.to, "_blank", "noopener,noreferrer")

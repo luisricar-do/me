@@ -5,17 +5,18 @@ import { SECTION_APP } from "../../lib/desktop"
 let nextId = 0
 
 const WELCOME = [
-  { kind: "accent", text: "luisr.com.br · desktop" },
-  { kind: "muted", text: "os mesmos comandos do terminal da home." },
-  { kind: "muted", text: "open <seção> abre a janela dela. exit sai do desktop." },
+  { kind: "accent", text: "luisr.com.br · terminal" },
+  { kind: "muted", text: "os mesmos comandos do terminal da versão simples." },
+  { kind: "muted", text: "open <seção> abre a janela dela. comece com help." },
 ]
 
 /**
- * O terminal dentro do desktop. Reaproveita o interpretador da home, mas os
- * efeitos viram ações de janela: "open palestras" abre a janela em vez de
- * rolar uma página que está escondida atrás.
+ * O terminal da versão interativa. Reaproveita o interpretador da versão
+ * simples, mas os efeitos viram ações de app: "open palestras" abre a
+ * janela (ou a tela, no celular) em vez de rolar uma página.
+ * `onExit` fecha o próprio terminal; `onSimple` vai para a versão simples.
  */
-export function Shell({ onLaunch, onExit, onTheme }) {
+export function Shell({ onLaunch, onExit, onSimple, onTheme }) {
   const [history, setHistory] = useState([{ id: ++nextId, lines: WELCOME }])
   const [value, setValue] = useState("")
   const inputRef = useRef(null)
@@ -47,6 +48,9 @@ export function Shell({ onLaunch, onExit, onTheme }) {
       case "collapse":
         onExit()
         break
+      case "simple":
+        onSimple()
+        break
       default:
         break
     }
@@ -59,10 +63,12 @@ export function Shell({ onLaunch, onExit, onTheme }) {
     const { lines, effect } = runCommand(input)
     const shown =
       effect?.type === "desktop"
-        ? [{ kind: "muted", text: "você já está no desktop." }]
+        ? [{ kind: "muted", text: "você já está na versão interativa." }]
         : effect?.type === "expand"
           ? [{ kind: "muted", text: "use o botão verde da janela para maximizar." }]
-          : lines
+          : effect?.type === "collapse"
+            ? [{ kind: "muted", text: "fechando o terminal." }]
+            : lines
     setHistory((current) => [...current, { id: ++nextId, command: input, lines: shown }])
     apply(effect)
   }

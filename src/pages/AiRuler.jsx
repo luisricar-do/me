@@ -1,5 +1,5 @@
 import { ArrowLeft, Mic } from "lucide-react"
-import { Link } from "react-router-dom"
+import { SiteLink } from "../components/ui/SiteLink"
 import { Reveal } from "../components/ui/Reveal"
 import { Figure } from "../components/ui/Figure"
 import { Button } from "../components/ui/Button"
@@ -11,34 +11,39 @@ import { site } from "../data/site"
 
 const talk = talks.find((item) => item.id === "hacktown-2026")
 
-export function AiRuler() {
+/** `embedded`: dentro de uma janela ou app, sem o cabeçalho fixo do site por cima. */
+export function AiRuler({ embedded = false }) {
   usePageMeta(
-    "Onde a IA não deve entrar · Régua de autonomia",
-    "A régua de autonomia que apresentei no HackTown 2026: responda seis perguntas sobre uma tarefa e descubra que nível de autonomia ela aceita."
+    embedded ? null : "Onde a IA não deve entrar · Régua de autonomia",
+    embedded ? null : "A régua de autonomia que apresentei no HackTown 2026: responda seis perguntas sobre uma tarefa e descubra que nível de autonomia ela aceita."
   )
 
   return (
     <>
-      <header className="mx-auto max-w-6xl px-6 pb-16 pt-32 md:pb-24 md:pt-40">
-        <Reveal>
-          <Link
-            to="/#palestras"
-            className="inline-flex items-center gap-2 font-mono text-[11px] text-muted transition-colors hover:text-accent"
-          >
-            <ArrowLeft size={13} />
-            palestras
-          </Link>
-        </Reveal>
+      <header
+        className={`mx-auto max-w-6xl px-6 pb-16 @3xl:pb-24 ${embedded ? "pt-8 @3xl:pt-12" : "pt-32 @3xl:pt-40"}`}
+      >
+        {!embedded && (
+          <Reveal>
+            <SiteLink
+              to="/#palestras"
+              className="inline-flex items-center gap-2 font-mono text-[11px] text-muted transition-colors hover:text-accent"
+            >
+              <ArrowLeft size={13} />
+              palestras
+            </SiteLink>
+          </Reveal>
+        )}
 
-        <Reveal delay={0.06} className="mt-8 border-t border-line pt-5">
+        <Reveal delay={0.06} className={`border-t border-line pt-5 ${embedded ? "" : "mt-8"}`}>
           <p className="label flex items-center gap-2 text-accent">
             <Mic size={12} />
             {talk.event}
           </p>
-          <h1 className="display mt-5 max-w-4xl text-balance text-[clamp(2.5rem,8vw,5.5rem)] text-ink">
+          <h1 className="display mt-5 max-w-4xl text-balance text-[clamp(2.5rem,8cqw,5.5rem)] text-ink">
             Onde a IA <span className="italic text-accent">não</span> deve entrar
           </h1>
-          <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
+          <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-ink-soft @3xl:text-xl">
             A decisão mais AI First que você vai tomar. Esta é a régua que eu levei ao palco
             em Santa Rita do Sapucaí, virada ferramenta: responda seis perguntas sobre uma
             tarefa e veja que nível de autonomia ela aceita.
@@ -47,8 +52,8 @@ export function AiRuler() {
       </header>
 
       {/* A história que abre a palestra */}
-      <section className="mx-auto max-w-6xl px-6 pb-20 md:pb-28">
-        <Reveal className="grid gap-10 border-t border-line pt-10 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
+      <section className="mx-auto max-w-6xl px-6 pb-20 @3xl:pb-28">
+        <Reveal className="grid gap-10 border-t border-line pt-10 @3xl:grid-cols-[0.85fr_1.15fr] @3xl:gap-12">
           <Figure
             src={talk.photo}
             alt={`Luis Ricardo Santos falando no ${talk.event}`}
@@ -58,21 +63,21 @@ export function AiRuler() {
           <div className="min-w-0">
             <p className="label text-muted">{story.date}</p>
             <p className="mt-4 text-pretty text-lg leading-relaxed text-ink-soft">{story.lead}</p>
-            <p className="display mt-6 text-[clamp(1.75rem,4vw,2.75rem)] text-ink">{story.punch}</p>
+            <p className="display mt-6 text-[clamp(1.75rem,4cqw,2.75rem)] text-ink">{story.punch}</p>
             <p className="mt-6 max-w-xl text-pretty leading-relaxed text-muted">{story.moral}</p>
           </div>
         </Reveal>
       </section>
 
       {/* Números levados ao palco */}
-      <section className="mx-auto max-w-6xl px-6 pb-20 md:pb-28">
+      <section className="mx-auto max-w-6xl px-6 pb-20 @3xl:pb-28">
         <Reveal className="border-t border-line pt-5">
           <p className="label text-muted">Os números que eu levei</p>
         </Reveal>
-        <dl className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="mt-8 grid gap-x-10 gap-y-8 @2xl:grid-cols-2 @5xl:grid-cols-4">
           {evidence.map((item, i) => (
             <Reveal key={item.value + i} delay={i * 0.05}>
-              <dd className="display text-[clamp(2.5rem,6vw,4rem)] text-accent">{item.value}</dd>
+              <dd className="display text-[clamp(2.5rem,6cqw,4rem)] text-accent">{item.value}</dd>
               <dt className="mt-3 text-pretty text-sm leading-relaxed text-muted">
                 {item.label}
               </dt>
@@ -92,16 +97,16 @@ export function AiRuler() {
       </section>
 
       {/* Os três níveis */}
-      <section className="mx-auto max-w-6xl px-6 pb-20 md:pb-28">
+      <section className="mx-auto max-w-6xl px-6 pb-20 @3xl:pb-28">
         <Reveal className="border-t border-line pt-5">
           <p className="label text-accent">A régua</p>
-          <h2 className="display mt-5 max-w-3xl text-balance text-[clamp(2rem,5vw,3.25rem)] text-ink">
+          <h2 className="display mt-5 max-w-3xl text-balance text-[clamp(2rem,5cqw,3.25rem)] text-ink">
             Três níveis de autonomia.
           </h2>
           <p className="mt-5 max-w-xl text-pretty leading-relaxed text-muted">{goldenRule}</p>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 @3xl:grid-cols-3">
           {Object.values(levels).map((level, i) => (
             <Reveal
               key={level.code}
@@ -121,15 +126,15 @@ export function AiRuler() {
       </section>
 
       {/* Ferramenta */}
-      <section className="mx-auto max-w-3xl px-6 pb-20 md:pb-28">
+      <section className="mx-auto max-w-3xl px-6 pb-20 @3xl:pb-28">
         <AutonomyRuler />
       </section>
 
       {/* Só é AI-first o que está escrito */}
-      <section className="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+      <section className="mx-auto max-w-6xl px-6 pb-24 @3xl:pb-32">
         <Reveal className="border-t border-line pt-5">
           <p className="label text-accent">O pré-requisito</p>
-          <h2 className="display mt-5 max-w-3xl text-balance text-[clamp(2rem,5vw,3.25rem)] text-ink">
+          <h2 className="display mt-5 max-w-3xl text-balance text-[clamp(2rem,5cqw,3.25rem)] text-ink">
             Só é AI-first o que está escrito.
           </h2>
           <p className="mt-5 max-w-xl text-pretty leading-relaxed text-muted">
@@ -153,14 +158,16 @@ export function AiRuler() {
         </ol>
 
         <Reveal delay={0.1} className="mt-16 border-t border-line pt-10">
-          <p className="display max-w-3xl text-balance text-[clamp(1.75rem,4.5vw,2.75rem)] text-ink">
+          <p className="display max-w-3xl text-balance text-[clamp(1.75rem,4.5cqw,2.75rem)] text-ink">
             A IA não conserta um time. Ela amplifica o que já existe, inclusive o caos.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Button href={`mailto:${site.email}`}>Chamar para uma conversa</Button>
-            <Button to="/" variant="outline">
-              Voltar ao início
-            </Button>
+            {!embedded && (
+              <Button to="/" variant="outline">
+                Voltar ao início
+              </Button>
+            )}
           </div>
         </Reveal>
       </section>

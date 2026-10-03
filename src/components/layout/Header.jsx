@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, Scale, Search, X } from "lucide-react"
+import { Menu, MonitorSmartphone, Scale, Search, X } from "lucide-react"
 import { site } from "../../data/site"
 import { Mark } from "../ui/Mark"
 import { ThemeToggle } from "../ui/ThemeToggle"
 import { useActiveSection } from "../../hooks/useActiveSection"
 import { useScrollBar } from "../../hooks/useScrollBar"
 import { openCommandPalette } from "../../lib/palette"
+import { SIMPLE_BASE } from "../../lib/siteMode"
 
 const navLinks = [
   { id: "atuacao", label: "Atuação" },
@@ -23,7 +24,7 @@ export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
-  const isHome = pathname === "/"
+  const isHome = pathname === SIMPLE_BASE
   const active = useActiveSection(sectionIds)
   useScrollBar()
 
@@ -52,7 +53,7 @@ export function Header() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
         <Link
-          to="/"
+          to={SIMPLE_BASE}
           className="group flex items-center gap-2.5 text-sm font-medium tracking-tight text-ink"
         >
           <Mark
@@ -93,9 +94,17 @@ export function Header() {
             <kbd className="rounded border border-line px-1 py-0.5 text-[10px]">⌘K</kbd>
           </button>
           <Link
-            to="/ia"
+            to="/"
+            aria-label="Versão interativa"
+            title="Versão interativa: o site como um computador (ou como app, no celular)"
+            className="hidden h-9 w-9 place-items-center rounded-full border border-line text-ink-soft transition-colors hover:border-accent hover:text-accent lg:grid"
+          >
+            <MonitorSmartphone size={15} />
+          </Link>
+          <Link
+            to={`${SIMPLE_BASE}/ia`}
             className={`hidden items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-[11px] transition-colors md:inline-flex ${
-              pathname === "/ia"
+              pathname === `${SIMPLE_BASE}/ia`
                 ? "border-accent bg-accent-tint text-accent"
                 : "border-line text-ink-soft hover:border-accent hover:text-accent"
             }`}
@@ -133,7 +142,7 @@ export function Header() {
         <ul className="min-h-0 px-6">
           <li className="border-b border-line-soft">
             <Link
-              to="/ia"
+              to={`${SIMPLE_BASE}/ia`}
               className="flex items-baseline gap-4 py-4 text-lg text-accent"
               onClick={() => setOpen(false)}
             >
@@ -156,6 +165,16 @@ export function Header() {
               </SectionLink>
             </li>
           ))}
+          <li className="border-b border-line-soft">
+            <Link
+              to="/"
+              className="flex items-baseline gap-4 py-4 text-lg text-ink"
+              onClick={() => setOpen(false)}
+            >
+              <span className="label text-muted">↗</span>
+              Versão interativa
+            </Link>
+          </li>
           <li>
             <SectionLink
               id="contato"
@@ -185,7 +204,7 @@ function SectionLink({ id, isHome, active, children, ...props }) {
     )
   }
   return (
-    <Link to={`/#${id}`} {...props}>
+    <Link to={`${SIMPLE_BASE}#${id}`} {...props}>
       {children}
     </Link>
   )

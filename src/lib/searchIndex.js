@@ -62,9 +62,9 @@ export function buildIndex() {
     })),
     {
       group: "Ações",
-      label: "Modo desktop",
-      hint: "o site como um sistema operacional",
-      action: { type: "desktop" },
+      label: "Trocar de versão",
+      hint: "interativa (computador e app) ou simples (rolável)",
+      action: { type: "switch" },
     },
     {
       group: "Ações",

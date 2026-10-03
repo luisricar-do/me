@@ -1,39 +1,44 @@
 import { ArrowLeft, ArrowUpRight, Star } from "lucide-react"
-import { Link } from "react-router-dom"
+import { SiteLink } from "../components/ui/SiteLink"
 import { Reveal } from "../components/ui/Reveal"
 import { Figure } from "../components/ui/Figure"
 import { Button } from "../components/ui/Button"
 import { usePageMeta } from "../hooks/usePageMeta"
 import { eduflow } from "../data/eduflow"
 
-export function Eduflow() {
+/** `embedded`: dentro de uma janela ou app, sem o cabeçalho fixo do site por cima. */
+export function Eduflow({ embedded = false }) {
   usePageMeta(
-    "EduFlow · Case",
-    "Sistema low-code configurável para gestão de TCCs, avaliado com usuários e publicado no IEEE IISA 2025."
+    embedded ? null : "EduFlow · Case",
+    embedded ? null : "Sistema low-code configurável para gestão de TCCs, avaliado com usuários e publicado no IEEE IISA 2025."
   )
 
   return (
     <>
-      <header className="mx-auto max-w-6xl px-6 pb-16 pt-32 md:pb-24 md:pt-40">
-        <Reveal>
-          <Link
-            to="/#destaques"
-            className="inline-flex items-center gap-2 font-mono text-[11px] text-muted transition-colors hover:text-accent"
-          >
-            <ArrowLeft size={13} />
-            destaques
-          </Link>
-        </Reveal>
+      <header
+        className={`mx-auto max-w-6xl px-6 pb-16 @3xl:pb-24 ${embedded ? "pt-8 @3xl:pt-12" : "pt-32 @3xl:pt-40"}`}
+      >
+        {!embedded && (
+          <Reveal>
+            <SiteLink
+              to="/#destaques"
+              className="inline-flex items-center gap-2 font-mono text-[11px] text-muted transition-colors hover:text-accent"
+            >
+              <ArrowLeft size={13} />
+              destaques
+            </SiteLink>
+          </Reveal>
+        )}
 
-        <Reveal delay={0.06} className="mt-8 border-t border-line pt-5">
+        <Reveal delay={0.06} className={`border-t border-line pt-5 ${embedded ? "" : "mt-8"}`}>
           <p className="label flex items-center gap-2 text-accent">
             <Star size={12} />
             {eduflow.venue}
           </p>
-          <h1 className="display mt-5 text-[clamp(3rem,10vw,6.5rem)] text-ink">
+          <h1 className="display mt-5 text-[clamp(3rem,10cqw,6.5rem)] text-ink">
             {eduflow.title}
           </h1>
-          <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
+          <p className="mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-ink-soft @3xl:text-xl">
             {eduflow.tagline}
           </p>
           <p className="mt-4 font-mono text-[11px] text-muted">
@@ -41,10 +46,10 @@ export function Eduflow() {
           </p>
         </Reveal>
 
-        <Reveal delay={0.12} className="mt-12 grid gap-6 border-t border-line pt-8 sm:grid-cols-3">
+        <Reveal delay={0.12} className="mt-12 grid gap-6 border-t border-line pt-8 @2xl:grid-cols-3">
           {eduflow.metrics.map((metric) => (
             <div key={metric.label}>
-              <p className="display text-[clamp(2rem,5vw,3rem)] text-accent">{metric.value}</p>
+              <p className="display text-[clamp(2rem,5cqw,3rem)] text-accent">{metric.value}</p>
               <p className="mt-2 text-pretty text-xs leading-snug text-muted">{metric.label}</p>
             </div>
           ))}
@@ -52,13 +57,13 @@ export function Eduflow() {
       </header>
 
       {eduflow.sections.map((section, i) => (
-        <section key={section.id} className="mx-auto max-w-6xl px-6 pb-16 md:pb-24">
-          <Reveal className="grid gap-8 border-t border-line pt-8 md:grid-cols-[14rem_1fr] md:gap-12">
+        <section key={section.id} className="mx-auto max-w-6xl px-6 pb-16 @3xl:pb-24">
+          <Reveal className="grid gap-8 border-t border-line pt-8 @3xl:grid-cols-[14rem_1fr] @3xl:gap-12">
             <div>
-              <p className="label text-accent md:sticky md:top-28">{section.eyebrow}</p>
+              <p className="label text-accent @3xl:sticky @3xl:top-[var(--sticky-top,7rem)]">{section.eyebrow}</p>
             </div>
             <div className="min-w-0">
-              <h2 className="display max-w-2xl text-balance text-[clamp(1.75rem,4.5vw,2.75rem)] text-ink">
+              <h2 className="display max-w-2xl text-balance text-[clamp(1.75rem,4.5cqw,2.75rem)] text-ink">
                 {section.title}
               </h2>
               <div className="mt-6 space-y-4">
@@ -69,7 +74,7 @@ export function Eduflow() {
                 ))}
               </div>
               {i === 0 && eduflow.screenshots.length > 0 && (
-                <div className="mt-10 grid gap-6 sm:grid-cols-2">
+                <div className="mt-10 grid gap-6 @2xl:grid-cols-2">
                   {eduflow.screenshots.map((shot) => (
                     <Figure key={shot.src} src={shot.src} alt={shot.alt} ratio="16 / 10" />
                   ))}
@@ -81,7 +86,7 @@ export function Eduflow() {
       ))}
 
       {eduflow.learnings.length > 0 && (
-        <section className="mx-auto max-w-6xl px-6 pb-16 md:pb-24">
+        <section className="mx-auto max-w-6xl px-6 pb-16 @3xl:pb-24">
           <Reveal className="border-t border-line pt-8">
             <p className="label text-accent">Aprendizados</p>
             <ul className="mt-6 max-w-2xl space-y-4">
@@ -96,7 +101,7 @@ export function Eduflow() {
         </section>
       )}
 
-      <section className="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+      <section className="mx-auto max-w-6xl px-6 pb-24 @3xl:pb-32">
         <Reveal className="border-t border-line pt-10">
           <p className="label text-muted">Publicação</p>
           <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-ink-soft">
@@ -117,9 +122,11 @@ export function Eduflow() {
               Ler no IEEE Xplore
               <ArrowUpRight size={16} />
             </Button>
-            <Button to="/" variant="outline">
-              Voltar ao início
-            </Button>
+            {!embedded && (
+              <Button to="/" variant="outline">
+                Voltar ao início
+              </Button>
+            )}
           </div>
         </Reveal>
       </section>

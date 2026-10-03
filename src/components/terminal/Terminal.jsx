@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { createPortal, flushSync } from "react-dom"
 import { useNavigate } from "react-router-dom"
+import { useSiteBase, withBase } from "../../lib/siteMode"
 import { Maximize2, Minimize2 } from "lucide-react"
 import { LINE_CLASS, runCommand } from "../../lib/terminal"
-import { openDesktop } from "../../lib/desktop"
 import { evaluate } from "../../lib/aiRuler"
 import { questions } from "../../data/aiRuler"
 import { site } from "../../data/site"
@@ -75,6 +75,7 @@ export function Terminal({ typed, command, intro, onActivate }) {
   const inputRef = useRef(null)
   const scrollRef = useRef(null)
   const navigate = useNavigate()
+  const base = useSiteBase()
   const { toggle } = useTheme()
   const activated = useRef(false)
 
@@ -144,7 +145,7 @@ export function Terminal({ typed, command, intro, onActivate }) {
         setShowIntro(false)
         break
       case "navigate":
-        navigate(effect.to)
+        navigate(withBase(base, effect.to))
         break
       case "scroll":
         document.getElementById(effect.to)?.scrollIntoView({ block: "start" })
@@ -156,9 +157,8 @@ export function Terminal({ typed, command, intro, onActivate }) {
         window.location.href = `mailto:${site.email}`
         break
       case "desktop":
-        // O desktop cobre a tela inteira: sai do fullscreen sem animar por baixo dele
         setExpanded(false)
-        openDesktop()
+        navigate("/")
         break
       case "expand":
         animateExpanded(true)
@@ -187,7 +187,9 @@ export function Terminal({ typed, command, intro, onActivate }) {
   }
 
   function submitShell(input) {
-    const { lines, effect } = runCommand(input)
+    const { lines: output, effect } = runCommand(input)
+    const lines =
+      effect?.type === "simple" ? [{ kind: "muted", text: "você já está na versão simples." }] : output
     if (lines.length) push(entry({ kind: "lines", lines }))
     applyEffect(effect)
   }

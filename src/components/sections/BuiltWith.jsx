@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react"
-import { Link } from "react-router-dom"
+import { SiteLink } from "../ui/SiteLink"
 import { Reveal } from "../ui/Reveal"
 import { builtWith } from "../../data/builtWith"
 import { levels } from "../../data/aiRuler"
@@ -30,7 +30,7 @@ export function BuiltWith() {
             {builtWith.note}
           </p>
 
-          <Link
+          <SiteLink
             to="/ia"
             className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink transition-colors hover:text-accent"
           >
@@ -39,7 +39,7 @@ export function BuiltWith() {
               size={16}
               className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             />
-          </Link>
+          </SiteLink>
         </div>
 
         <div className="min-w-0">

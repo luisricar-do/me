@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
-import { Header } from "./components/layout/Header"
-import { Footer } from "./components/layout/Footer"
+import { SimpleLayout } from "./components/layout/SimpleLayout"
 import { CommandPalette } from "./components/ui/CommandPalette"
-import { Desktop } from "./components/desktop/Desktop"
+import { OS } from "./components/desktop/OS"
+import { APPS } from "./components/desktop/apps"
 import { Home } from "./pages/Home"
 import { AiRuler } from "./pages/AiRuler"
 import { Eduflow } from "./pages/Eduflow"
@@ -39,17 +39,24 @@ function App() {
       </a>
       <ScrollManager />
       <CommandPalette />
-      <Desktop />
-      <Header />
-      <main id="conteudo">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/ia" element={<AiRuler />} />
-          <Route path="/eduflow" element={<Eduflow />} />
+      {/* Um único layout para todas as rotas da versão interativa: trocar de
+          app troca a URL sem desmontar o desktop e as janelas abertas */}
+      <Routes>
+        <Route element={<OS />}>
+          <Route index />
+          {APPS.map((app) => (
+            <Route key={app.id} path={app.path} />
+          ))}
+        </Route>
+        <Route path="/simples" element={<SimpleLayout />}>
+          <Route index element={<Home />} />
+          <Route path="ia" element={<AiRuler />} />
+          <Route path="eduflow" element={<Eduflow />} />
+        </Route>
+        <Route element={<SimpleLayout />}>
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-      <Footer />
+        </Route>
+      </Routes>
     </>
   )
 }

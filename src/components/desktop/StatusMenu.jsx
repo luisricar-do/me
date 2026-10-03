@@ -1,6 +1,6 @@
 import { ArrowUpRight, Minimize2, Moon, Search, Sun } from "lucide-react"
 import { START_AT_COMPANY } from "../../data/about"
-import { talks } from "../../data/talks"
+import { stage } from "../../lib/agenda"
 import { mailto } from "../../data/site"
 import { build, formattedBuildDate } from "../../lib/build"
 import { openCommandPalette } from "../../lib/palette"
@@ -29,14 +29,6 @@ function tenure(now) {
   }
 }
 
-/** O próximo evento na agenda; sem nenhum marcado, o mais recente. */
-function stage(now) {
-  const today = now.toISOString().slice(0, 10)
-  const upcoming = talks.filter((talk) => talk.date >= today).sort((a, b) => a.date.localeCompare(b.date))
-  if (upcoming.length) return { label: "Próximo palco", talk: upcoming[0] }
-  const past = [...talks].sort((a, b) => b.date.localeCompare(a.date))
-  return { label: "Último palco", talk: past[0] }
-}
 
 /**
  * O popover da marca na menu bar: o equivalente a um app de status, com
@@ -78,7 +70,7 @@ export function StatusMenu({ onMinimizeAll, onClose }) {
     <div
       role="menu"
       aria-label="Status"
-      className="desk-pop absolute left-2 top-9 z-[1000] w-[min(20rem,calc(100vw-1rem))] rounded-xl border border-line bg-surface/95 p-3 shadow-[var(--shadow-card)] backdrop-blur-xl"
+      className="desk-pop absolute left-2 top-10 z-[1000] w-[min(20rem,calc(100vw-1rem))] rounded-xl border border-line bg-surface/95 p-3 shadow-[var(--shadow-card)] backdrop-blur-xl"
     >
       <section className="rounded-lg bg-surface-2 p-3">
         <p className="label text-muted">Na Tech for Humans há</p>

@@ -1,19 +1,32 @@
 import { Link } from "react-router-dom"
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react"
 import { site, contactIntents, mailto } from "../../data/site"
-import { about } from "../../data/about"
+import { about, proof } from "../../data/about"
+import { services } from "../../data/services"
 import { talks, talkKinds } from "../../data/talks"
 import { publications } from "../../data/publications"
 import { projects } from "../../data/projects"
 import { timelineEntries } from "../../data/timeline"
-import { coreQuestion } from "../../data/aiRuler"
-import { AutonomyRuler } from "../ia/AutonomyRuler"
-import { closeDesktop } from "../../lib/desktop"
+import { Mark } from "../ui/Mark"
+import { AiRuler } from "../../pages/AiRuler"
+import { Eduflow } from "../../pages/Eduflow"
 
 /*
- * O conteúdo de cada janela. Tudo vem de src/data, então o desktop mostra
- * o mesmo que a home, só em outro formato.
+ * O conteúdo de cada janela. Tudo vem de src/data, então a versão
+ * interativa mostra o mesmo que a versão simples, só em outro formato.
  */
+
+export function RulerIcon({ size }) {
+  return <Mark size={size} />
+}
+
+export function RulerView() {
+  return <AiRuler embedded />
+}
+
+export function EduflowView() {
+  return <Eduflow embedded />
+}
 
 const TOKEN_OF = {
   work: "--cat-work",
@@ -36,35 +49,77 @@ function Pane({ eyebrow, title, children }) {
 
 export function AboutView() {
   return (
-    <Pane eyebrow="me.txt" title={site.name}>
-      <p className="text-sm text-ink-soft">
-        {site.role} · {site.company}
+    <div className="p-5 md:p-7">
+      <p className="label text-accent">Boas-vindas</p>
+      <h1 className="display mt-3 text-balance text-3xl text-ink md:text-4xl">
+        O mais difícil em IA é decidir <span className="italic text-accent">onde ela não entra.</span>
+      </h1>
+      <p className="mt-5 text-pretty leading-relaxed text-ink-soft">
+        Sou {site.name}, {site.role} na {site.company}. Cheguei em tecnologia
+        por engano e fiquei por escolha: há {about.yearsAtCompany} anos lá, de estagiário a
+        gerente. Cuido para que a IA entre no trabalho pelo lugar certo: o que automatizar, o
+        que continua com gente e como provar que está tudo sob controle, LGPD incluída.
       </p>
-      <p className="mt-4 text-pretty leading-relaxed text-muted">
-        Cheguei em tecnologia por engano e fiquei por escolha. Há {about.yearsAtCompany} anos na
-        Tech for Humans, de estagiário a gerente. Cuido para que a IA entre na engenharia pelo
-        lugar certo: o que automatizar, o que continua com gente e como provar que está tudo sob
-        controle, LGPD incluída.
-      </p>
-      <dl className="mt-6">
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        <a
+          href={mailto("Convite para palestra")}
+          className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-accent-ink"
+        >
+          Convidar para uma palestra <ArrowUpRight size={15} />
+        </a>
+        <Link
+          to="/ia"
+          className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
+        >
+          Testar a Régua de IA
+        </Link>
+      </div>
+
+      <h2 className="label mt-10 text-muted">Como posso ajudar</h2>
+      <ul className="mt-4 space-y-3">
+        {services.map(({ id, icon: Icon, title, body, subject }) => (
+          <li key={id} className="flex gap-4 rounded-lg border border-line-soft p-4">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent-tint text-accent">
+              <Icon size={16} />
+            </span>
+            <div className="min-w-0">
+              <p className="font-medium text-ink">{title}</p>
+              <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">{body}</p>
+              <a
+                href={mailto(subject)}
+                className="mt-2 inline-flex items-center gap-1 text-sm text-accent link-underline"
+              >
+                Falar sobre isso <ArrowUpRight size={13} />
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <h2 className="label mt-10 text-muted">Já passei por</h2>
+      <p className="mt-3 text-sm text-ink-soft">{proof.join(" · ")}</p>
+
+      <h2 className="label mt-10 text-muted">No que eu trabalho</h2>
+      <dl className="mt-3">
         {about.stack.map((group) => (
           <div
             key={group.area}
-            className="grid grid-cols-[6rem_1fr] gap-3 border-t border-line-soft py-3 last:border-b"
+            className="grid grid-cols-[6.5rem_1fr] gap-3 border-t border-line-soft py-3 last:border-b"
           >
             <dt className="label pt-0.5 text-muted">{group.area}</dt>
             <dd className="text-sm text-ink-soft">{group.items.join(" · ")}</dd>
           </div>
         ))}
       </dl>
-    </Pane>
+    </div>
   )
 }
 
 export function TalksView() {
   const ordered = [...talks].sort((a, b) => b.date.localeCompare(a.date))
   return (
-    <Pane eyebrow="palestras" title="O que eu levei para o palco.">
+    <Pane eyebrow="Palestras" title="O que eu levei para o palco.">
       <ul className="space-y-3">
         {ordered.map((talk) => (
           <li key={talk.id} className="flex gap-4 rounded-lg border border-line-soft p-3">
@@ -93,24 +148,10 @@ export function TalksView() {
   )
 }
 
-export function RulerView() {
-  return (
-    <Pane eyebrow="regua.app" title={coreQuestion}>
-      <p className="mb-6 text-sm text-muted">
-        Seis perguntas sobre uma tarefa dizem que nível de autonomia ela aceita.{" "}
-        <Link to="/ia" onClick={closeDesktop} className="text-accent link-underline">
-          Ver a página completa
-        </Link>
-      </p>
-      <AutonomyRuler />
-    </Pane>
-  )
-}
-
 export function TimelineView() {
   const ordered = [...timelineEntries].reverse()
   return (
-    <Pane eyebrow="trajetoria.md" title={`${timelineEntries.length} marcos desde 2017.`}>
+    <Pane eyebrow="Trajetória" title={`${timelineEntries.length} marcos desde 2017.`}>
       <ol className="relative border-l border-line pl-5">
         {ordered.map((entry) => {
           const Icon = entry.icon
@@ -137,7 +178,7 @@ export function TimelineView() {
 
 export function HighlightsView() {
   return (
-    <Pane eyebrow="publicacoes.md" title="Artigos e projetos.">
+    <Pane eyebrow="Publicações" title="Artigos e projetos.">
       <ul className="space-y-3">
         {publications.map((paper) => (
           <li key={paper.id} className="rounded-lg border border-line-soft p-4">
@@ -155,6 +196,14 @@ export function HighlightsView() {
               >
                 IEEE Xplore <ArrowUpRight size={13} />
               </a>
+            )}
+            {paper.caseHref && (
+              <Link
+                to={paper.caseHref}
+                className="ml-4 mt-2 inline-flex items-center gap-1 text-sm text-accent link-underline"
+              >
+                Ver o case
+              </Link>
             )}
           </li>
         ))}
@@ -185,7 +234,7 @@ const LINKS = [
 
 export function ContactView() {
   return (
-    <Pane eyebrow="contato" title="Me chama para o próximo palco.">
+    <Pane eyebrow="Contato" title="Me chama para o próximo palco.">
       <ul className="space-y-2">
         {contactIntents.map((intent) => (
           <li key={intent.id}>

@@ -10,6 +10,9 @@ function yearsSince(date) {
   return years
 }
 
+/** Onde a tese já foi testada: a prova vem antes de qualquer clique. */
+export const proof = ["HackTown 2026", "JobShop UNIFEI", "IEEE IISA 2025 e 2026", "NASA Space Apps"]
+
 export const about = {
   yearsAtCompany: yearsSince(START_AT_COMPANY),
   stack: [

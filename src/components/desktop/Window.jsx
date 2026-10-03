@@ -99,12 +99,17 @@ export function Window({
             />
           )}
         </div>
-        <p className="flex-1 truncate pr-12 text-center font-mono text-[11px] text-muted">
-          {app.file}
-        </p>
+        <h2 className="flex-1 truncate pr-12 text-center text-[13px] font-medium text-ink-soft">
+          {app.title}
+        </h2>
       </header>
 
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
+      <div
+        style={{ "--sticky-top": "1.5rem" }}
+        className="@container min-h-0 flex-1 overflow-y-auto overscroll-contain"
+      >
+        {children}
+      </div>
     </section>
   )
 }
@@ -117,7 +122,7 @@ function TrafficLight({ color, label, glyph, onClick }) {
       aria-label={label}
       title={label}
       style={{ backgroundColor: color }}
-      className="grid h-3 w-3 place-items-center rounded-full text-[9px] font-bold leading-none text-black/0 transition-colors group-hover:text-black/55"
+      className="grid h-3.5 w-3.5 place-items-center rounded-full text-[9px] font-bold leading-none text-black/40 transition-colors group-hover:text-black/70"
     >
       <span aria-hidden>{glyph}</span>
     </button>

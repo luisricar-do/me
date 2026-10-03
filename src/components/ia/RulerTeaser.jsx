@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ArrowUpRight, RotateCcw } from "lucide-react"
-import { Link } from "react-router-dom"
+import { SiteLink } from "../ui/SiteLink"
 import { Reveal } from "../ui/Reveal"
 import { goldenRule, levels, questions } from "../../data/aiRuler"
 
@@ -61,7 +61,7 @@ export function RulerTeaser() {
               </p>
 
               <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
-                <Link
+                <SiteLink
                   to={handoff}
                   className="group inline-flex items-center gap-2 rounded-full border border-ink bg-ink px-5 py-2.5 text-sm font-medium text-paper transition duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-ink"
                 >
@@ -70,7 +70,7 @@ export function RulerTeaser() {
                     size={16}
                     className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   />
-                </Link>
+                </SiteLink>
                 <button
                   type="button"
                   onClick={() => setChoice(null)}

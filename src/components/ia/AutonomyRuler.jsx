@@ -126,10 +126,10 @@ export function AutonomyRuler() {
               {result.blocked.map((gate) => (
                 <article
                   key={gate.title}
-                  className="rounded-xl border border-line bg-surface p-6 md:p-8"
+                  className="rounded-xl border border-line bg-surface p-6 @3xl:p-8"
                 >
                   <p className="label text-muted">Antes do nível</p>
-                  <h3 className="display mt-4 text-[clamp(1.5rem,3.5vw,2.25rem)] text-ink">
+                  <h3 className="display mt-4 text-[clamp(1.5rem,3.5cqw,2.25rem)] text-ink">
                     {gate.title}
                   </h3>
                   <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted">
@@ -139,7 +139,7 @@ export function AutonomyRuler() {
               ))}
             </div>
           ) : (
-            <article className="rounded-xl border border-accent bg-surface p-6 md:p-8">
+            <article className="rounded-xl border border-accent bg-surface p-6 @3xl:p-8">
               {task.trim() && (
                 <p className="mb-5 border-b border-line-soft pb-4 font-mono text-[11px] text-muted">
                   &gt; {task.trim()}
@@ -152,7 +152,7 @@ export function AutonomyRuler() {
                 </p>
               </div>
 
-              <h3 className="display mt-4 text-[clamp(2rem,5vw,3.25rem)] text-ink">
+              <h3 className="display mt-4 text-[clamp(2rem,5cqw,3.25rem)] text-ink">
                 {result.levelInfo.code} · {result.levelInfo.name}
               </h3>
               <p className="mt-1 font-mono text-sm text-accent">{result.levelInfo.motto}</p>

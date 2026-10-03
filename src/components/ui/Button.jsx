@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { SiteLink } from "./SiteLink"
 
 const variants = {
   primary:
@@ -21,9 +21,9 @@ export function Button({
 
   if (to) {
     return (
-      <Link to={to} className={classes} {...props}>
+      <SiteLink to={to} className={classes} {...props}>
         {children}
-      </Link>
+      </SiteLink>
     )
   }
 

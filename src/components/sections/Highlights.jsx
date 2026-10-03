@@ -1,5 +1,5 @@
 import { ArrowUpRight, FileText, Youtube } from "lucide-react"
-import { Link } from "react-router-dom"
+import { SiteLink } from "../ui/SiteLink"
 import { SectionTitle } from "../ui/SectionTitle"
 import { Reveal } from "../ui/Reveal"
 import { highlights } from "../../data/highlights"
@@ -61,13 +61,13 @@ export function Highlights() {
                     </a>
                   )}
                   {paper.caseHref && (
-                    <Link
+                    <SiteLink
                       to={paper.caseHref}
                       className="inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-soft transition-colors hover:text-accent"
                     >
                       <ArrowUpRight size={13} />
                       case
-                    </Link>
+                    </SiteLink>
                   )}
                 </div>
               </div>
@@ -133,7 +133,7 @@ function HighlightRow({ item, index }) {
         )}
 
         {item.caseHref && (
-          <Link
+          <SiteLink
             to={item.caseHref}
             className="group/case mt-7 inline-flex items-center gap-2 text-sm font-medium text-ink transition-colors hover:text-accent"
           >
@@ -142,7 +142,7 @@ function HighlightRow({ item, index }) {
               size={16}
               className="transition-transform duration-300 group-hover/case:-translate-y-0.5 group-hover/case:translate-x-0.5"
             />
-          </Link>
+          </SiteLink>
         )}
 
         <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">

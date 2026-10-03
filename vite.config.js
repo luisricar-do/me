@@ -12,7 +12,45 @@ const ORIGIN = "https://luisr.com.br"
  * Sem isso o GitHub Pages responde 404 nelas: a página até carrega, via
  * 404.html, mas o status quebra indexação e preview de link.
  */
+const SIMPLE = {
+  title: "Luis Ricardo Santos | Versão simples",
+  description:
+    "Luis Ricardo Santos, Gerente de Governança de TI e IA na Tech for Humans. Tudo numa página só: palestras, trajetória, publicações e contato.",
+}
+
 const ROUTES = [
+  {
+    path: "sobre",
+    title: "Sobre mim · Luis Ricardo Santos",
+    description:
+      "Quem sou e como posso ajudar: palestras, governança de TI e IA, mentoria e avaliação.",
+  },
+  {
+    path: "palestras",
+    title: "Palestras · Luis Ricardo Santos",
+    description: "Onde já falei e sobre o quê: IA na engenharia, governança e carreira em tecnologia.",
+  },
+  {
+    path: "trajetoria",
+    title: "Trajetória · Luis Ricardo Santos",
+    description: "Minha carreira, ano a ano: de estagiário a Gerente de Governança de TI e IA.",
+  },
+  {
+    path: "publicacoes",
+    title: "Publicações · Luis Ricardo Santos",
+    description: "Artigos científicos publicados no IEEE e projetos.",
+  },
+  {
+    path: "contato",
+    title: "Contato · Luis Ricardo Santos",
+    description: "Convites para palestra, mentoria, banca ou oportunidades.",
+  },
+  {
+    path: "terminal",
+    title: "Terminal · Luis Ricardo Santos",
+    description: "O site por linha de comando.",
+  },
+  { path: "simples", ...SIMPLE },
   {
     path: "ia",
     title: "Onde a IA não deve entrar | Régua de autonomia",
@@ -27,6 +65,12 @@ const ROUTES = [
       "Sistema low-code configurável para gestão de trabalhos de conclusão de curso, avaliado com usuários e publicado no IEEE IISA 2025.",
   },
 ]
+
+// A versão simples das páginas longas aponta o canonical para a interativa
+for (const path of ["ia", "eduflow"]) {
+  const route = ROUTES.find((item) => item.path === path)
+  ROUTES.push({ ...route, path: `simples/${path}`, canonical: path })
+}
 
 function git(command, fallback) {
   try {
@@ -61,8 +105,9 @@ function staticRoutes() {
         html = replaceTag(html, /(<meta property="og:description" content=")[^"]*/, route.description)
         html = replaceTag(html, /(<meta name="twitter:title" content=")[^"]*/, route.title)
         html = replaceTag(html, /(<meta name="twitter:description" content=")[^"]*/, route.description)
-        html = replaceTag(html, /(<meta property="og:url" content=")[^"]*/, `${ORIGIN}/${route.path}`)
-        html = replaceTag(html, /(<link rel="canonical" href=")[^"]*/, `${ORIGIN}/${route.path}`)
+        const canonical = `${ORIGIN}/${route.canonical ?? route.path}`
+        html = replaceTag(html, /(<meta property="og:url" content=")[^"]*/, canonical)
+        html = replaceTag(html, /(<link rel="canonical" href=")[^"]*/, canonical)
         if (route.image) {
           html = replaceTag(html, /(<meta property="og:image" content=")[^"]*/, route.image)
           html = replaceTag(html, /(<meta name="twitter:image" content=")[^"]*/, route.image)

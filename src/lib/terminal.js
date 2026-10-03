@@ -5,7 +5,7 @@ import { publications } from "../data/publications"
 import { projects } from "../data/projects"
 import { timelineEntries } from "../data/timeline"
 
-/** Cor de cada tipo de linha, compartilhada pelo terminal do hero e o do desktop. */
+/** Cor de cada tipo de linha, compartilhada pelo terminal do hero e o da versão interativa. */
 export const LINE_CLASS = {
   out: "text-term-ink",
   muted: "text-term-muted",
@@ -74,7 +74,8 @@ const HELP = [
   ["open <seção>", "rola até a seção"],
   ["ia", "abre a régua de autonomia"],
   ["ia --run", "roda a régua aqui no terminal"],
-  ["desktop", "abre o modo desktop"],
+  ["desktop", "abre a versão interativa"],
+  ["simples", "abre a versão simples, rolável"],
   ["expand", "abre o terminal em tela cheia"],
   ["collapse", "volta ao tamanho normal (ou esc)"],
   ["theme", "alterna claro e escuro"],
@@ -176,8 +177,14 @@ export function runCommand(raw) {
 
     case "desktop":
       return {
-        lines: [{ kind: "muted", text: "abrindo o desktop. esc ou exit para sair." }],
+        lines: [{ kind: "muted", text: "abrindo a versão interativa..." }],
         effect: { type: "desktop" },
+      }
+
+    case "simples":
+      return {
+        lines: [{ kind: "muted", text: "abrindo a versão simples..." }],
+        effect: { type: "simple" },
       }
 
     case "expand":

@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { ArrowUpRight } from "lucide-react"
 import { site, mailto } from "../../data/site"
+import { proof } from "../../data/about"
 import { Button } from "../ui/Button"
 import { Reveal } from "../ui/Reveal"
 import { useTerminalIntro } from "../../hooks/useTerminalIntro"
@@ -19,8 +20,6 @@ const OUTPUT = [
   { kind: "muted", text: "ela entra. Nuvem, CI/CD e observabilidade na base." },
 ]
 
-/** Onde a tese já foi testada: a prova vem antes da primeira rolagem. */
-const PROOF = ["HackTown 2026", "JobShop UNIFEI", "IEEE IISA 2025 e 2026", "NASA Space Apps"]
 
 export function Hero() {
   const sectionRef = useRef(null)
@@ -86,7 +85,7 @@ export function Hero() {
         <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-t border-line pt-5">
           <span className="label text-muted">Já passei por</span>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
-            {PROOF.map((item) => (
+            {proof.map((item) => (
               <li key={item} className="font-mono text-[12px] text-ink-soft">
                 {item}
               </li>
