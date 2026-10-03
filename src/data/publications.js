@@ -13,8 +13,8 @@ export const publications = [
     place: "University of the Aegean, Rodos, Grécia",
     date: "2026-07-06",
     dateLabel: "6 a 9 de julho de 2026",
-    status: "Aceito para apresentação e publicação nos anais do IEEE",
-    href: null,
+    status: "Publicado no IEEE Xplore",
+    href: "https://ieeexplore.ieee.org/document/11705513/",
   },
   {
     id: "iisa-2025-eduflow",

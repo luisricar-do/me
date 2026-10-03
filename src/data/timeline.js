@@ -186,7 +186,7 @@ export const timelineEntries = [
     id: "iisa-2026",
     date: "6 a 9 Julho 2026",
     year: 2026,
-    title: "Segundo artigo aceito no IEEE IISA",
+    title: "Segundo artigo publicado no IEEE IISA",
     subtitle:
       "“LLM-Based Conversational Bots for Support and Question Answering in Higher Education: A Systematic Literature Review” · IISA 2026, Rodos, Grécia",
     category: "achievement",
