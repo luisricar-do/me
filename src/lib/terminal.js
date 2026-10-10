@@ -16,9 +16,10 @@ export const LINE_CLASS = {
 
 const SECTIONS = [
   ["atuacao", "onde eu posso ajudar"],
-  ["palestras", "palcos, mentorias e presenças"],
+  ["escrita", "o que escrevo no substack"],
   ["sobre", "quem sou"],
   ["destaques", "projetos de impacto e publicações"],
+  ["palestras", "palcos, mentorias e presenças"],
   ["trajetoria", "linha do tempo"],
   ["contato", "como me achar"],
 ]
@@ -27,7 +28,8 @@ const FILES = {
   "me.txt": () => [
     { kind: "accent", text: "# whoami" },
     { kind: "out", text: `${site.role} · ${site.company}` },
-    { kind: "muted", text: "DPO: governança de dados e conformidade com a LGPD" },
+    { kind: "muted", text: "fullstack → DevOps → governança de TI e IA" },
+    { kind: "muted", text: `escrevo em ${site.substack}` },
   ],
   "palestras.md": () =>
     talks.flatMap((talk) => [
@@ -214,6 +216,7 @@ export function runCommand(raw) {
         lines: [
           { kind: "accent", text: site.email },
           { kind: "muted", text: site.linkedin },
+          { kind: "muted", text: site.substack },
         ],
         effect: { type: "mail" },
       }

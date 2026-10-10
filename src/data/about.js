@@ -10,16 +10,21 @@ function yearsSince(date) {
   return years
 }
 
-/** Onde a tese já foi testada: a prova vem antes de qualquer clique. */
-export const proof = ["HackTown 2026", "JobShop UNIFEI", "IEEE IISA 2025 e 2026", "NASA Space Apps"]
+/** O que sustenta o discurso: trabalho feito, antes de qualquer palco. */
+export const proof = [
+  "Fundei a área de DevOps na Tech for Humans",
+  "DPO desde 2024",
+  "2 artigos no IEEE",
+  "Mestrado em IA · UNIFEI",
+]
 
 export const about = {
   yearsAtCompany: yearsSince(START_AT_COMPANY),
   stack: [
-    { area: "Governança", items: ["Governança de TI", "Segurança da informação", "LGPD", "DPO", "SDLC"] },
-    { area: "IA", items: ["IA aplicada à engenharia", "LLMs", "Régua de autonomia"] },
-    { area: "Cloud", items: ["AWS", "Azure"] },
+    { area: "IA", items: ["IA aplicada à engenharia", "LLMs", "Agentes", "Régua de autonomia"] },
     { area: "DevOps", items: ["CI/CD", "Microsserviços", "Observabilidade"] },
+    { area: "Cloud", items: ["AWS", "Azure"] },
     { area: "Engenharia", items: ["React", "TypeScript", "Node.js", "PostgreSQL"] },
+    { area: "Governança", items: ["Governança de TI", "Segurança da informação", "LGPD", "DPO", "SDLC"] },
   ],
 }

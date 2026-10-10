@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react"
+import { ArrowUpRight, Github, Linkedin, Mail, PenLine } from "lucide-react"
 import { SectionTitle } from "../ui/SectionTitle"
 import { Reveal } from "../ui/Reveal"
 import { site, contactIntents, mailto } from "../../data/site"
@@ -7,16 +7,17 @@ const links = [
   { href: `mailto:${site.email}`, icon: Mail, label: "Email", text: site.email },
   { href: site.github, icon: Github, label: "GitHub", text: "github.com/luisricar-do" },
   { href: site.linkedin, icon: Linkedin, label: "LinkedIn", text: "linkedin.com/in/luisricar-do" },
+  { href: site.substack, icon: PenLine, label: "Substack", text: "substack.com/@luisricar" },
 ]
 
 export function Contact() {
   return (
     <section id="contato" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-      <SectionTitle index="06" eyebrow="Contato" title="Me chama para o próximo palco." />
+      <SectionTitle index="07" eyebrow="Contato" title="Vamos conversar." />
 
       <Reveal className="mt-10 max-w-2xl">
         <p className="text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
-          Palestra, mentoria, banca ou uma conversa sobre governança de IA. Escolha o
+          IA no seu time de engenharia, uma oportunidade ou um convite. Escolha o
           motivo e o email já sai com o assunto certo. Respondo pessoalmente.
         </p>
       </Reveal>
@@ -59,7 +60,7 @@ export function Contact() {
       </Reveal>
 
       <Reveal delay={0.14} className="mt-14">
-        <ul className="grid gap-0 sm:grid-cols-3">
+        <ul className="grid gap-0 sm:grid-cols-2 lg:grid-cols-4">
           {links.map(({ href, icon: Icon, label, text }) => (
             <li key={label} className="border-t border-line">
               <a

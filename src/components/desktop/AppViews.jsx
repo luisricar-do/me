@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom"
-import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react"
+import { ArrowUpRight, Github, Linkedin, Mail, PenLine } from "lucide-react"
 import { site, contactIntents, mailto } from "../../data/site"
 import { about, proof } from "../../data/about"
 import { services } from "../../data/services"
 import { talks, talkKinds } from "../../data/talks"
+import { writing } from "../../data/writing"
 import { publications } from "../../data/publications"
 import { projects } from "../../data/projects"
 import { timelineEntries } from "../../data/timeline"
@@ -52,21 +53,29 @@ export function AboutView() {
     <div className="p-5 md:p-7">
       <p className="label text-accent">Boas-vindas</p>
       <h1 className="display mt-3 text-balance text-3xl text-ink md:text-4xl">
-        O mais difícil em IA é decidir <span className="italic text-accent">onde ela não entra.</span>
+        Uso IA para a engenharia <span className="italic text-accent">funcionar melhor.</span>
       </h1>
       <p className="mt-5 text-pretty leading-relaxed text-ink-soft">
         Sou {site.name}, {site.role} na {site.company}. Cheguei em tecnologia
-        por engano e fiquei por escolha: há {about.yearsAtCompany} anos lá, de estagiário a
-        gerente. Cuido para que a IA entre no trabalho pelo lugar certo: o que automatizar, o
-        que continua com gente e como provar que está tudo sob controle, LGPD incluída.
+        por engano e fiquei por escolha: há {about.yearsAtCompany} anos lá, de dev fullstack a
+        DevOps a gerente. Levo IA para dentro do fluxo de engenharia: o que automatizar, o que
+        continua com gente e como provar que está tudo sob controle.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2">
         <a
-          href={mailto("Convite para palestra")}
+          href={mailto("Conversa sobre IA na engenharia")}
           className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-accent-ink"
         >
-          Convidar para uma palestra <ArrowUpRight size={15} />
+          Falar sobre IA no seu time <ArrowUpRight size={15} />
+        </a>
+        <a
+          href={writing.href}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
+        >
+          Ler no Substack <ArrowUpRight size={15} />
         </a>
         <Link
           to="/ia"
@@ -97,7 +106,7 @@ export function AboutView() {
         ))}
       </ul>
 
-      <h2 className="label mt-10 text-muted">Já passei por</h2>
+      <h2 className="label mt-10 text-muted">Na prática</h2>
       <p className="mt-3 text-sm text-ink-soft">{proof.join(" · ")}</p>
 
       <h2 className="label mt-10 text-muted">No que eu trabalho</h2>
@@ -119,7 +128,7 @@ export function AboutView() {
 export function TalksView() {
   const ordered = [...talks].sort((a, b) => b.date.localeCompare(a.date))
   return (
-    <Pane eyebrow="Palestras" title="O que eu levei para o palco.">
+    <Pane eyebrow="Palestras" title="Também levo isso para o palco.">
       <ul className="space-y-3">
         {ordered.map((talk) => (
           <li key={talk.id} className="flex gap-4 rounded-lg border border-line-soft p-3">
@@ -144,6 +153,29 @@ export function TalksView() {
           </li>
         ))}
       </ul>
+    </Pane>
+  )
+}
+
+export function WritingView() {
+  return (
+    <Pane eyebrow={`Substack · ${writing.handle}`} title={writing.title}>
+      <p className="text-pretty leading-relaxed text-ink-soft">{writing.body}</p>
+      <ul className="mt-6">
+        {writing.topics.map((topic) => (
+          <li key={topic} className="border-t border-line-soft py-3 text-sm text-ink-soft last:border-b">
+            {topic}
+          </li>
+        ))}
+      </ul>
+      <a
+        href={writing.href}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-accent-ink"
+      >
+        Ler e assinar no Substack <ArrowUpRight size={15} />
+      </a>
     </Pane>
   )
 }
@@ -230,11 +262,12 @@ const LINKS = [
   { href: `mailto:${site.email}`, icon: Mail, text: site.email },
   { href: site.linkedin, icon: Linkedin, text: "linkedin.com/in/luisricar-do" },
   { href: site.github, icon: Github, text: "github.com/luisricar-do" },
+  { href: site.substack, icon: PenLine, text: "substack.com/@luisricar" },
 ]
 
 export function ContactView() {
   return (
-    <Pane eyebrow="Contato" title="Me chama para o próximo palco.">
+    <Pane eyebrow="Contato" title="Vamos conversar.">
       <ul className="space-y-2">
         {contactIntents.map((intent) => (
           <li key={intent.id}>

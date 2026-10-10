@@ -1,7 +1,7 @@
 import { ArrowUpRight, Minimize2, Moon, Search, Sun } from "lucide-react"
 import { START_AT_COMPANY } from "../../data/about"
 import { stage } from "../../lib/agenda"
-import { mailto } from "../../data/site"
+import { site } from "../../data/site"
 import { build, formattedBuildDate } from "../../lib/build"
 import { openCommandPalette } from "../../lib/palette"
 import { useNow } from "../../hooks/useNow"
@@ -109,10 +109,12 @@ export function StatusMenu({ onMinimizeAll, onClose }) {
 
       <a
         role="menuitem"
-        href={mailto("Convite para palestra")}
+        href={site.substack}
+        target="_blank"
+        rel="noreferrer"
         className="mt-2 flex items-center justify-between rounded-lg bg-accent px-3 py-2.5 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
       >
-        Convidar para uma palestra
+        Ler no Substack
         <ArrowUpRight size={15} />
       </a>
 

@@ -11,7 +11,7 @@ export function Services() {
         index="01"
         eyebrow="Atuação"
         title="Onde eu posso ajudar."
-        lead="Três formas de trabalhar comigo. Todas partem da mesma pergunta: o que a IA deve fazer aqui, e o que não deve."
+        lead="Meu trabalho é fazer engenharia funcionar melhor com IA. Tudo parte da mesma pergunta: o que a IA deve fazer aqui, e o que não deve."
       />
 
       <ul className="mt-14 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:mt-20 md:grid-cols-3">
