@@ -39,8 +39,8 @@ export function About() {
             </p>
             <p className="text-pretty leading-relaxed text-muted">
               Em paralelo, faço mestrado em IA na <span className="text-ink-soft">UNIFEI</span>,
-              publiquei dois artigos no IEEE e mentoro times em hackathons, do Startup Weekend ao
-              NASA Space Apps.
+              publiquei dois artigos no IEEE e escrevo no Substack sobre o que aprendo no caminho.
+              Palestra e mentoria vêm junto, quando o trabalho rende assunto.
             </p>
           </Reveal>
 

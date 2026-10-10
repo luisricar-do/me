@@ -4,6 +4,7 @@ import {
   History,
   Mail,
   Mic,
+  PenLine,
   SquareTerminal,
   UserRound,
 } from "lucide-react"
@@ -16,6 +17,7 @@ import {
   RulerView,
   TalksView,
   TimelineView,
+  WritingView,
 } from "./AppViews"
 
 /**
@@ -36,13 +38,13 @@ export const APPS = [
     View: AboutView,
   },
   {
-    id: "palestras",
-    path: "/palestras",
-    title: "Palestras",
-    hint: "Onde já falei e sobre o quê",
-    icon: Mic,
-    size: [620, 640],
-    View: TalksView,
+    id: "escrita",
+    path: "/escrita",
+    title: "Escrita",
+    hint: "O que escrevo no Substack",
+    icon: PenLine,
+    size: [580, 560],
+    View: WritingView,
   },
   {
     id: "regua",
@@ -59,15 +61,6 @@ export const APPS = [
     },
   },
   {
-    id: "trajetoria",
-    path: "/trajetoria",
-    title: "Trajetória",
-    hint: "Minha carreira, ano a ano",
-    icon: History,
-    size: [580, 640],
-    View: TimelineView,
-  },
-  {
     id: "publicacoes",
     path: "/publicacoes",
     title: "Publicações",
@@ -77,10 +70,28 @@ export const APPS = [
     View: HighlightsView,
   },
   {
+    id: "palestras",
+    path: "/palestras",
+    title: "Palestras",
+    hint: "Onde já falei e sobre o quê",
+    icon: Mic,
+    size: [620, 640],
+    View: TalksView,
+  },
+  {
+    id: "trajetoria",
+    path: "/trajetoria",
+    title: "Trajetória",
+    hint: "Minha carreira, ano a ano",
+    icon: History,
+    size: [580, 640],
+    View: TimelineView,
+  },
+  {
     id: "contato",
     path: "/contato",
     title: "Contato",
-    hint: "Convites, mentorias e conversas",
+    hint: "Projetos, oportunidades e convites",
     icon: Mail,
     size: [500, 560],
     View: ContactView,

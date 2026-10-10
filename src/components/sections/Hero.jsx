@@ -13,11 +13,12 @@ const COMMAND = "cat ~/me.txt"
 const OUTPUT = [
   { kind: "accent", text: "# whoami" },
   { kind: "out", text: `${site.role} · ${site.company}` },
-  { kind: "muted", text: "DPO: governança de dados e conformidade com a LGPD" },
+  { kind: "muted", text: "fullstack → DevOps → governança de TI e IA" },
   { kind: "blank", text: "" },
   { kind: "accent", text: "# no que trabalho" },
   { kind: "muted", text: "IA aplicada à engenharia, com critério de onde" },
   { kind: "muted", text: "ela entra. Nuvem, CI/CD e observabilidade na base." },
+  { kind: "muted", text: "escrevo sobre isso em substack.com/@luisricar" },
 ]
 
 
@@ -45,8 +46,8 @@ export function Hero() {
             delay={0.08}
             className="display mt-6 text-balance text-[clamp(2.5rem,6.5vw,5rem)] leading-[1] text-ink"
           >
-            O mais difícil em IA é decidir{" "}
-            <span className="italic text-accent">onde ela não entra.</span>
+            Uso IA para a engenharia{" "}
+            <span className="italic text-accent">funcionar melhor.</span>
           </Reveal>
 
           <Reveal
@@ -54,14 +55,18 @@ export function Hero() {
             delay={0.2}
             className="mt-7 max-w-lg text-pretty text-lg leading-relaxed text-ink-soft"
           >
-            Sou Luis Ricardo. Cuido para que a IA entre na
-            engenharia pelo lugar certo: o que automatizar, o que continua com gente e como
-            provar que está tudo sob controle, LGPD incluída.
+            Sou Luis Ricardo. Venho do código e do DevOps, e hoje levo IA para dentro do
+            fluxo de engenharia: o que automatizar, o que continua com gente e como provar
+            que está tudo sob controle. Inclusive decidir onde ela não entra.
           </Reveal>
 
           <Reveal delay={0.3} className="mt-9 flex flex-wrap gap-3">
-            <Button href={mailto("Convite para palestra")}>
-              Convidar para uma palestra
+            <Button href={mailto("Conversa sobre IA na engenharia")}>
+              Falar sobre IA no seu time
+              <ArrowUpRight size={16} />
+            </Button>
+            <Button href={site.substack} target="_blank" rel="noopener noreferrer" variant="outline">
+              Ler no Substack
               <ArrowUpRight size={16} />
             </Button>
             <Button to="/ia" variant="outline">
@@ -83,7 +88,7 @@ export function Hero() {
 
       <Reveal delay={0.4} className="mx-auto w-full max-w-6xl px-6 pb-10">
         <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-t border-line pt-5">
-          <span className="label text-muted">Já passei por</span>
+          <span className="label text-muted">Na prática</span>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {proof.map((item) => (
               <li key={item} className="font-mono text-[12px] text-ink-soft">

@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { ArrowUpRight, ChevronLeft, House, Mail, Mic, UserRound } from "lucide-react"
+import { ArrowUpRight, ChevronLeft, House, Mail, PenLine, UserRound } from "lucide-react"
 import { Mark } from "../ui/Mark"
 import { Shell } from "./Shell"
 import { APP, APPS, appForPath } from "./apps"
@@ -13,7 +13,7 @@ const HOME_APPS = APPS.filter((app) => app.listed !== false)
 const TABS = [
   { to: "/", label: "Início", icon: House },
   { to: APP.sobre.path, label: "Sobre", icon: UserRound },
-  { to: APP.palestras.path, label: "Palestras", icon: Mic },
+  { to: APP.escrita.path, label: "Escrita", icon: PenLine },
   { to: APP.contato.path, label: "Contato", icon: Mail },
 ]
 
@@ -52,7 +52,7 @@ function HomeScreen() {
       </header>
 
       <p className="display mt-7 text-balance text-[1.75rem] leading-tight text-ink">
-        O mais difícil em IA é decidir <span className="italic text-accent">onde ela não entra.</span>
+        Uso IA para a engenharia <span className="italic text-accent">funcionar melhor.</span>
       </p>
       <p className="mt-3 text-sm text-muted">Toque em um ícone para abrir.</p>
 
@@ -78,26 +78,27 @@ function HomeScreen() {
         </ul>
       </nav>
 
+      <a
+        href={site.substack}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-9 flex items-center justify-between rounded-2xl bg-accent px-4 py-3.5 font-medium text-accent-ink"
+      >
+        Ler no Substack
+        <ArrowUpRight size={18} />
+      </a>
+
       {/* Widget: o próximo (ou o último) evento, como um card de tela inicial */}
       <Link
         to={APP.palestras.path}
         state={{ fromHome: true }}
-        className="mt-9 block rounded-2xl border border-line bg-surface p-4 shadow-[var(--shadow-card)]"
+        className="mt-3 block rounded-2xl border border-line bg-surface p-4 shadow-[var(--shadow-card)]"
       >
         <p className="label text-accent">{next.label}</p>
         <p className="mt-2 font-medium leading-snug text-ink">{next.talk.title}</p>
         <p className="mt-1 text-sm text-muted">
           {next.talk.event} · {next.talk.dateLabel}
         </p>
-      </Link>
-
-      <Link
-        to={APP.contato.path}
-        state={{ fromHome: true }}
-        className="mt-3 flex items-center justify-between rounded-2xl bg-accent px-4 py-3.5 font-medium text-accent-ink"
-      >
-        Convidar para uma palestra
-        <ArrowUpRight size={18} />
       </Link>
 
       <p className="mt-10 pb-6 text-center text-sm text-muted">

@@ -6,9 +6,10 @@ import { timelineEntries } from "../data/timeline"
 
 const SECTIONS = [
   ["atuacao", "Atuação"],
-  ["palestras", "Palestras"],
+  ["escrita", "Escrita no Substack"],
   ["sobre", "Sobre"],
   ["destaques", "Destaques e publicações"],
+  ["palestras", "Palestras"],
   ["trajetoria", "Trajetória"],
   ["contato", "Contato"],
 ]
@@ -77,6 +78,12 @@ export function buildIndex() {
       label: "Copiar email",
       hint: site.email,
       action: { type: "copy", value: site.email },
+    },
+    {
+      group: "Ações",
+      label: "Substack",
+      hint: "substack.com/@luisricar",
+      action: { type: "external", to: site.substack },
     },
     {
       group: "Ações",
