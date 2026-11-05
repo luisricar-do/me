@@ -8,8 +8,8 @@ const ACCENT = "#ff606a"
 const PAPER = "#0b0b0d"
 const ALERT = "#fbbf24"
 
-const mono = (size, weight = 500) => `${weight} ${size}px "JetBrains Mono", ui-monospace, monospace`
-const display = (size) => `500 ${size}px Fraunces, Georgia, serif`
+const mono = (size, weight = 500) => `${weight} ${size}px "JetBrains Mono Variable", ui-monospace, monospace`
+const display = (size) => `500 ${size}px "Fraunces Variable", Georgia, serif`
 
 /** Quebra o texto na largura disponível e devolve as linhas usadas. */
 function wrap(ctx, text, maxWidth, maxLines = 3) {

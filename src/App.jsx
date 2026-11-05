@@ -1,12 +1,11 @@
-import { useEffect } from "react"
+import { Suspense, useEffect } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
 import { SimpleLayout } from "./components/layout/SimpleLayout"
 import { CommandPalette } from "./components/ui/CommandPalette"
 import { OS } from "./components/desktop/OS"
 import { APPS } from "./components/desktop/apps"
 import { Home } from "./pages/Home"
-import { AiRuler } from "./pages/AiRuler"
-import { Eduflow } from "./pages/Eduflow"
+import { AiRuler, Eduflow } from "./pages/lazy"
 import { NotFound } from "./pages/NotFound"
 import { StructuredData } from "./components/seo/StructuredData"
 
@@ -52,8 +51,8 @@ function App() {
         </Route>
         <Route path="/simples" element={<SimpleLayout />}>
           <Route index element={<Home />} />
-          <Route path="ia" element={<AiRuler />} />
-          <Route path="eduflow" element={<Eduflow />} />
+          <Route path="ia" element={<Suspense><AiRuler /></Suspense>} />
+          <Route path="eduflow" element={<Suspense><Eduflow /></Suspense>} />
         </Route>
         <Route element={<SimpleLayout />}>
           <Route path="*" element={<NotFound />} />

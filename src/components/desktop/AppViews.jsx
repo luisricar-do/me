@@ -9,8 +9,8 @@ import { projects } from "../../data/projects"
 import { timelineEntries } from "../../data/timeline"
 import { writing } from "../../data/writing"
 import { Mark } from "../ui/Mark"
-import { AiRuler } from "../../pages/AiRuler"
-import { Eduflow } from "../../pages/Eduflow"
+import { Suspense } from "react"
+import { AiRuler, Eduflow } from "../../pages/lazy"
 import { ProjectLinks } from "../sections/Projects"
 
 /*
@@ -23,11 +23,19 @@ export function RulerIcon({ size }) {
 }
 
 export function RulerView() {
-  return <AiRuler embedded />
+  return (
+    <Suspense>
+      <AiRuler embedded />
+    </Suspense>
+  )
 }
 
 export function EduflowView() {
-  return <Eduflow embedded />
+  return (
+    <Suspense>
+      <Eduflow embedded />
+    </Suspense>
+  )
 }
 
 const TOKEN_OF = {

@@ -1,5 +1,5 @@
 import { execSync } from "node:child_process"
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
@@ -117,7 +117,19 @@ function staticRoutes() {
     name: "static-routes",
     apply: "build",
     closeBundle() {
-      const index = readFileSync(resolve("dist/index.html"), "utf8")
+      // Preload das duas fontes da primeira dobra (texto e títulos, em latim):
+      // o navegador começa a baixar junto com o CSS, sem esperar descobrir
+      const fonts = readdirSync(resolve("dist/assets")).filter((name) =>
+        /^(inter-latin-opsz-normal|fraunces-latin-full-normal)-.*\.woff2$/.test(name)
+      )
+      const preload = fonts
+        .map((name) => `<link rel="preload" href="/assets/${name}" as="font" type="font/woff2" crossorigin />`)
+        .join("\n    ")
+      const index = readFileSync(resolve("dist/index.html"), "utf8").replace(
+        "</head>",
+        `  ${preload}\n  </head>`
+      )
+      writeFileSync(resolve("dist/index.html"), index)
 
       // Fallback para qualquer caminho não previsto (ex. links antigos)
       writeFileSync(resolve("dist/404.html"), index)
@@ -141,9 +153,12 @@ function staticRoutes() {
             `$1\n    <meta name="robots" content="noindex, follow" />`
           )
         }
-        if (route.image) {
-          html = replaceTag(html, /(<meta property="og:image" content=")[^"]*/, route.image)
-          html = replaceTag(html, /(<meta name="twitter:image" content=")[^"]*/, route.image)
+        // Imagem de compartilhamento da seção (public/og, gerada com `npm run og`)
+        const ogFile = `og/${target || "home"}.png`
+        const image = route.image ?? (existsSync(resolve("public", ogFile)) ? `${ORIGIN}/${ogFile}` : null)
+        if (image) {
+          html = replaceTag(html, /(<meta property="og:image" content=")[^"]*/, image)
+          html = replaceTag(html, /(<meta name="twitter:image" content=")[^"]*/, image)
         }
 
         mkdirSync(resolve(`dist/${route.path}`), { recursive: true })
@@ -173,6 +188,16 @@ function staticRoutes() {
 export default defineConfig({
   base: "/",
   plugins: [react(), tailwindcss(), staticRoutes()],
+  build: {
+    rollupOptions: {
+      output: {
+        // React e o router mudam pouco: num chunk próprio, ficam no cache entre deploys
+        manualChunks(id) {
+          if (/node_modules\/(react|react-dom|react-router|scheduler)\//.test(id)) return "vendor"
+        },
+      },
+    },
+  },
   define: {
     __BUILD_SHA__: JSON.stringify(git("git rev-parse --short HEAD", "dev")),
     __BUILD_REF__: JSON.stringify(git("git rev-parse --abbrev-ref HEAD", "local")),
