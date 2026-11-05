@@ -509,7 +509,12 @@ export function DesktopScreen() {
 
       {/* Área de trabalho */}
       <main id="conteudo" className="absolute inset-x-0" style={{ top: MENU_BAR, bottom: DOCK }}>
-        <h1 className="sr-only">Luis Ricardo Santos · Governança de TI e IA</h1>
+        {/* Um h1 por rota: é o que o buscador lê como assunto da página */}
+        <h1 className="sr-only">
+          {focusedApp && focusedId !== "sobre"
+            ? (focusedApp.meta?.title ?? `${focusedApp.title} · Luis Ricardo Santos`)
+            : "Luis Ricardo Santos · Desenvolvimento, cloud e IA aplicada"}
+        </h1>
 
         {nothingOpen && (
           <div className="pointer-events-none absolute inset-0 grid place-items-center">
@@ -675,12 +680,22 @@ export function DesktopScreen() {
   )
 }
 
+/**
+ * Clique simples abre a janela; ⌘/Ctrl/Shift + clique e o botão do meio
+ * seguem o link normal. Sendo <a href>, o buscador também descobre cada página.
+ */
+function openInPlace(event, onClick) {
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+  event.preventDefault()
+  onClick()
+}
+
 function DeskIcon({ app, onClick }) {
   const Icon = app.icon
   return (
-    <button
-      type="button"
-      onClick={onClick}
+    <a
+      href={`${app.path}/`}
+      onClick={(event) => openInPlace(event, onClick)}
       className="group flex w-24 flex-col items-center gap-1.5 rounded-lg p-2 text-center transition-colors hover:bg-surface/60"
     >
       <span className="grid h-12 w-12 place-items-center rounded-2xl border border-line bg-surface text-ink-soft shadow-sm transition-colors group-hover:border-accent group-hover:text-accent">
@@ -689,7 +704,7 @@ function DeskIcon({ app, onClick }) {
       <span className="rounded px-1 text-[12px] leading-tight text-ink-soft [text-shadow:0_1px_2px_var(--paper)] group-hover:text-ink">
         {app.title}
       </span>
-    </button>
+    </a>
   )
 }
 
@@ -697,9 +712,9 @@ function DockItem({ app, focused, running, onClick }) {
   const Icon = app.icon
   return (
     <li className="group relative shrink-0">
-      <button
-        type="button"
-        onClick={onClick}
+      <a
+        href={`${app.path}/`}
+        onClick={(event) => openInPlace(event, onClick)}
         aria-label={`${app.title}: ${app.hint}`}
         className={`dock-item grid h-12 w-12 place-items-center rounded-xl border transition-colors ${
           focused
@@ -708,7 +723,7 @@ function DockItem({ app, focused, running, onClick }) {
         }`}
       >
         <Icon size={22} />
-      </button>
+      </a>
       {/* Balão com o nome: o mesmo que o dock do Mac mostra ao passar o mouse */}
       <span
         aria-hidden

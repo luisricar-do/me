@@ -20,7 +20,9 @@ const SIMPLE = {
 
 const ROUTES = [
   {
+    // A home abre a janela "Sobre mim": mesmo conteúdo, então a raiz é a canônica
     path: "sobre",
+    canonical: "",
     title: "Sobre mim · Luis Ricardo Santos",
     description:
       "Quem sou e como posso ajudar: sites e sistemas, consultoria de IA, cloud e DevOps, palestras e mentoria.",
@@ -57,16 +59,19 @@ const ROUTES = [
   },
   {
     path: "terminal",
+    noindex: true,
     title: "Terminal · Luis Ricardo Santos",
     description: "O site por linha de comando.",
   },
   {
     path: "arquivos",
+    noindex: true,
     title: "Arquivos · Luis Ricardo Santos",
     description: "Projetos, artigos e fotos de palestras organizados como pastas.",
   },
   {
     path: "lixeira",
+    noindex: true,
     title: "Lixeira · Luis Ricardo Santos",
     description: "O que ficou pelo caminho.",
   },
@@ -125,9 +130,17 @@ function staticRoutes() {
         html = replaceTag(html, /(<meta property="og:description" content=")[^"]*/, route.description)
         html = replaceTag(html, /(<meta name="twitter:title" content=")[^"]*/, route.title)
         html = replaceTag(html, /(<meta name="twitter:description" content=")[^"]*/, route.description)
-        const canonical = `${ORIGIN}/${route.canonical ?? route.path}`
+        // Com barra no fim: é a URL que o GitHub Pages serve sem redirecionar
+        const target = route.canonical ?? route.path
+        const canonical = target ? `${ORIGIN}/${target}/` : `${ORIGIN}/`
         html = replaceTag(html, /(<meta property="og:url" content=")[^"]*/, canonical)
         html = replaceTag(html, /(<link rel="canonical" href=")[^"]*/, canonical)
+        if (route.noindex) {
+          html = html.replace(
+            /(<meta name="description"[^>]*>)/,
+            `$1\n    <meta name="robots" content="noindex, follow" />`
+          )
+        }
         if (route.image) {
           html = replaceTag(html, /(<meta property="og:image" content=")[^"]*/, route.image)
           html = replaceTag(html, /(<meta name="twitter:image" content=")[^"]*/, route.image)
@@ -136,6 +149,23 @@ function staticRoutes() {
         mkdirSync(resolve(`dist/${route.path}`), { recursive: true })
         writeFileSync(resolve(`dist/${route.path}/index.html`), html)
       }
+
+      // Sitemap só com as páginas que devem aparecer na busca, cada uma pela
+      // URL canônica; as versões simples que apontam para a interativa ficam fora
+      const indexable = ROUTES.filter((route) => !route.noindex && route.canonical === undefined)
+      const urls = ["", ...indexable.map((route) => `${route.path}/`)]
+      const sitemap = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        ...urls.map((path) => `  <url><loc>${ORIGIN}/${path}</loc></url>`),
+        "</urlset>",
+        "",
+      ].join("\n")
+      writeFileSync(resolve("dist/sitemap.xml"), sitemap)
+      writeFileSync(
+        resolve("dist/robots.txt"),
+        `User-agent: *\nAllow: /\n\nSitemap: ${ORIGIN}/sitemap.xml\n`
+      )
     },
   }
 }

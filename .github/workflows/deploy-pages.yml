@@ -30,8 +30,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # O build pré-renderiza as páginas com o Chrome que já vem no runner;
+      # sem ele o passo falha em vez de publicar HTML vazio
       - name: Build
         run: npm run build
+        env:
+          PRERENDER_REQUIRED: "1"
+          CHROME_PATH: /usr/bin/google-chrome
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

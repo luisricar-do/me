@@ -8,6 +8,7 @@ import { Home } from "./pages/Home"
 import { AiRuler } from "./pages/AiRuler"
 import { Eduflow } from "./pages/Eduflow"
 import { NotFound } from "./pages/NotFound"
+import { StructuredData } from "./components/seo/StructuredData"
 
 /** Ao trocar de rota: vai para a âncora, se houver, senão para o topo. */
 function ScrollManager() {
@@ -38,6 +39,7 @@ function App() {
         Pular para o conteúdo
       </a>
       <ScrollManager />
+      <StructuredData />
       <CommandPalette />
       {/* Um único layout para todas as rotas da versão interativa: trocar de
           app troca a URL sem desmontar o desktop e as janelas abertas */}

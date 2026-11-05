@@ -14,9 +14,14 @@
     <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)" />
 
+    <!-- Com JS, o HTML pré-renderizado fica escondido até o React montar
+         por cima (evita piscar o desktop numa tela de celular). Sem JS, aparece. -->
+    <style>.js #root[data-prerendered] { visibility: hidden; }</style>
+
     <!-- Tema: aplica a escolha salva antes da primeira pintura (evita flash) -->
     <script>
-      (function () {
+      document.documentElement.classList.add("js")
+      ;(function () {
         try {
           var t = localStorage.getItem("theme")
           if (t === "light" || t === "dark") {
