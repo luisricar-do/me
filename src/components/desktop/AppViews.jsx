@@ -187,7 +187,7 @@ export function TalksView() {
                 src={talk.photo}
                 alt=""
                 loading="lazy"
-                className="photo-guard h-16 w-20 shrink-0 rounded-md object-cover"
+                className="photo-guard h-16 w-20 shrink-0 rounded-md object-cover object-[50%_22%]"
                 {...photoGuard}
               />
             ) : (

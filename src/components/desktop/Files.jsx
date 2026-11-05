@@ -103,7 +103,7 @@ function Thumb({ item, size = "lg" }) {
         src={item.src}
         alt=""
         loading="lazy"
-        className={`photo-guard ${size === "lg" ? "h-16 w-20" : "h-5 w-6"} rounded-md border border-line object-cover`}
+        className={`photo-guard ${size === "lg" ? "h-16 w-20" : "h-5 w-6"} rounded-md border border-line object-cover object-[50%_22%]`}
         {...photoGuard}
       />
     )

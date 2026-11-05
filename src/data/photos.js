@@ -14,9 +14,9 @@ export const photos = [
   {
     id: "startup-weekend-2025",
     src: "/images/talks/startup-weekend-2025.jpg",
-    caption: "Startup Weekend 2025",
-    detail: "Startup Weekend",
-    sub: "Smart Cities · 2025",
+    caption: "Participante no Startup Weekend 2025",
+    detail: "Startup Weekend Smart Cities",
+    sub: "Participante · 2025",
   },
   { id: "retrato", src: "/images/photos/retrato.jpg", caption: "Retrato", detail: "Retrato", sub: "Tech for Humans" },
   {
