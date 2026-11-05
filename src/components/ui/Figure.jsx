@@ -2,7 +2,9 @@
  * Imagem com proporção fixa. Só é usada quando existe arquivo — os dados
  * guardam `null` enquanto a foto não chega, e o chamador nem renderiza.
  */
-export function Figure({ src, alt, caption, ratio = "4 / 3", className = "" }) {
+import { photoGuard } from "../../lib/photoGuard"
+
+export function Figure({ src, alt, caption, ratio = "4 / 3", position, className = "" }) {
   if (!src) return null
 
   return (
@@ -16,7 +18,9 @@ export function Figure({ src, alt, caption, ratio = "4 / 3", className = "" }) {
           alt={alt}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover"
+          className="photo-guard h-full w-full object-cover"
+          style={position ? { objectPosition: position } : undefined}
+          {...photoGuard}
         />
       </div>
       {caption && (

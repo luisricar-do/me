@@ -1,6 +1,11 @@
 import { SectionTitle } from "../ui/SectionTitle"
 import { Reveal } from "../ui/Reveal"
+import { Figure } from "../ui/Figure"
 import { about } from "../../data/about"
+import { talks } from "../../data/talks"
+
+// A foto principal do site: o palco do HackTown
+const stage = talks.find((talk) => talk.id === "hacktown-2026")
 
 const stats = [
   { value: String(about.yearsAtCompany), label: "anos na Tech for Humans" },
@@ -55,6 +60,14 @@ export function About() {
         </div>
 
         <Reveal delay={0.08} className="min-w-0">
+          <Figure
+            src={stage.photo}
+            alt="Luis Ricardo no palco do HackTown 2026, segurando o microfone"
+            caption={`${stage.event} · ${stage.title}`}
+            ratio="4 / 3"
+            position="35% 30%"
+            className="mb-12"
+          />
           <p className="label text-muted">Onde eu atuo</p>
           <dl className="mt-5">
             {about.stack.map((group) => (

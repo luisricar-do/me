@@ -120,6 +120,13 @@ section[id] {
   color: var(--accent-ink);
 }
 
+/* Fotos pessoais: sem o menu de toque longo do iOS nem seleção (ver lib/photoGuard.js) */
+.photo-guard {
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 /* Em @layer base para que `outline-none` (camada utilities) consiga desligar o
    anel onde o próprio componente já mostra o foco, como os inputs com caret. */
 @layer base {

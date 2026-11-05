@@ -2,6 +2,8 @@ import { ArrowUpRight, Github, Linkedin, Mail, PenLine } from "lucide-react"
 import { SectionTitle } from "../ui/SectionTitle"
 import { Reveal } from "../ui/Reveal"
 import { site, contactIntents, mailto } from "../../data/site"
+import { portrait } from "../../data/photos"
+import { photoGuard } from "../../lib/photoGuard"
 
 const links = [
   { href: `mailto:${site.email}`, icon: Mail, label: "Email", text: site.email },
@@ -15,7 +17,17 @@ export function Contact() {
     <section id="contato" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle index="08" eyebrow="Contato" title="Me conta o que você precisa." />
 
-      <Reveal className="mt-10 max-w-2xl">
+      <Reveal className="mt-10 flex max-w-2xl items-center gap-5">
+        <img
+          src={portrait.src}
+          alt={portrait.alt}
+          loading="lazy"
+          decoding="async"
+          width="80"
+          height="80"
+          className="photo-guard h-16 w-16 shrink-0 rounded-full border border-line object-cover md:h-20 md:w-20"
+          {...photoGuard}
+        />
         <p className="text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
           Um site, um sistema, uma dúvida sobre IA no seu negócio, uma palestra. Escolha o
           motivo e o email já sai com o assunto certo. Respondo pessoalmente.
