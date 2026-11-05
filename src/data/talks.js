@@ -65,7 +65,7 @@ export const talks = [
     location: "Itajubá, MG",
     date: "2025-09-01",
     dateLabel: "setembro de 2025",
-    photo: null,
+    photo: "/images/talks/mentor-nasa.jpg",
   },
   {
     id: "mentor-startup-weekend",

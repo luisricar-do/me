@@ -5,10 +5,12 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, FileText, Folder, Image, X } f
 import { projects } from "../../data/projects"
 import { publications } from "../../data/publications"
 import { talks } from "../../data/talks"
+import { photos } from "../../data/photos"
+import { photoGuard } from "../../lib/photoGuard"
 
 /*
  * O app Arquivos: o conteúdo do site arrumado como num Finder. Projetos são
- * pastas, artigos são PDFs e as fotos de palco são imagens. Espaço abre a
+ * pastas, artigos são PDFs e as fotos (palco e retratos) são imagens. Espaço abre a
  * prévia rápida (como o Quick Look do Mac), Enter ou duplo clique abre.
  */
 
@@ -68,7 +70,19 @@ const FOLDERS = [
         caption: talk.title,
         sub: `${talk.location} · ${talk.dateLabel}`,
         links: talk.toolHref ? [{ label: talk.toolLabel, href: talk.toolHref, internal: true }] : [],
-      })),
+      }))
+      .concat(
+        photos.map((photo) => ({
+          id: photo.id,
+          kind: "image",
+          name: `${photo.id}.jpg`,
+          detail: photo.detail,
+          src: photo.src,
+          caption: photo.caption,
+          sub: photo.sub,
+          links: [],
+        }))
+      ),
   },
 ]
 
@@ -89,7 +103,8 @@ function Thumb({ item, size = "lg" }) {
         src={item.src}
         alt=""
         loading="lazy"
-        className={`${size === "lg" ? "h-16 w-20" : "h-5 w-6"} rounded-md border border-line object-cover`}
+        className={`photo-guard ${size === "lg" ? "h-16 w-20" : "h-5 w-6"} rounded-md border border-line object-cover`}
+        {...photoGuard}
       />
     )
   }
@@ -344,7 +359,12 @@ function QuickLook({ items, index, onIndex, onOpen, onClose }) {
         <div className="min-h-0 overflow-y-auto">
           {item.kind === "image" ? (
             <figure>
-              <img src={item.src} alt={item.caption} className="max-h-[70vh] w-full bg-black object-contain" />
+              <img
+                src={item.src}
+                alt={item.caption}
+                className="photo-guard max-h-[70vh] w-full bg-black object-contain"
+                {...photoGuard}
+              />
               <figcaption className="px-5 py-4">
                 <p className="font-medium text-ink">{item.caption}</p>
                 <p className="mt-0.5 text-sm text-muted">

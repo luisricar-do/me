@@ -179,7 +179,8 @@ function staticRoutes() {
       writeFileSync(resolve("dist/sitemap.xml"), sitemap)
       writeFileSync(
         resolve("dist/robots.txt"),
-        `User-agent: *\nAllow: /\n\nSitemap: ${ORIGIN}/sitemap.xml\n`
+        // Fotos pessoais fora do Google Imagens; as páginas continuam indexadas
+        `User-agent: *\nAllow: /\n\nUser-agent: Googlebot-Image\nDisallow: /images/\n\nSitemap: ${ORIGIN}/sitemap.xml\n`
       )
     },
   }

@@ -8,6 +8,8 @@ import { publications } from "../../data/publications"
 import { projects } from "../../data/projects"
 import { timelineEntries } from "../../data/timeline"
 import { writing } from "../../data/writing"
+import { portrait } from "../../data/photos"
+import { photoGuard } from "../../lib/photoGuard"
 import { Mark } from "../ui/Mark"
 import { Suspense } from "react"
 import { AiRuler, Eduflow } from "../../pages/lazy"
@@ -60,7 +62,17 @@ function Pane({ eyebrow, title, children }) {
 export function AboutView() {
   return (
     <div className="p-5 md:p-7">
-      <p className="label text-accent">Boas-vindas</p>
+      <div className="flex items-center gap-4">
+        <img
+          src={portrait.src}
+          alt={portrait.alt}
+          width="56"
+          height="56"
+          className="photo-guard h-14 w-14 shrink-0 rounded-full border border-line object-cover"
+          {...photoGuard}
+        />
+        <p className="label text-accent">Boas-vindas</p>
+      </div>
       <h1 className="display mt-3 text-balance text-3xl text-ink md:text-4xl">
         Construo software e ajudo empresas a usar IA{" "}
         <span className="italic text-accent">no lugar certo.</span>
@@ -175,7 +187,8 @@ export function TalksView() {
                 src={talk.photo}
                 alt=""
                 loading="lazy"
-                className="h-16 w-20 shrink-0 rounded-md object-cover"
+                className="photo-guard h-16 w-20 shrink-0 rounded-md object-cover"
+                {...photoGuard}
               />
             ) : (
               <span className="label grid h-16 w-20 shrink-0 place-items-center rounded-md bg-surface-2 text-muted">
