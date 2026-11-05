@@ -120,10 +120,14 @@ section[id] {
   color: var(--accent-ink);
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 3px;
+/* Em @layer base para que `outline-none` (camada utilities) consiga desligar o
+   anel onde o próprio componente já mostra o foco, como os inputs com caret. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
 }
 
 @layer components {
