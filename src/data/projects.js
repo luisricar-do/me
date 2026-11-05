@@ -43,8 +43,9 @@ const published = [
     id: "volei-cidadao",
     kind: "Site",
     title: "Vôlei Cidadão",
-    summary: "Site do projeto Vôlei Cidadão.",
-    stack: ["TypeScript"],
+    summary:
+      "Site do projeto social que, há 11 anos, oferece vôlei gratuito a jovens de 9 a 17 anos em São Bento do Sapucaí. Conta a história, mostra conquistas, horários e vídeos do time, e leva as famílias direto para a lista de espera.",
+    stack: ["React", "TypeScript", "Tailwind", "GitHub Pages"],
     href: "https://voleicidadao.com.br",
     repo: "https://github.com/luisricar-do/volei-cidadao",
     year: 2026,
