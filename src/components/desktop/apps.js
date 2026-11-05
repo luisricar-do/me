@@ -1,5 +1,7 @@
 import {
   BookOpen,
+  FolderOpen,
+  FolderGit2,
   GraduationCap,
   History,
   Mail,
@@ -12,11 +14,14 @@ import {
   ContactView,
   EduflowView,
   HighlightsView,
+  ProjectsView,
   RulerIcon,
   RulerView,
   TalksView,
   TimelineView,
 } from "./AppViews"
+import { FilesView } from "./Files"
+import { TrashIcon, TrashView } from "./Trash"
 
 /**
  * Cada parte do site vira um app: janela no computador, tela no celular.
@@ -24,6 +29,7 @@ import {
  * no celular, embaixo do ícone, e no balão do dock.
  * `listed: false` abre por link, mas não ganha ícone próprio.
  * `size` é o tamanho preferido da janela, [largura, altura].
+ * `desktopOnly: true` não aparece na tela inicial do celular.
  */
 export const APPS = [
   {
@@ -34,6 +40,15 @@ export const APPS = [
     icon: UserRound,
     size: [660, 660],
     View: AboutView,
+  },
+  {
+    id: "projetos",
+    path: "/projetos",
+    title: "Projetos",
+    hint: "Sites, sistemas e IA que eu construí",
+    icon: FolderGit2,
+    size: [720, 680],
+    View: ProjectsView,
   },
   {
     id: "palestras",
@@ -71,7 +86,7 @@ export const APPS = [
     id: "publicacoes",
     path: "/publicacoes",
     title: "Publicações",
-    hint: "Artigos científicos e projetos",
+    hint: "Artigos científicos no IEEE",
     icon: BookOpen,
     size: [580, 600],
     View: HighlightsView,
@@ -99,6 +114,26 @@ export const APPS = [
       description:
         "Sistema low-code configurável para gestão de TCCs, avaliado com usuários e publicado no IEEE IISA 2025.",
     },
+  },
+  {
+    id: "arquivos",
+    path: "/arquivos",
+    title: "Arquivos",
+    hint: "Projetos, artigos e fotos como pastas",
+    icon: FolderOpen,
+    size: [860, 560],
+    View: FilesView,
+    desktopOnly: true,
+  },
+  {
+    id: "lixeira",
+    path: "/lixeira",
+    title: "Lixeira",
+    hint: "O que ficou pelo caminho",
+    icon: TrashIcon,
+    size: [560, 420],
+    View: TrashView,
+    desktopOnly: true,
   },
   {
     id: "terminal",

@@ -8,13 +8,13 @@ export function Services() {
   return (
     <section id="atuacao" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle
-        index="01"
-        eyebrow="Atuação"
+        index="02"
+        eyebrow="Serviços"
         title="Onde eu posso ajudar."
-        lead="Três formas de trabalhar comigo. Todas partem da mesma pergunta: o que a IA deve fazer aqui, e o que não deve."
+        lead="Pode ser um site, um sistema inteiro, uma dúvida sobre IA no seu negócio ou uma palestra. Se não estiver aqui, pergunta mesmo assim."
       />
 
-      <ul className="mt-14 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:mt-20 md:grid-cols-3">
+      <ul className="mt-14 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:mt-20 md:grid-cols-2">
         {services.map(({ id, icon: Icon, title, body, proof, subject }, i) => (
           <Reveal as="li" key={id} delay={i * 0.06} className="flex flex-col bg-paper p-7 md:p-8">
             <span className="grid h-9 w-9 place-items-center rounded-full bg-accent-tint text-accent">

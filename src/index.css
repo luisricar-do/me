@@ -18,22 +18,26 @@
   --line: light-dark(rgba(26, 25, 23, 0.14), rgba(255, 255, 255, 0.12));
   --line-soft: light-dark(rgba(26, 25, 23, 0.07), rgba(255, 255, 255, 0.06));
 
-  --accent: light-dark(#146c43, #4ade80);
-  --accent-ink: light-dark(#ffffff, #06140c);
-  --accent-tint: light-dark(rgba(20, 108, 67, 0.08), rgba(74, 222, 128, 0.1));
+  --accent: light-dark(#0e359d, #7b9bff);
+  --accent-ink: light-dark(#ffffff, #0a1433);
+  --accent-tint: light-dark(rgba(14, 53, 157, 0.07), rgba(123, 155, 255, 0.1));
+
+  /* Coral da marca: destaque pontual. Em texto sobre fundo claro usa o tom
+     mais fundo (#c8323f), porque o #ff606a não passa contraste no papel. */
+  --coral: #ff606a;
 
   /* Terminal: mantém o tom escuro nos dois temas (bloco de código) */
   --term-bg: #14151a;
   --term-head: #1b1c22;
   --term-ink: #e9e9e6;
   --term-muted: #8f8f8c;
-  --term-accent: #4ade80;
+  --term-accent: var(--coral);
   --term-line: rgba(255, 255, 255, 0.09);
 
   /* Grupos da linha do tempo */
   --cat-education: light-dark(#a16207, #fbbf24);
-  --cat-work: light-dark(#146c43, #4ade80);
-  --cat-speaking: light-dark(#b3541e, #fb923c);
+  --cat-work: var(--accent);
+  --cat-speaking: light-dark(#c8323f, #ff606a);
 
   --shadow-card: 0 1px 2px light-dark(rgba(26, 25, 23, 0.05), rgba(0, 0, 0, 0.4)),
     0 16px 40px -24px light-dark(rgba(26, 25, 23, 0.28), rgba(0, 0, 0, 0.7));
@@ -58,6 +62,7 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-tint: var(--accent-tint);
+  --color-coral: var(--coral);
 
   --color-term: var(--term-bg);
   --color-term-head: var(--term-head);
@@ -273,13 +278,63 @@ section[id] {
 /* ─────────────────────────────────────────────────────────────
    Modo desktop
    ───────────────────────────────────────────────────────────── */
-.desk-wallpaper {
+/* Papéis de parede (Wallpaper.jsx). Os tons saem dos tokens, então todos
+   funcionam no tema claro e no escuro. */
+.wall {
   background-color: var(--paper);
+  --wall-navy: light-dark(rgba(14, 53, 157, 0.16), rgba(14, 53, 157, 0.55));
+  --wall-coral: light-dark(rgba(255, 96, 106, 0.14), rgba(255, 96, 106, 0.16));
+  --wall-blue: light-dark(rgba(123, 155, 255, 0.18), rgba(123, 155, 255, 0.14));
+}
+.wall-marinho {
+  background-image:
+    radial-gradient(80% 70% at 10% 105%, var(--wall-navy) 0%, transparent 70%),
+    radial-gradient(45% 40% at 92% 6%, var(--wall-coral) 0%, transparent 70%),
+    radial-gradient(60% 60% at 70% 80%, var(--wall-blue) 0%, transparent 75%);
+}
+.wall-pontos {
   background-image:
     radial-gradient(70% 55% at 18% 8%, var(--accent-tint) 0%, transparent 70%),
     radial-gradient(60% 50% at 88% 92%, var(--accent-tint) 0%, transparent 70%),
-    radial-gradient(var(--line-soft) 1px, transparent 1px);
+    radial-gradient(var(--line) 1px, transparent 1px);
   background-size: auto, auto, 22px 22px;
+}
+.wall-regua {
+  background-image: radial-gradient(90% 80% at 0% 100%, var(--wall-navy) 0%, transparent 70%);
+}
+.wall-ruler {
+  position: absolute;
+  left: 120px;
+  bottom: 9vh;
+  width: 64vmin;
+  height: 64vmin;
+  fill: light-dark(rgba(26, 25, 23, 0.05), rgba(255, 255, 255, 0.045));
+}
+.wall-ruler-hot {
+  fill: light-dark(rgba(255, 96, 106, 0.22), rgba(255, 96, 106, 0.2));
+}
+.wall-aurora {
+  background-image: radial-gradient(120% 80% at 50% 120%, var(--wall-navy) 0%, transparent 70%);
+}
+.wall-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  animation: wall-drift 38s ease-in-out infinite alternate;
+}
+.wall-blob-a { width: 52vmax; height: 52vmax; left: -12vmax; top: 20%; background: var(--wall-navy); }
+.wall-blob-b { width: 34vmax; height: 34vmax; right: -6vmax; top: -10vmax; background: var(--wall-coral); animation-duration: 46s; animation-direction: alternate-reverse; }
+.wall-blob-c { width: 40vmax; height: 40vmax; right: 18%; bottom: -18vmax; background: var(--wall-blue); animation-duration: 54s; }
+@keyframes wall-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vmax, -4vmax, 0) scale(1.08); }
+  to { transform: translate3d(-4vmax, 5vmax, 0) scale(0.94); }
+}
+.wall-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .desk-enter {
@@ -312,6 +367,29 @@ section[id] {
 .dock-item:hover {
   transform: translateY(-4px) scale(1.12);
 }
+
+/* Boot */
+.boot-mark rect { transform-box: fill-box; transform-origin: left center; animation: boot-bar 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.boot-mark rect:nth-child(2) { animation-delay: 0.25s; }
+.boot-mark rect:nth-child(3) { animation-delay: 0.5s; }
+.boot-progress { transform-origin: left; animation: boot-progress 1.6s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.boot-leave { animation: fade-out 0.4s ease-in forwards; }
+@keyframes boot-bar { from { transform: scaleX(0); opacity: 0; } }
+@keyframes boot-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes fade-out { to { opacity: 0; visibility: hidden; } }
+
+/* Notificação */
+.toast-in { animation: toast-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes toast-in { from { opacity: 0; transform: translateX(calc(100% + 1rem)); } }
+
+/* Encaixe: a prévia de onde a janela vai cair */
+.snap-preview { transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* Proteção de tela: dois eixos com durações diferentes fazem o quique */
+.saver-x { animation: saver-x 13s linear infinite alternate; }
+.saver-y { animation: saver-y 8.5s linear infinite alternate; }
+@keyframes saver-x { from { transform: translateX(0); } to { transform: translateX(calc(100vw - 120px)); } }
+@keyframes saver-y { from { transform: translateY(0); } to { transform: translateY(calc(100vh - 120px)); } }
 
 @keyframes desk-pop {
   from { opacity: 0; transform: translateY(-4px) scale(0.98); }

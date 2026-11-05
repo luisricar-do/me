@@ -12,7 +12,7 @@ export function About() {
   return (
     <section id="sobre" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle
-        index="03"
+        index="04"
         eyebrow="Sobre"
         title="Cheguei por engano. Fiquei por escolha."
       />

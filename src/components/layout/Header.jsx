@@ -10,10 +10,11 @@ import { openCommandPalette } from "../../lib/palette"
 import { SIMPLE_BASE } from "../../lib/siteMode"
 
 const navLinks = [
-  { id: "atuacao", label: "Atuação" },
+  { id: "projetos", label: "Projetos" },
+  { id: "atuacao", label: "Serviços" },
   { id: "palestras", label: "Palestras" },
   { id: "sobre", label: "Sobre" },
-  { id: "destaques", label: "Destaques" },
+  { id: "destaques", label: "Pesquisa" },
   { id: "trajetoria", label: "Trajetória" },
 ]
 

@@ -16,10 +16,10 @@ export const proof = ["HackTown 2026", "JobShop UNIFEI", "IEEE IISA 2025 e 2026"
 export const about = {
   yearsAtCompany: yearsSince(START_AT_COMPANY),
   stack: [
-    { area: "Governança", items: ["Governança de TI", "Segurança da informação", "LGPD", "DPO", "SDLC"] },
-    { area: "IA", items: ["IA aplicada à engenharia", "LLMs", "Régua de autonomia"] },
+    { area: "Engenharia", items: ["React", "TypeScript", "Node.js", "PostgreSQL", "APIs e integrações"] },
+    { area: "IA", items: ["LLMs", "Agentes e MCP", "IA aplicada à engenharia", "Régua de autonomia"] },
     { area: "Cloud", items: ["AWS", "Azure"] },
     { area: "DevOps", items: ["CI/CD", "Microsserviços", "Observabilidade"] },
-    { area: "Engenharia", items: ["React", "TypeScript", "Node.js", "PostgreSQL"] },
+    { area: "Governança", items: ["Governança de TI", "Segurança da informação", "LGPD", "DPO"] },
   ],
 }

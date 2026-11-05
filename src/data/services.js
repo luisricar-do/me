@@ -1,4 +1,4 @@
-import { Mic, ShieldCheck, Users } from "lucide-react"
+import { Code2, Mic, ServerCog, Sparkles } from "lucide-react"
 
 /**
  * O que alguém pode me chamar para fazer. Cada bloco aponta para a prova
@@ -6,27 +6,35 @@ import { Mic, ShieldCheck, Users } from "lucide-react"
  */
 export const services = [
   {
+    id: "desenvolvimento",
+    icon: Code2,
+    title: "Sites e sistemas",
+    body: "Do site institucional ao sistema com login, banco de dados e integrações. Faço o front, o back e a infraestrutura, e entrego no ar.",
+    proof: "Este site · EduFlow · Vôlei Cidadão",
+    subject: "Projeto: site ou sistema",
+  },
+  {
+    id: "ia",
+    icon: Sparkles,
+    title: "Consultoria e soluções com IA",
+    body: "Onde a IA ajuda no seu negócio e onde atrapalha. Agentes, automações e integrações com LLMs, com limite claro de autonomia e os dados protegidos.",
+    proof: "Mestrado em IA · Régua de autonomia · HackTown 2026",
+    subject: "Consultoria de IA",
+  },
+  {
+    id: "infra",
+    icon: ServerCog,
+    title: "Cloud, DevOps e segurança",
+    body: "AWS e Azure, CI/CD, observabilidade e LGPD pensadas desde o começo. Fundei a área de DevOps de uma empresa e hoje cuido da governança de TI dela.",
+    proof: "DevOps, DPO e governança na Tech for Humans",
+    subject: "Conversa sobre cloud e DevOps",
+  },
+  {
     id: "palestras",
     icon: Mic,
-    title: "Palestras e workshops",
-    body: "IA na engenharia sem hype: onde ela acelera, onde não deve entrar e como decidir antes que a decisão vire incidente.",
-    proof: "HackTown 2026 · JobShop UNIFEI 2026",
+    title: "Palestras e mentoria",
+    body: "IA na engenharia sem hype, carreira em tecnologia e mentoria de times em hackathons e startups.",
+    proof: "HackTown 2026 · JobShop UNIFEI · NASA Space Apps",
     subject: "Convite para palestra",
-  },
-  {
-    id: "governanca",
-    icon: ShieldCheck,
-    title: "Governança de TI e IA",
-    body: "Segurança da informação, LGPD e políticas de uso de IA desenhadas junto com o produto, não coladas no fim como checklist.",
-    proof: "DPO e gestor de governança na Tech for Humans",
-    subject: "Conversa sobre governança de IA",
-  },
-  {
-    id: "mentoria",
-    icon: Users,
-    title: "Mentoria e avaliação",
-    body: "Times de hackathon, startups em fase inicial e trabalhos de iniciação científica, com olhar de quem já esteve do outro lado.",
-    proof: "NASA Space Apps · Startup Weekend · SIC UNIFEI",
-    subject: "Convite para mentoria",
   },
 ]

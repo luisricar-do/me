@@ -1,4 +1,5 @@
 import { Hero } from "../components/sections/Hero"
+import { Projects } from "../components/sections/Projects"
 import { Services } from "../components/sections/Services"
 import { Talks } from "../components/sections/Talks"
 import { About } from "../components/sections/About"
@@ -12,16 +13,17 @@ import { quotes } from "../data/quotes"
 import { usePageMeta } from "../hooks/usePageMeta"
 import { site } from "../data/site"
 
-// Tese → prova → o que ofereço → quem sou → como me chamar
+// O que construí → o que ofereço → prova → quem sou → como me chamar
 export function Home() {
   usePageMeta(
-    `${site.name} | Governança de TI e IA · Palestras`,
-    "Luis Ricardo Santos, Gerente de Governança de TI e IA na Tech for Humans. Palestras e mentoria sobre IA na engenharia: onde ela acelera, onde não deve entrar e como governar."
+    `${site.name} | Desenvolvimento, cloud e IA aplicada`,
+    "Luis Ricardo Santos desenvolve sites e sistemas, do front à nuvem, e ajuda empresas a usar IA com critério. Também faz palestras e mentoria."
   )
 
   return (
     <>
       <Hero />
+      <Projects />
       <Services />
       <Talks />
       <RulerTeaser />

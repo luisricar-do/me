@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { ArrowUpRight, ChevronLeft, House, Mail, Mic, UserRound } from "lucide-react"
+import { ArrowUpRight, ChevronLeft, FolderGit2, House, Mail, UserRound } from "lucide-react"
 import { Mark } from "../ui/Mark"
 import { Shell } from "./Shell"
 import { APP, APPS, appForPath } from "./apps"
@@ -8,12 +8,12 @@ import { stage } from "../../lib/agenda"
 import { useTheme } from "../../hooks/useTheme"
 import { SIMPLE_BASE } from "../../lib/siteMode"
 
-const HOME_APPS = APPS.filter((app) => app.listed !== false)
+const HOME_APPS = APPS.filter((app) => app.listed !== false && !app.desktopOnly)
 
 const TABS = [
   { to: "/", label: "Início", icon: House },
   { to: APP.sobre.path, label: "Sobre", icon: UserRound },
-  { to: APP.palestras.path, label: "Palestras", icon: Mic },
+  { to: APP.projetos.path, label: "Projetos", icon: FolderGit2 },
   { to: APP.contato.path, label: "Contato", icon: Mail },
 ]
 
@@ -45,14 +45,12 @@ function HomeScreen() {
         </span>
         <div className="min-w-0">
           <h1 className="font-semibold leading-tight text-ink">{site.name}</h1>
-          <p className="text-sm text-muted">
-            {site.role} · {site.company}
-          </p>
+          <p className="text-sm text-muted">{site.tagline}</p>
         </div>
       </header>
 
       <p className="display mt-7 text-balance text-[1.75rem] leading-tight text-ink">
-        O mais difícil em IA é decidir <span className="italic text-accent">onde ela não entra.</span>
+        Construo software e ajudo empresas a usar IA <span className="italic text-accent">no lugar certo.</span>
       </p>
       <p className="mt-3 text-sm text-muted">Toque em um ícone para abrir.</p>
 
@@ -96,7 +94,7 @@ function HomeScreen() {
         state={{ fromHome: true }}
         className="mt-3 flex items-center justify-between rounded-2xl bg-accent px-4 py-3.5 font-medium text-accent-ink"
       >
-        Convidar para uma palestra
+        Falar sobre um projeto
         <ArrowUpRight size={18} />
       </Link>
 

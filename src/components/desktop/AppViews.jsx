@@ -10,6 +10,7 @@ import { timelineEntries } from "../../data/timeline"
 import { Mark } from "../ui/Mark"
 import { AiRuler } from "../../pages/AiRuler"
 import { Eduflow } from "../../pages/Eduflow"
+import { ProjectLinks } from "../sections/Projects"
 
 /*
  * O conteúdo de cada janela. Tudo vem de src/data, então a versão
@@ -52,27 +53,28 @@ export function AboutView() {
     <div className="p-5 md:p-7">
       <p className="label text-accent">Boas-vindas</p>
       <h1 className="display mt-3 text-balance text-3xl text-ink md:text-4xl">
-        O mais difícil em IA é decidir <span className="italic text-accent">onde ela não entra.</span>
+        Construo software e ajudo empresas a usar IA{" "}
+        <span className="italic text-accent">no lugar certo.</span>
       </h1>
       <p className="mt-5 text-pretty leading-relaxed text-ink-soft">
-        Sou {site.name}, {site.role} na {site.company}. Cheguei em tecnologia
-        por engano e fiquei por escolha: há {about.yearsAtCompany} anos lá, de estagiário a
-        gerente. Cuido para que a IA entre no trabalho pelo lugar certo: o que automatizar, o
-        que continua com gente e como provar que está tudo sob controle, LGPD incluída.
+        Sou {site.name}. Faço sites e sistemas de ponta a ponta, do front à nuvem, e ajudo
+        quem quer colocar IA no trabalho sem perder o controle dos dados nem da qualidade.
+        Há {about.yearsAtCompany} anos na {site.company}, fui de estagiário fullstack a{" "}
+        {site.role}, passando pela fundação da área de DevOps.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2">
         <a
-          href={mailto("Convite para palestra")}
+          href={mailto("Projeto: site ou sistema")}
           className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-accent-ink"
         >
-          Convidar para uma palestra <ArrowUpRight size={15} />
+          Falar sobre um projeto <ArrowUpRight size={15} />
         </a>
         <Link
-          to="/ia"
+          to="/projetos"
           className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
         >
-          Testar a Régua de IA
+          Ver o que eu construí
         </Link>
       </div>
 
@@ -113,6 +115,42 @@ export function AboutView() {
         ))}
       </dl>
     </div>
+  )
+}
+
+export function ProjectsView() {
+  return (
+    <Pane eyebrow="Projetos" title="O que eu construí.">
+      <ul className="space-y-3">
+        {projects.map((project) => (
+          <li
+            key={project.id}
+            className={`rounded-lg border p-4 ${project.draft ? "border-dashed border-line" : "border-line-soft"}`}
+          >
+            <p className="flex items-center gap-3">
+              <span className="label text-accent">{project.kind}</span>
+              <span className="font-mono text-[11px] text-muted">{project.year}</span>
+              {project.draft && (
+                <span className="ml-auto font-mono text-[10px] text-muted">rascunho · só no dev</span>
+              )}
+            </p>
+            <p className="mt-2 font-medium text-ink">{project.title}</p>
+            <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">{project.summary}</p>
+            {project.stack.length > 0 && (
+              <p className="mt-2 font-mono text-[11px] text-ink-soft">{project.stack.join(" · ")}</p>
+            )}
+            <ProjectLinks project={project} className="mt-3" />
+          </li>
+        ))}
+      </ul>
+      <a
+        href={mailto("Projeto: site ou sistema")}
+        className="mt-6 flex items-center justify-between rounded-lg bg-accent px-4 py-3 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
+      >
+        Tem um projeto? Me conta o que você precisa
+        <ArrowUpRight size={15} />
+      </a>
+    </Pane>
   )
 }
 
@@ -178,7 +216,7 @@ export function TimelineView() {
 
 export function HighlightsView() {
   return (
-    <Pane eyebrow="Publicações" title="Artigos e projetos.">
+    <Pane eyebrow="Publicações" title="Artigos publicados.">
       <ul className="space-y-3">
         {publications.map((paper) => (
           <li key={paper.id} className="rounded-lg border border-line-soft p-4">
@@ -207,20 +245,6 @@ export function HighlightsView() {
             )}
           </li>
         ))}
-        {projects.map((project) => (
-          <li key={project.id} className="rounded-lg border border-line-soft p-4">
-            <p className="label text-muted">Projeto · {project.dateFormatted()}</p>
-            <a
-              href={project.href}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2 inline-flex items-center gap-1 font-medium text-ink hover:text-accent"
-            >
-              {project.title} <ArrowUpRight size={14} />
-            </a>
-            <p className="mt-1 text-sm text-muted">{project.description}</p>
-          </li>
-        ))}
       </ul>
     </Pane>
   )
@@ -234,7 +258,7 @@ const LINKS = [
 
 export function ContactView() {
   return (
-    <Pane eyebrow="Contato" title="Me chama para o próximo palco.">
+    <Pane eyebrow="Contato" title="Me conta o que você precisa.">
       <ul className="space-y-2">
         {contactIntents.map((intent) => (
           <li key={intent.id}>

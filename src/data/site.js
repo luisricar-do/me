@@ -1,6 +1,6 @@
 export const site = {
   name: "Luis Ricardo Santos",
-  tagline: "Governança de TI e IA · Engenharia · Palestras",
+  tagline: "Desenvolvimento · Cloud · IA aplicada",
   role: "Gerente de Governança de TI e IA",
   company: "Tech for Humans",
   email: "eu@luisr.com.br",
@@ -18,21 +18,27 @@ export function mailto(subject) {
 /** Os motivos pelos quais alguém me escreve, na ordem em que mais acontecem. */
 export const contactIntents = [
   {
+    id: "projeto",
+    label: "Site ou sistema",
+    hint: "Um site novo, um sistema sob medida, uma integração",
+    subject: "Projeto: site ou sistema",
+  },
+  {
+    id: "ia",
+    label: "Consultoria de IA",
+    hint: "Onde aplicar IA, agentes, automações, governança",
+    subject: "Consultoria de IA",
+  },
+  {
     id: "palestra",
-    label: "Palestra ou workshop",
-    hint: "IA na engenharia, governança, carreira em tech",
-    subject: "Convite para palestra",
+    label: "Palestra ou mentoria",
+    hint: "Eventos, workshops, hackathons, bancas",
+    subject: "Convite para palestra ou mentoria",
   },
   {
-    id: "mentoria",
-    label: "Mentoria, banca ou avaliação",
-    hint: "Hackathons, startups, iniciação científica",
-    subject: "Convite para mentoria",
-  },
-  {
-    id: "oportunidade",
-    label: "Oportunidade ou parceria",
-    hint: "Projetos, cargos e colaborações",
-    subject: "Oportunidade",
+    id: "outro",
+    label: "Outro assunto",
+    hint: "Oportunidades, parcerias ou só uma dúvida",
+    subject: "Contato pelo site",
   },
 ]

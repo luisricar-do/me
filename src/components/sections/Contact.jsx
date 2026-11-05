@@ -12,17 +12,17 @@ const links = [
 export function Contact() {
   return (
     <section id="contato" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-      <SectionTitle index="06" eyebrow="Contato" title="Me chama para o próximo palco." />
+      <SectionTitle index="07" eyebrow="Contato" title="Me conta o que você precisa." />
 
       <Reveal className="mt-10 max-w-2xl">
         <p className="text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
-          Palestra, mentoria, banca ou uma conversa sobre governança de IA. Escolha o
+          Um site, um sistema, uma dúvida sobre IA no seu negócio, uma palestra. Escolha o
           motivo e o email já sai com o assunto certo. Respondo pessoalmente.
         </p>
       </Reveal>
 
       <Reveal delay={0.04} className="mt-10">
-        <ul className="grid gap-3 md:grid-cols-3">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {contactIntents.map((intent) => (
             <li key={intent.id}>
               <a

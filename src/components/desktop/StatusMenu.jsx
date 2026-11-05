@@ -1,40 +1,27 @@
 import { ArrowUpRight, Minimize2, Moon, Search, Sun } from "lucide-react"
-import { START_AT_COMPANY } from "../../data/about"
 import { stage } from "../../lib/agenda"
 import { mailto } from "../../data/site"
 import { build, formattedBuildDate } from "../../lib/build"
 import { openCommandPalette } from "../../lib/palette"
 import { useNow } from "../../hooks/useNow"
 import { useTheme } from "../../hooks/useTheme"
+import { tenure } from "../../lib/tenure"
+import { WALLPAPERS } from "../../lib/wallpapers"
 
-const DAY = 86_400_000
-const two = (value) => String(value).padStart(2, "0")
-
-/** Tempo de casa desde o primeiro dia, decomposto para virar contador. */
-function tenure(now) {
-  const anniversary = new Date(START_AT_COMPANY)
-  let years = now.getFullYear() - anniversary.getFullYear()
-  anniversary.setFullYear(anniversary.getFullYear() + years)
-  if (anniversary > now) {
-    years -= 1
-    anniversary.setFullYear(anniversary.getFullYear() - 1)
-  }
-  const rest = now - anniversary
-  const days = Math.floor(rest / DAY)
-  const seconds = Math.floor((rest % DAY) / 1000)
-  return {
-    years,
-    days,
-    clock: `${two(Math.floor(seconds / 3600))}:${two(Math.floor((seconds % 3600) / 60))}:${two(seconds % 60)}`,
-  }
-}
-
+const SHORTCUTS = [
+  ["⌥ ← →", "encaixar"],
+  ["⌥ ↑ ↓", "maximizar"],
+  ["⌥ M", "minimizar"],
+  ["⌥ W", "fechar"],
+  ["⌥ Tab", "alternar"],
+  ["⌥ O", "organizar"],
+]
 
 /**
  * O popover da marca na menu bar: o equivalente a um app de status, com
  * números que andam sozinhos. Nada inventado: tudo sai dos dados do site.
  */
-export function StatusMenu({ onMinimizeAll, onClose }) {
+export function StatusMenu({ onMinimizeAll, onClose, wallpaper, onWallpaper }) {
   const now = useNow()
   const { theme, toggle } = useTheme()
   const time = tenure(now)
@@ -107,12 +94,49 @@ export function StatusMenu({ onMinimizeAll, onClose }) {
         ))}
       </div>
 
+      <section className="mt-2 rounded-lg bg-surface-2 p-3">
+        <p className="label text-muted">Papel de parede</p>
+        <div className="mt-2 grid grid-cols-4 gap-1.5">
+          {WALLPAPERS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              role="menuitemradio"
+              aria-checked={item.id === wallpaper}
+              onClick={() => onWallpaper(item.id)}
+              className={`flex flex-col items-center gap-1 rounded-md p-1 text-[10px] transition-colors ${
+                item.id === wallpaper ? "text-accent" : "text-muted hover:text-ink"
+              }`}
+            >
+              <span
+                className={`wall wall-${item.id} relative block h-9 w-full overflow-hidden rounded border ${
+                  item.id === wallpaper ? "border-accent" : "border-line"
+                }`}
+              />
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-2 rounded-lg bg-surface-2 p-3">
+        <p className="label text-muted">Atalhos</p>
+        <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">
+          {SHORTCUTS.map(([keys, label]) => (
+            <div key={keys} className="flex items-baseline justify-between gap-2">
+              <dt className="font-mono text-ink-soft">{keys}</dt>
+              <dd className="text-muted">{label}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <a
         role="menuitem"
-        href={mailto("Convite para palestra")}
+        href={mailto("Projeto: site ou sistema")}
         className="mt-2 flex items-center justify-between rounded-lg bg-accent px-3 py-2.5 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
       >
-        Convidar para uma palestra
+        Falar sobre um projeto
         <ArrowUpRight size={15} />
       </a>
 

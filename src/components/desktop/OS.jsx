@@ -20,9 +20,9 @@ function useIsDesktop() {
   return desktop
 }
 
-const HOME_TITLE = `${site.name} | Governança de TI e IA · Palestras`
+const HOME_TITLE = `${site.name} | Desenvolvimento, cloud e IA aplicada`
 const HOME_DESCRIPTION =
-  "Luis Ricardo Santos, Gerente de Governança de TI e IA na Tech for Humans. Palestras e mentoria sobre IA na engenharia: onde ela acelera, onde não deve entrar e como governar."
+  "Luis Ricardo Santos desenvolve sites e sistemas, do front à nuvem, e ajuda empresas a usar IA com critério. Também faz palestras e mentoria."
 
 /** A versão interativa: desktop no computador, app no celular. Mesmo conteúdo, mesmas URLs. */
 export function OS() {

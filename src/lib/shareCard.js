@@ -4,9 +4,9 @@ const PAD = 72
 
 const INK = "#edece8"
 const MUTED = "#8d8b85"
-const ACCENT = "#4ade80"
+const ACCENT = "#ff606a"
 const PAPER = "#0b0b0d"
-const ALERT = "#ff9a8b"
+const ALERT = "#fbbf24"
 
 const mono = (size, weight = 500) => `${weight} ${size}px "JetBrains Mono", ui-monospace, monospace`
 const display = (size) => `500 ${size}px Fraunces, Georgia, serif`

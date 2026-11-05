@@ -5,10 +5,11 @@ import { projects } from "../data/projects"
 import { timelineEntries } from "../data/timeline"
 
 const SECTIONS = [
-  ["atuacao", "Atuação"],
+  ["projetos", "Projetos"],
+  ["atuacao", "Serviços"],
   ["palestras", "Palestras"],
   ["sobre", "Sobre"],
-  ["destaques", "Destaques e publicações"],
+  ["destaques", "Pesquisa e publicações"],
   ["trajetoria", "Trajetória"],
   ["contato", "Contato"],
 ]
@@ -51,8 +52,8 @@ export function buildIndex() {
     ...projects.map((project) => ({
       group: "Projetos",
       label: project.title,
-      hint: project.dateFormatted(),
-      action: { type: "external", to: project.href },
+      hint: `${project.kind} · ${project.year}`,
+      action: { type: "scroll", to: "projetos" },
     })),
     ...timelineEntries.map((item) => ({
       group: "Trajetória",

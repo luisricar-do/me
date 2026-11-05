@@ -1,13 +1,87 @@
-const monthYear = new Intl.DateTimeFormat("pt-BR", { month: "long", year: "numeric" })
-
-export const projects = [
+/**
+ * O que eu construí. Cada item diz o que é, para quem, com o quê e onde ver.
+ * `href` é o projeto no ar, `repo` o código, `caseHref` o case dentro do site.
+ *
+ * Os rascunhos, no fim, são espaços que ainda vou preencher: aparecem só no
+ * `npm run dev`, com o selo de rascunho, e o build de produção nem leva o
+ * texto deles. Para publicar, completa os campos, tira o `draft` e move o
+ * item para a lista de cima.
+ */
+const published = [
+  {
+    id: "este-site",
+    kind: "Site",
+    title: "luisr.com.br",
+    summary:
+      "Este site. Uma página rolável, um desktop com janelas no computador, um app no celular e um terminal que aceita comandos, todos lendo o mesmo conteúdo. Cada rota sai pré-renderizada com as próprias meta tags.",
+    stack: ["React", "Vite", "Tailwind", "GitHub Actions"],
+    href: "https://luisr.com.br",
+    repo: "https://github.com/luisricar-do/me",
+    year: 2026,
+  },
+  {
+    id: "regua",
+    kind: "IA",
+    title: "Régua de autonomia",
+    summary:
+      "A ferramenta da palestra no HackTown 2026: seis perguntas sobre uma tarefa dizem quanta autonomia a IA pode ter nela, de copiloto a autônomo. O resultado vira link e card para compartilhar.",
+    stack: ["React", "IA aplicada"],
+    caseHref: "/ia",
+    year: 2026,
+  },
+  {
+    id: "eduflow",
+    kind: "Sistema",
+    title: "EduFlow",
+    summary:
+      "Sistema low-code para gestão de TCCs: submissão, avaliação em várias etapas e acompanhamento. Testado com usuários e publicado no IEEE IISA 2025.",
+    stack: ["React", "Node.js", "Low-code"],
+    caseHref: "/eduflow",
+    year: 2025,
+  },
   {
     id: "volei-cidadao",
+    kind: "Site",
     title: "Vôlei Cidadão",
-    description: "Site do projeto Vôlei Cidadão.",
-    tags: ["TypeScript"],
-    href: "https://github.com/luisricar-do/volei-cidadao",
-    date: "2026-03-11",
-    dateFormatted: () => monthYear.format(new Date("2026-03-11T12:00:00")),
+    summary: "Site do projeto Vôlei Cidadão.",
+    stack: ["TypeScript"],
+    repo: "https://github.com/luisricar-do/volei-cidadao",
+    year: 2026,
   },
 ]
+
+// import.meta.env.DEV vira false no build e o minificador descarta a lista
+const drafts = import.meta.env.DEV
+  ? [
+      {
+        id: "rascunho-ia",
+        draft: true,
+        kind: "IA",
+        title: "Agente ou integração com IA",
+        summary:
+          "Problema, o que foi construído e o resultado medido. Sem nome de cliente se não puder.",
+        stack: ["LLMs", "MCP"],
+        year: 2026,
+      },
+      {
+        id: "rascunho-infra",
+        draft: true,
+        kind: "Infra",
+        title: "Cloud e DevOps",
+        summary: "A área de DevOps que fundei: o que existia antes, o que montei e o que mudou.",
+        stack: ["AWS", "Azure", "CI/CD", "Observabilidade"],
+        year: 2023,
+      },
+      {
+        id: "rascunho-site",
+        draft: true,
+        kind: "Site",
+        title: "Site ou sistema para cliente",
+        summary: "Para quem foi, o que precisava e o que entreguei.",
+        stack: [],
+        year: 2026,
+      },
+    ]
+  : []
+
+export const projects = [...published, ...drafts]

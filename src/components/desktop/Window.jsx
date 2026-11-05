@@ -1,10 +1,38 @@
 import { useRef } from "react"
 import { clamp } from "../../lib/motion"
 
+const MIN_W = 380
+const MIN_H = 260
+// Distância da borda que conta como "encostar" para encaixar a janela
+const SNAP_EDGE = 8
+
+const HANDLES = [
+  { dir: "n", className: "inset-x-3 -top-1 h-2 cursor-ns-resize" },
+  { dir: "s", className: "inset-x-3 -bottom-1 h-2 cursor-ns-resize" },
+  { dir: "e", className: "inset-y-3 -right-1 w-2 cursor-ew-resize" },
+  { dir: "w", className: "inset-y-3 -left-1 w-2 cursor-ew-resize" },
+  { dir: "ne", className: "-right-1 -top-1 h-3.5 w-3.5 cursor-nesw-resize" },
+  { dir: "nw", className: "-left-1 -top-1 h-3.5 w-3.5 cursor-nwse-resize" },
+  { dir: "se", className: "-bottom-1 -right-1 h-3.5 w-3.5 cursor-nwse-resize" },
+  { dir: "sw", className: "-bottom-1 -left-1 h-3.5 w-3.5 cursor-nesw-resize" },
+]
+
+function snapZone(event, area) {
+  const x = event.clientX - area.left
+  const y = event.clientY - area.top
+  if (y <= SNAP_EDGE) return "top"
+  if (x <= SNAP_EDGE) return "left"
+  if (x >= area.width - SNAP_EDGE) return "right"
+  return null
+}
+
 /**
- * Janela do desktop. O arraste mexe só no transform do elemento, direto no
- * DOM, e a posição vai para o estado no pointerup: assim o conteúdo da
- * janela (a régua, o terminal) não re-renderiza a cada pixel.
+ * Janela do desktop. Arraste e redimensionamento mexem direto no estilo do
+ * elemento e só vão para o estado no pointerup: assim o conteúdo da janela
+ * (a régua, o terminal) não re-renderiza a cada pixel.
+ *
+ * Arrastar até a borda encaixa: esquerda e direita ocupam meia tela, o topo
+ * maximiza. `onSnapPreview` avisa o desktop para desenhar onde ela vai cair.
  */
 export function Window({
   app,
@@ -12,7 +40,9 @@ export function Window({
   focused,
   compact,
   onFocus,
-  onMove,
+  onGeometry,
+  onSnap,
+  onSnapPreview,
   onClose,
   onMinimize,
   onMaximize,
@@ -21,12 +51,13 @@ export function Window({
 }) {
   const ref = useRef(null)
   const drag = useRef(null)
+  const resize = useRef(null)
   const fill = compact || state.maximized
 
   function onPointerDown(event) {
     if (fill || event.button !== 0 || event.target.closest("button")) return
     const area = ref.current.parentElement.getBoundingClientRect()
-    drag.current = { startX: event.clientX, startY: event.clientY, area, dx: 0, dy: 0 }
+    drag.current = { startX: event.clientX, startY: event.clientY, area, dx: 0, dy: 0, zone: null }
     event.currentTarget.setPointerCapture(event.pointerId)
   }
 
@@ -39,6 +70,11 @@ export function Window({
     current.dx = x - state.x
     current.dy = y - state.y
     ref.current.style.transform = `translate3d(${current.dx}px, ${current.dy}px, 0)`
+    const zone = Math.abs(current.dx) + Math.abs(current.dy) > 4 ? snapZone(event, current.area) : null
+    if (zone !== current.zone) {
+      current.zone = zone
+      onSnapPreview?.(zone)
+    }
   }
 
   function onPointerUp() {
@@ -46,7 +82,50 @@ export function Window({
     if (!current) return
     drag.current = null
     ref.current.style.transform = ""
-    if (current.dx || current.dy) onMove(state.x + current.dx, state.y + current.dy)
+    onSnapPreview?.(null)
+    if (current.zone) {
+      onSnap(current.zone)
+      return
+    }
+    if (!current.dx && !current.dy) return
+    // Tirar uma janela encaixada do lugar devolve o tamanho que ela tinha
+    const size = state.snapped && state.restore ? { w: state.restore.w, h: state.restore.h } : {}
+    onGeometry({ x: state.x + current.dx, y: state.y + current.dy, ...size, snapped: null, restore: null })
+  }
+
+  function onResizeDown(event, dir) {
+    if (event.button !== 0) return
+    event.stopPropagation()
+    const area = ref.current.parentElement.getBoundingClientRect()
+    resize.current = { dir, startX: event.clientX, startY: event.clientY, area, rect: null }
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+
+  function onResizeMove(event) {
+    const current = resize.current
+    if (!current) return
+    const dx = event.clientX - current.startX
+    const dy = event.clientY - current.startY
+    let { x, y, w, h } = state
+    if (current.dir.includes("e")) w = clamp(state.w + dx, MIN_W, current.area.width - state.x)
+    if (current.dir.includes("s")) h = clamp(state.h + dy, MIN_H, current.area.height - state.y)
+    if (current.dir.includes("w")) {
+      w = clamp(state.w - dx, MIN_W, state.x + state.w)
+      x = state.x + state.w - w
+    }
+    if (current.dir.includes("n")) {
+      h = clamp(state.h - dy, MIN_H, state.y + state.h)
+      y = state.y + state.h - h
+    }
+    current.rect = { x, y, w, h }
+    Object.assign(ref.current.style, { left: `${x}px`, top: `${y}px`, width: `${w}px`, height: `${h}px` })
+  }
+
+  function onResizeUp() {
+    const current = resize.current
+    if (!current) return
+    resize.current = null
+    if (current.rect) onGeometry({ ...current.rect, snapped: null, restore: null })
   }
 
   const motion = state.closing ? "desk-close" : state.minimizing ? "desk-minimize" : "desk-open"
@@ -66,7 +145,7 @@ export function Window({
           ? { zIndex: state.z }
           : { zIndex: state.z, left: state.x, top: state.y, width: state.w, height: state.h }
       }
-      className={`${motion} absolute flex flex-col overflow-hidden rounded-xl border bg-surface shadow-[var(--shadow-card)] ${
+      className={`${motion} absolute flex flex-col rounded-xl border bg-surface shadow-[var(--shadow-card)] ${
         fill ? "inset-2 md:inset-3" : ""
       } ${focused ? "border-line" : "border-line-soft"}`}
     >
@@ -78,7 +157,7 @@ export function Window({
         onDoubleClick={(event) => {
           if (!compact && !event.target.closest("button")) onMaximize()
         }}
-        className={`flex shrink-0 select-none items-center gap-2 border-b border-line-soft bg-surface-2 px-3.5 py-2.5 ${
+        className={`flex shrink-0 select-none items-center gap-2 rounded-t-xl border-b border-line-soft bg-surface-2 px-3.5 py-2.5 ${
           fill ? "" : "cursor-grab active:cursor-grabbing"
         }`}
       >
@@ -106,10 +185,23 @@ export function Window({
 
       <div
         style={{ "--sticky-top": "1.5rem" }}
-        className="@container min-h-0 flex-1 overflow-y-auto overscroll-contain"
+        className="@container min-h-0 flex-1 overflow-y-auto overscroll-contain rounded-b-xl"
       >
         {children}
       </div>
+
+      {!fill &&
+        HANDLES.map(({ dir, className }) => (
+          <span
+            key={dir}
+            aria-hidden
+            onPointerDown={(event) => onResizeDown(event, dir)}
+            onPointerMove={onResizeMove}
+            onPointerUp={onResizeUp}
+            onPointerCancel={onResizeUp}
+            className={`absolute z-10 touch-none ${className}`}
+          />
+        ))}
     </section>
   )
 }

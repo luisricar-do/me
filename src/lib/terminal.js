@@ -10,15 +10,16 @@ export const LINE_CLASS = {
   out: "text-term-ink",
   muted: "text-term-muted",
   accent: "text-term-accent",
-  error: "text-[#ff9a8b]",
+  error: "text-[#fbbf24]",
   blank: "text-term-muted",
 }
 
 const SECTIONS = [
+  ["projetos", "o que eu construí"],
   ["atuacao", "onde eu posso ajudar"],
   ["palestras", "palcos, mentorias e presenças"],
   ["sobre", "quem sou"],
-  ["destaques", "projetos de impacto e publicações"],
+  ["destaques", "pesquisa e publicações"],
   ["trajetoria", "linha do tempo"],
   ["contato", "como me achar"],
 ]
@@ -26,8 +27,9 @@ const SECTIONS = [
 const FILES = {
   "me.txt": () => [
     { kind: "accent", text: "# whoami" },
-    { kind: "out", text: `${site.role} · ${site.company}` },
-    { kind: "muted", text: "DPO: governança de dados e conformidade com a LGPD" },
+    { kind: "out", text: "dev fullstack · cloud · IA aplicada" },
+    { kind: "muted", text: `${site.role} · ${site.company}` },
+    { kind: "muted", text: "sites e sistemas, consultoria de IA, palestras" },
   ],
   "palestras.md": () =>
     talks.flatMap((talk) => [
@@ -51,7 +53,7 @@ const FILES = {
   "projetos.md": () =>
     projects.map((project) => ({
       kind: "out",
-      text: `${project.dateFormatted().padEnd(20)} ${project.title}`,
+      text: `${String(project.year).padEnd(6)}${project.kind.padEnd(10)}${project.title}`,
     })),
   "trajetoria.md": () => {
     const recent = [...timelineEntries].reverse().slice(0, 6)
@@ -115,9 +117,10 @@ export function runCommand(raw) {
       return {
         lines: [
           { kind: "out", text: site.name },
-          { kind: "accent", text: `${site.role} · ${site.company}` },
-          { kind: "muted", text: `${about.yearsAtCompany} anos na empresa, de estagiário a gerente.` },
-          { kind: "muted", text: "Nuvem, automação, dados e IA, com governança por trás." },
+          { kind: "accent", text: "dev fullstack · cloud · IA aplicada" },
+          { kind: "muted", text: `${site.role} · ${site.company}, há ${about.yearsAtCompany} anos.` },
+          { kind: "muted", text: "Faço sites e sistemas e ajudo empresas a usar IA com critério." },
+          { kind: "muted", text: "cat projetos.md mostra o que eu construí." },
         ],
       }
 

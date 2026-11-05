@@ -15,7 +15,7 @@ const ORIGIN = "https://luisr.com.br"
 const SIMPLE = {
   title: "Luis Ricardo Santos | Versão simples",
   description:
-    "Luis Ricardo Santos, Gerente de Governança de TI e IA na Tech for Humans. Tudo numa página só: palestras, trajetória, publicações e contato.",
+    "Luis Ricardo Santos, desenvolvimento, cloud e IA aplicada. Tudo numa página só: projetos, serviços, palestras, trajetória e contato.",
 }
 
 const ROUTES = [
@@ -23,7 +23,12 @@ const ROUTES = [
     path: "sobre",
     title: "Sobre mim · Luis Ricardo Santos",
     description:
-      "Quem sou e como posso ajudar: palestras, governança de TI e IA, mentoria e avaliação.",
+      "Quem sou e como posso ajudar: sites e sistemas, consultoria de IA, cloud e DevOps, palestras e mentoria.",
+  },
+  {
+    path: "projetos",
+    title: "Projetos · Luis Ricardo Santos",
+    description: "Sites, sistemas e ferramentas com IA que eu construí, do código à produção.",
   },
   {
     path: "palestras",
@@ -43,12 +48,22 @@ const ROUTES = [
   {
     path: "contato",
     title: "Contato · Luis Ricardo Santos",
-    description: "Convites para palestra, mentoria, banca ou oportunidades.",
+    description: "Um site, um sistema, consultoria de IA, palestra ou mentoria: me conta o que você precisa.",
   },
   {
     path: "terminal",
     title: "Terminal · Luis Ricardo Santos",
     description: "O site por linha de comando.",
+  },
+  {
+    path: "arquivos",
+    title: "Arquivos · Luis Ricardo Santos",
+    description: "Projetos, artigos e fotos de palestras organizados como pastas.",
+  },
+  {
+    path: "lixeira",
+    title: "Lixeira · Luis Ricardo Santos",
+    description: "O que ficou pelo caminho.",
   },
   { path: "simples", ...SIMPLE },
   {
