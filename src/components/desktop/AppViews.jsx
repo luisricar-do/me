@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react"
+import { ArrowUpRight, Github, Linkedin, Mail, PenLine } from "lucide-react"
 import { site, contactIntents, mailto } from "../../data/site"
 import { about, proof } from "../../data/about"
 import { services } from "../../data/services"
@@ -7,6 +7,7 @@ import { talks, talkKinds } from "../../data/talks"
 import { publications } from "../../data/publications"
 import { projects } from "../../data/projects"
 import { timelineEntries } from "../../data/timeline"
+import { writing } from "../../data/writing"
 import { Mark } from "../ui/Mark"
 import { AiRuler } from "../../pages/AiRuler"
 import { Eduflow } from "../../pages/Eduflow"
@@ -186,6 +187,29 @@ export function TalksView() {
   )
 }
 
+export function WritingView() {
+  return (
+    <Pane eyebrow={`Substack · ${writing.handle}`} title={writing.title}>
+      <p className="text-pretty leading-relaxed text-ink-soft">{writing.body}</p>
+      <ul className="mt-6">
+        {writing.topics.map((topic) => (
+          <li key={topic} className="border-t border-line-soft py-3 text-sm text-ink-soft last:border-b">
+            {topic}
+          </li>
+        ))}
+      </ul>
+      <a
+        href={writing.href}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-accent-ink"
+      >
+        Ler e assinar no Substack <ArrowUpRight size={15} />
+      </a>
+    </Pane>
+  )
+}
+
 export function TimelineView() {
   const ordered = [...timelineEntries].reverse()
   return (
@@ -254,6 +278,7 @@ const LINKS = [
   { href: `mailto:${site.email}`, icon: Mail, text: site.email },
   { href: site.linkedin, icon: Linkedin, text: "linkedin.com/in/luisricar-do" },
   { href: site.github, icon: Github, text: "github.com/luisricar-do" },
+  { href: site.substack, icon: PenLine, text: "substack.com/@luisricar" },
 ]
 
 export function ContactView() {

@@ -1,4 +1,4 @@
-import { ArrowUp, Github, Linkedin, Mail } from "lucide-react"
+import { ArrowUp, Github, Linkedin, Mail, PenLine } from "lucide-react"
 import { site } from "../../data/site"
 import { Mark } from "../ui/Mark"
 import { build, formattedBuildDate } from "../../lib/build"
@@ -6,6 +6,7 @@ import { build, formattedBuildDate } from "../../lib/build"
 const social = [
   { href: site.github, icon: Github, label: "GitHub" },
   { href: site.linkedin, icon: Linkedin, label: "LinkedIn" },
+  { href: site.substack, icon: PenLine, label: "Substack" },
   { href: `mailto:${site.email}`, icon: Mail, label: "Email" },
 ]
 

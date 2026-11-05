@@ -522,8 +522,8 @@ export function DesktopScreen() {
 
         <Widgets onLaunch={launch} />
 
-        <nav aria-label="Atalhos" data-desk-item className="absolute left-3 top-3">
-          <ul className="flex flex-col gap-1">
+        <nav aria-label="Atalhos" data-desk-item className="absolute bottom-3 left-3 top-3">
+          <ul className="flex h-full flex-col flex-wrap content-start gap-1">
             {DESK_APPS.map((app) => (
               <li key={app.id}>
                 <DeskIcon app={app} onClick={() => launch(app.id)} />

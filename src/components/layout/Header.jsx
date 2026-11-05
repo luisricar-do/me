@@ -15,6 +15,7 @@ const navLinks = [
   { id: "palestras", label: "Palestras" },
   { id: "sobre", label: "Sobre" },
   { id: "destaques", label: "Pesquisa" },
+  { id: "escrita", label: "Escrita" },
   { id: "trajetoria", label: "Trajetória" },
 ]
 

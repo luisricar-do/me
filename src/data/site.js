@@ -7,6 +7,7 @@ export const site = {
   github: "https://github.com/luisricar-do",
   repo: "https://github.com/luisricar-do/me",
   linkedin: "https://linkedin.com/in/luisricar-do",
+  substack: "https://substack.com/@luisricar",
   url: "https://luisr.com.br",
 }
 

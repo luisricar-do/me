@@ -46,6 +46,11 @@ const ROUTES = [
     description: "Artigos científicos publicados no IEEE e projetos.",
   },
   {
+    path: "escrita",
+    title: "Escrita · Luis Ricardo Santos",
+    description: "O que escrevo no Substack: IA aplicada, desenvolvimento, nuvem e o critério de onde a IA não deve entrar.",
+  },
+  {
     path: "contato",
     title: "Contato · Luis Ricardo Santos",
     description: "Um site, um sistema, consultoria de IA, palestra ou mentoria: me conta o que você precisa.",

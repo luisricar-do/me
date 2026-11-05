@@ -10,6 +10,7 @@ const SECTIONS = [
   ["palestras", "Palestras"],
   ["sobre", "Sobre"],
   ["destaques", "Pesquisa e publicações"],
+  ["escrita", "Escrita no Substack"],
   ["trajetoria", "Trajetória"],
   ["contato", "Contato"],
 ]
@@ -90,6 +91,12 @@ export function buildIndex() {
       label: "GitHub",
       hint: "github.com/luisricar-do",
       action: { type: "external", to: site.github },
+    },
+    {
+      group: "Ações",
+      label: "Substack",
+      hint: "substack.com/@luisricar",
+      action: { type: "external", to: site.substack },
     },
   ]
 

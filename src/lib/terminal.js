@@ -20,6 +20,7 @@ const SECTIONS = [
   ["palestras", "palcos, mentorias e presenças"],
   ["sobre", "quem sou"],
   ["destaques", "pesquisa e publicações"],
+  ["escrita", "o que escrevo no substack"],
   ["trajetoria", "linha do tempo"],
   ["contato", "como me achar"],
 ]
@@ -30,6 +31,7 @@ const FILES = {
     { kind: "out", text: "dev fullstack · cloud · IA aplicada" },
     { kind: "muted", text: `${site.role} · ${site.company}` },
     { kind: "muted", text: "sites e sistemas, consultoria de IA, palestras" },
+    { kind: "muted", text: `escrevo em ${site.substack}` },
   ],
   "palestras.md": () =>
     talks.flatMap((talk) => [
@@ -217,6 +219,7 @@ export function runCommand(raw) {
         lines: [
           { kind: "accent", text: site.email },
           { kind: "muted", text: site.linkedin },
+          { kind: "muted", text: site.substack },
         ],
         effect: { type: "mail" },
       }

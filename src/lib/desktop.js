@@ -6,6 +6,7 @@ export const SECTION_APP = {
   sobre: "sobre",
   palestras: "palestras",
   destaques: "publicacoes",
+  escrita: "escrita",
   trajetoria: "trajetoria",
   contato: "contato",
 }

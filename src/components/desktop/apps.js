@@ -6,6 +6,7 @@ import {
   History,
   Mail,
   Mic,
+  PenLine,
   SquareTerminal,
   UserRound,
 } from "lucide-react"
@@ -19,6 +20,7 @@ import {
   RulerView,
   TalksView,
   TimelineView,
+  WritingView,
 } from "./AppViews"
 import { FilesView } from "./Files"
 import { TrashIcon, TrashView } from "./Trash"
@@ -90,6 +92,15 @@ export const APPS = [
     icon: BookOpen,
     size: [580, 600],
     View: HighlightsView,
+  },
+  {
+    id: "escrita",
+    path: "/escrita",
+    title: "Escrita",
+    hint: "O que escrevo no Substack",
+    icon: PenLine,
+    size: [560, 560],
+    View: WritingView,
   },
   {
     id: "contato",

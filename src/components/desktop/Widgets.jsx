@@ -78,7 +78,7 @@ export function Widgets({ onLaunch }) {
       <button
         type="button"
         onClick={() => onLaunch("contato")}
-        className="sticky-note group relative mt-1 rotate-[-2deg] rounded-sm bg-coral p-4 text-left text-[#1a1917] shadow-[0_14px_30px_-14px_rgba(0,0,0,0.45)] transition-transform hover:rotate-0"
+        className="group relative mt-1 rotate-[-2deg] [@media(max-height:860px)]:hidden rounded-sm bg-coral p-4 text-left text-[#1a1917] shadow-[0_14px_30px_-14px_rgba(0,0,0,0.45)] transition-transform hover:rotate-0"
       >
         <span aria-hidden className="absolute -top-2 left-1/2 h-4 w-14 -translate-x-1/2 rotate-2 bg-white/50" />
         <p className="display text-xl italic leading-snug">
