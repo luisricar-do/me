@@ -45,6 +45,7 @@ const published = [
     title: "Vôlei Cidadão",
     summary: "Site do projeto Vôlei Cidadão.",
     stack: ["TypeScript"],
+    href: "https://voleicidadao.com.br",
     repo: "https://github.com/luisricar-do/volei-cidadao",
     year: 2026,
   },
