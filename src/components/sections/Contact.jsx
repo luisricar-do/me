@@ -7,7 +7,7 @@ const links = [
   { href: `mailto:${site.email}`, icon: Mail, label: "Email", text: site.email },
   { href: site.github, icon: Github, label: "GitHub", text: "github.com/luisricar-do" },
   { href: site.linkedin, icon: Linkedin, label: "LinkedIn", text: "linkedin.com/in/luisricar-do" },
-  { href: site.substack, icon: PenLine, label: "Substack", text: "substack.com/@luisricar" },
+  { href: site.substack, icon: PenLine, label: "Substack", text: "obigrick.substack.com" },
 ]
 
 export function Contact() {

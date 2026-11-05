@@ -1,13 +1,14 @@
 import { site } from "./site"
 
 /**
- * O Substack, onde o trabalho vira texto. Sem lista de posts aqui de
- * propósito: o feed não libera CORS e copiar à mão desatualiza no dia seguinte.
+ * O Substack, onde o trabalho vira texto: a newsletter Big Rick. Sem lista
+ * de posts aqui de propósito: o feed não libera CORS e copiar à mão
+ * desatualiza no dia seguinte.
  */
 export const writing = {
   href: site.substack,
-  handle: "@luisricar",
-  title: "O que aprendo construindo, por escrito.",
-  body: "Escrevo no Substack sobre o que funciona (e o que não funciona) quando a IA entra no trabalho de verdade: desenvolvimento, nuvem, automação e o critério de onde ela não deve entrar.",
-  topics: ["IA aplicada no dia a dia", "Desenvolvimento e arquitetura", "Cloud e DevOps", "Onde a IA não deve entrar"],
+  handle: "Big Rick",
+  title: "Entenda a IA que você já usa.",
+  body: "Na Big Rick, cada edição pega um assunto de IA e explica sem jargão, pra quem é técnico e pra quem não é. O Little Rick vai perguntando tudo no caminho.",
+  topics: ["Um assunto de IA por edição", "Explicado sem jargão", "Pra quem é técnico e pra quem não é", "Com o Little Rick perguntando tudo"],
 }

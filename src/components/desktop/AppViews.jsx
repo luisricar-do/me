@@ -278,7 +278,7 @@ const LINKS = [
   { href: `mailto:${site.email}`, icon: Mail, text: site.email },
   { href: site.linkedin, icon: Linkedin, text: "linkedin.com/in/luisricar-do" },
   { href: site.github, icon: Github, text: "github.com/luisricar-do" },
-  { href: site.substack, icon: PenLine, text: "substack.com/@luisricar" },
+  { href: site.substack, icon: PenLine, text: "obigrick.substack.com" },
 ]
 
 export function ContactView() {

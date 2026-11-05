@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=block");
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow:hidden}
+body{position:relative;color:#edece8;-webkit-font-smoothing:antialiased;font-family:"Inter",sans-serif;
+  background:
+    radial-gradient(55% 90% at 88% 100%, rgba(14,53,157,.55) 0%, transparent 70%),
+    radial-gradient(30% 50% at 96% 0%, rgba(255,96,106,.10) 0%, transparent 70%),
+    #0b0b0d}
+.display{font-family:"Fraunces",Georgia,serif;font-weight:500;font-optical-sizing:auto;font-variation-settings:"SOFT" 32,"WONK" 1;letter-spacing:-0.02em}
+.display em{font-style:italic;color:#ff606a}
+.label{font-family:"JetBrains Mono",monospace;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:#7b9bff}
+.sub{color:#c6c4be}
+.bars{position:absolute;display:flex;align-items:flex-end}
+.bars i{display:block;border-radius:6px}
+.bars i:nth-child(1){background:#1d1e24}
+.bars i:nth-child(2){background:#2a2c35}
+.bars i:nth-child(3){background:#3b3e4b}
+.bars i:nth-child(4){background:#ff606a}

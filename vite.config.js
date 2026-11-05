@@ -48,7 +48,7 @@ const ROUTES = [
   {
     path: "escrita",
     title: "Escrita · Luis Ricardo Santos",
-    description: "O que escrevo no Substack: IA aplicada, desenvolvimento, nuvem e o critério de onde a IA não deve entrar.",
+    description: "Big Rick, minha newsletter no Substack: um assunto de IA por edição, explicado sem jargão.",
   },
   {
     path: "contato",

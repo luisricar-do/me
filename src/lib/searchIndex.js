@@ -95,7 +95,7 @@ export function buildIndex() {
     {
       group: "Ações",
       label: "Substack",
-      hint: "substack.com/@luisricar",
+      hint: "obigrick.substack.com",
       action: { type: "external", to: site.substack },
     },
   ]
