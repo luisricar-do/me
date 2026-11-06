@@ -251,6 +251,15 @@ export function TimelineView() {
               <p className="label text-muted">{entry.date}</p>
               <p className="mt-1 font-medium text-ink">{entry.title}</p>
               <p className="mt-1 text-sm leading-relaxed text-muted">{entry.subtitle}</p>
+              {entry.photo && (
+                <img
+                  src={entry.photo}
+                  alt={entry.title}
+                  loading="lazy"
+                  className="photo-guard mt-2.5 aspect-[4/3] w-36 rounded-md border border-line object-cover object-[50%_25%]"
+                  {...photoGuard}
+                />
+              )}
             </li>
           )
         })}

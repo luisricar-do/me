@@ -1,6 +1,7 @@
 import { Briefcase, Code2, GraduationCap, Mic, Trophy, Users } from "lucide-react"
+import { talks } from "./talks"
 
-export const timelineEntries = [
+const entries = [
   {
     id: "tecnico",
     date: "2017 a 2019",
@@ -88,6 +89,7 @@ export const timelineEntries = [
     year: 2021,
     title: "Presidente do CATS",
     subtitle: "Projeto de extensão da UNIFEI · Voluntário",
+    photo: "/images/photos/cats-presidente.jpg",
     category: "community",
     icon: Users,
   },
@@ -150,7 +152,8 @@ export const timelineEntries = [
     date: "Janeiro 2025",
     year: 2025,
     title: "Graduado em Sistemas de Informação",
-    subtitle: "UNIFEI",
+    subtitle: "UNIFEI · Orador da turma na formatura",
+    photo: "/images/photos/formatura.jpg",
     category: "education",
     icon: GraduationCap,
   },
@@ -239,3 +242,10 @@ export const timelineEntries = [
     icon: Mic,
   },
 ]
+
+// Marco com o mesmo id de uma palestra herda a foto dela; `photo` no próprio marco tem prioridade
+const talkPhoto = Object.fromEntries(talks.map((talk) => [talk.id, talk.photo]))
+
+export const timelineEntries = entries.map((entry) =>
+  entry.photo || !talkPhoto[entry.id] ? entry : { ...entry, photo: talkPhoto[entry.id] }
+)

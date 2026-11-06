@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { useNavigate } from "react-router-dom"
-import { ArrowUpRight, ChevronLeft, ChevronRight, FileText, Folder, Image, X } from "lucide-react"
+import { ArrowUpRight, ChevronLeft, ChevronRight, FileText, Folder, Image, Play, X } from "lucide-react"
 import { projects } from "../../data/projects"
 import { publications } from "../../data/publications"
 import { talks } from "../../data/talks"
@@ -64,9 +64,10 @@ const FOLDERS = [
       .map((talk) => ({
         id: talk.id,
         kind: "image",
-        name: `${talk.id}.jpg`,
+        name: `${talk.id}.${talk.video ? "mp4" : "jpg"}`,
         detail: talk.event,
         src: talk.photo,
+        video: talk.video,
         caption: talk.title,
         sub: `${talk.location} · ${talk.dateLabel}`,
         links: talk.toolHref ? [{ label: talk.toolLabel, href: talk.toolHref, internal: true }] : [],
@@ -99,13 +100,22 @@ function Thumb({ item, size = "lg" }) {
   const box = size === "lg" ? "h-16 w-16" : "h-5 w-5"
   if (item.kind === "image") {
     return (
-      <img
-        src={item.src}
-        alt=""
-        loading="lazy"
-        className={`photo-guard ${size === "lg" ? "h-16 w-20" : "h-5 w-6"} rounded-md border border-line object-cover object-[50%_22%]`}
-        {...photoGuard}
-      />
+      <span className="relative inline-grid shrink-0">
+        <img
+          src={item.src}
+          alt=""
+          loading="lazy"
+          className={`photo-guard ${size === "lg" ? "h-16 w-20" : "h-5 w-6"} rounded-md border border-line object-cover object-[50%_22%]`}
+          {...photoGuard}
+        />
+        {item.video && size === "lg" && (
+          <span className="absolute inset-0 grid place-items-center" aria-hidden>
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-black/60 text-white">
+              <Play size={11} fill="currentColor" />
+            </span>
+          </span>
+        )}
+      </span>
     )
   }
   if (item.kind === "pdf") {
@@ -359,12 +369,30 @@ function QuickLook({ items, index, onIndex, onOpen, onClose }) {
         <div className="min-h-0 overflow-y-auto">
           {item.kind === "image" ? (
             <figure>
-              <img
-                src={item.src}
-                alt={item.caption}
-                className="photo-guard max-h-[70vh] w-full bg-black object-contain"
-                {...photoGuard}
-              />
+              {item.video ? (
+                <video
+                  key={item.video}
+                  src={item.video}
+                  poster={item.src}
+                  aria-label={item.caption}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  controlsList="nodownload noplaybackrate"
+                  disablePictureInPicture
+                  className="photo-guard max-h-[70vh] w-full bg-black object-contain"
+                  {...photoGuard}
+                />
+              ) : (
+                <img
+                  src={item.src}
+                  alt={item.caption}
+                  className="photo-guard max-h-[70vh] w-full bg-black object-contain"
+                  {...photoGuard}
+                />
+              )}
               <figcaption className="px-5 py-4">
                 <p className="font-medium text-ink">{item.caption}</p>
                 <p className="mt-0.5 text-sm text-muted">
