@@ -59,14 +59,25 @@ export const talks = [
     video: "/images/talks/hardtech-innovation.mp4",
   },
   {
+    id: "startup-weekend-2025",
+    kind: "participante",
+    title: "Startup Weekend Itajubá · Cidades Inteligentes",
+    subtitle: "Do outro lado da mesa: 54 horas no time que criou a SolarShare",
+    event: "Startup Weekend",
+    location: "Itajubá, MG",
+    date: "2025-08-29",
+    dateLabel: "29 a 31 de agosto de 2025",
+    photo: "/images/talks/startup-weekend-2025.jpg",
+  },
+  {
     id: "mentor-nasa",
     kind: "mentoria",
     title: "NASA Space Apps Challenge",
     subtitle: "Mentoria internacional de times",
     event: "NASA Space Apps Challenge",
     location: "Itajubá, MG",
-    date: "2025-09-01",
-    dateLabel: "setembro de 2025",
+    date: "2025-10-03",
+    dateLabel: "3 a 5 de outubro de 2025",
     photo: "/images/talks/mentor-nasa.jpg",
   },
   {
@@ -86,4 +97,5 @@ export const talkKinds = {
   palestra: "Palestra",
   mentoria: "Mentoria",
   stand: "Stand",
+  participante: "Participante",
 }

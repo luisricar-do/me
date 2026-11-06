@@ -10,7 +10,7 @@ export const services = [
     icon: Code2,
     title: "Sites e sistemas",
     body: "Do site institucional ao sistema com login, banco de dados e integrações. Faço o front, o back e a infraestrutura, e entrego no ar.",
-    proof: "Este site · EduFlow · Vôlei Cidadão",
+    proof: "Streamline · EduFlow · Vôlei Cidadão · Este site",
     subject: "Projeto: site ou sistema",
   },
   {

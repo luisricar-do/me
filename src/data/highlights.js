@@ -11,7 +11,7 @@ export const highlights = [
     caseHref: "/eduflow",
     context: "TCC na UNIFEI · Publicado na IEEE IISA 2025, Atenas",
     description:
-      "Sistema low-code configurável para gestão de TCCs: submissão, avaliação em múltiplas etapas e acompanhamento de projetos finais. Desenvolvido como Trabalho de Conclusão de Curso, foi aprovado na International Symposium on INnovations in Intelligent SysTems and Applications (IISA) e publicado no IEEE, com alcance internacional.",
+      "Sistema low-code configurável para gestão de TCCs: submissão, avaliação em múltiplas etapas e acompanhamento de projetos finais. Desenvolvido como Trabalho de Conclusão de Curso, foi aprovado na International Conference on Information, Intelligence, Systems and Applications (IISA) e publicado no IEEE, com alcance internacional.",
     metrics: [
       { label: "Facilidade de uso", value: "92,4%" },
       { label: "Utilidade percebida", value: "94%" },

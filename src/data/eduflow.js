@@ -8,7 +8,7 @@ export const eduflow = {
   paperHref: "https://ieeexplore.ieee.org/document/11311235/",
   venue: "IEEE · IISA 2025",
   venueFull:
-    "International Symposium on INnovations in Intelligent SysTems and Applications",
+    "16th International Conference on Information, Intelligence, Systems and Applications",
   place: "Atenas, Grécia",
   institution: "UNIFEI · Sistemas de Informação",
   stack: ["React", "Node.js", "Low-code"],
@@ -50,7 +50,16 @@ export const eduflow = {
       title: "Avaliado com usuários, aprovado por revisão por pares.",
       body: [
         "Na avaliação com usuários, 92,4% relataram facilidade de uso e 94% destacaram a utilidade percebida.",
-        "O trabalho foi aceito no International Symposium on INnovations in Intelligent SysTems and Applications (IISA) 2025 e publicado no IEEE, com apresentação em Atenas.",
+        "O trabalho foi aceito na 16ª International Conference on Information, Intelligence, Systems and Applications (IISA 2025) e publicado no IEEE, com apresentação em Atenas.",
+      ],
+    },
+    {
+      id: "depois",
+      eyebrow: "Depois",
+      title: "O EduFlow virou o Streamline.",
+      body: [
+        "A ideia de fluxo configurável não ficou no TCC. Com as demandas reais da Tech for Humans, ela cresceu e virou o Streamline, a plataforma de automação de processos da empresa.",
+        "Hoje são mais de 50 processos automatizados e 10 mil blocos processados, e o código é aberto: github.com/tech4humans-brasil/streamline.",
       ],
     },
   ],

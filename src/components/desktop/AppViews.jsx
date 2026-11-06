@@ -276,6 +276,9 @@ export function HighlightsView() {
           <li key={paper.id} className="rounded-lg border border-line-soft p-4">
             <p className="label text-accent">{paper.venue}</p>
             <p className="mt-2 font-medium leading-snug text-ink">{paper.title}</p>
+            {paper.coauthors && (
+              <p className="mt-1 text-sm text-ink-soft">Com {paper.coauthors.join(" e ")}</p>
+            )}
             <p className="mt-1 text-sm text-muted">
               {paper.place} · {paper.status}
             </p>

@@ -43,6 +43,9 @@ export function Highlights() {
                     {paper.subtitle}
                   </p>
                 )}
+                {paper.coauthors && (
+                  <p className="mt-2 text-xs text-ink-soft">Com {paper.coauthors.join(" e ")}</p>
+                )}
                 <p className="mt-2 text-xs text-muted">
                   {paper.venueFull} · {paper.place}
                 </p>

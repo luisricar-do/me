@@ -37,7 +37,7 @@ export const photos = [
     src: "/images/photos/formatura.jpg",
     caption: "Formatura em Sistemas de Informação",
     detail: "UNIFEI",
-    sub: "Orador da turma · 2025",
+    sub: "Orador da formatura · 2025",
   },
   {
     id: "cats-presidente",
