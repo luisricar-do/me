@@ -1,7 +1,8 @@
 /**
  * Palestras, mentorias e presenças em evento.
  * `photo` fica null enquanto não existe arquivo em public/images/talks/ —
- * o componente simplesmente não renderiza imagem nesse caso.
+ * o componente simplesmente não renderiza imagem nesse caso. `video`, quando
+ * existe, toca na prévia do app Arquivos e usa `photo` como capa.
  */
 export const talks = [
   {
@@ -43,7 +44,7 @@ export const talks = [
     location: "Itajubá, MG",
     date: "2026-08-29",
     dateLabel: "29 a 31 de agosto de 2026",
-    photo: null,
+    photo: "/images/talks/startup-weekend-maker.jpg",
   },
   {
     id: "hardtech-innovation",
@@ -54,7 +55,8 @@ export const talks = [
     location: "Itajubá, MG",
     date: "2026-08-01",
     dateLabel: "agosto de 2026",
-    photo: null,
+    photo: "/images/talks/hardtech-innovation.jpg",
+    video: "/images/talks/hardtech-innovation.mp4",
   },
   {
     id: "mentor-nasa",
@@ -76,7 +78,7 @@ export const talks = [
     location: "Itajubá, MG",
     date: "2024-06-01",
     dateLabel: "junho de 2024",
-    photo: null,
+    photo: "/images/talks/mentor-startup-weekend.jpg",
   },
 ]
 

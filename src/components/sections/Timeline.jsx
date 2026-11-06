@@ -2,6 +2,7 @@ import { useMemo, useState } from "react"
 import { SectionTitle } from "../ui/SectionTitle"
 import { Reveal } from "../ui/Reveal"
 import { timelineEntries } from "../../data/timeline"
+import { photoGuard } from "../../lib/photoGuard"
 
 /**
  * Três grupos visuais em vez de seis cores: o dado guarda a categoria fina,
@@ -168,6 +169,16 @@ function TimelineEntry({ entry }) {
           <span className="label shrink-0 text-muted">{entry.date}</span>
         </div>
         <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">{entry.subtitle}</p>
+        {entry.photo && (
+          <img
+            src={entry.photo}
+            alt={entry.title}
+            loading="lazy"
+            decoding="async"
+            className="photo-guard mt-3 aspect-[4/3] w-40 rounded-lg border border-line object-cover object-[50%_25%] sm:w-48"
+            {...photoGuard}
+          />
+        )}
       </div>
     </li>
   )

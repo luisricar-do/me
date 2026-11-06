@@ -12,6 +12,41 @@ export const portrait = {
 
 export const photos = [
   {
+    id: "hardtech-2024",
+    src: "/images/photos/hardtech-2024.jpg",
+    caption: "HardTech Innovation 2024",
+    detail: "HardTech Innovation",
+    sub: "2024",
+  },
+  {
+    id: "google",
+    src: "/images/photos/google.jpg",
+    caption: "Evento no escritório do Google",
+    detail: "Google",
+    sub: "Escritório do Google",
+  },
+  {
+    id: "hoffman-lideres",
+    src: "/images/photos/hoffman-lideres.jpg",
+    caption: "Educação para Líderes",
+    detail: "Instituto Hoffman",
+    sub: "Turma do curso",
+  },
+  {
+    id: "formatura",
+    src: "/images/photos/formatura.jpg",
+    caption: "Formatura em Sistemas de Informação",
+    detail: "UNIFEI",
+    sub: "Orador da turma · 2025",
+  },
+  {
+    id: "cats-presidente",
+    src: "/images/photos/cats-presidente.jpg",
+    caption: "Presidente do CATS",
+    detail: "CATS · UNIFEI",
+    sub: "2022",
+  },
+  {
     id: "startup-weekend-2025",
     src: "/images/talks/startup-weekend-2025.jpg",
     caption: "Participante no Startup Weekend 2025",
