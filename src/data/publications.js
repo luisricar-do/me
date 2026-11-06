@@ -14,6 +14,7 @@ export const publications = [
     date: "2026-07-06",
     dateLabel: "6 a 9 de julho de 2026",
     status: "Publicado no IEEE Xplore",
+    coauthors: ["Adler Diniz de Souza", "Bruno Guazzelli Batista"],
     href: "https://ieeexplore.ieee.org/document/11705513/",
   },
   {
@@ -22,7 +23,7 @@ export const publications = [
     subtitle: "Sistema low-code configurável para gestão de trabalhos de conclusão de curso",
     venue: "IEEE · IISA 2025",
     venueFull:
-      "International Symposium on INnovations in Intelligent SysTems and Applications",
+      "16th International Conference on Information, Intelligence, Systems and Applications",
     place: "Atenas, Grécia",
     date: "2025-07-10",
     dateLabel: "julho de 2025",

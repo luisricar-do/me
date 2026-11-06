@@ -30,6 +30,16 @@ const published = [
     year: 2026,
   },
   {
+    id: "streamline",
+    kind: "Sistema",
+    title: "Streamline",
+    summary:
+      "A evolução do EduFlow para dentro da empresa: plataforma de automação de processos e workflows para cortar trabalho operacional repetido. Virou a plataforma oficial da Tech for Humans, com mais de 50 processos automatizados e 10 mil blocos processados, e hoje é open source.",
+    stack: ["Node.js", "React", "Azure", "Low-code"],
+    repo: "https://github.com/tech4humans-brasil/streamline",
+    year: 2024,
+  },
+  {
     id: "eduflow",
     kind: "Sistema",
     title: "EduFlow",
