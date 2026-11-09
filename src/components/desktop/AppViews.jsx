@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { ArrowUpRight, Github, Linkedin, Mail, PenLine } from "lucide-react"
-import { site, contactIntents, mailto } from "../../data/site"
+import { site, contactIntents, mailto, primarySubject } from "../../data/site"
 import { about, proof } from "../../data/about"
 import { services } from "../../data/services"
 import { talks, talkKinds } from "../../data/talks"
@@ -74,22 +74,22 @@ export function AboutView() {
         <p className="label text-accent">Boas-vindas</p>
       </div>
       <h1 className="display mt-3 text-balance text-3xl text-ink md:text-4xl">
-        Construo software e ajudo empresas a usar IA{" "}
-        <span className="italic text-accent">no lugar certo.</span>
+        Transformo burocracia em{" "}
+        <span className="italic text-accent">sistema que roda.</span>
       </h1>
       <p className="mt-5 text-pretty leading-relaxed text-ink-soft">
-        Sou {site.name}. Faço sites e sistemas de ponta a ponta, do front à nuvem, e ajudo
-        quem quer colocar IA no trabalho sem perder o controle dos dados nem da qualidade.
-        Há {about.yearsAtCompany} anos na {site.company}, fui de estagiário fullstack a{" "}
+        Sou {site.name}, o técnico que gosta da parte que ninguém quer: LGPD, ISO,
+        auditoria, processo. Construo a ferramenta e o processo junto, com IA quando ela
+        ajuda e sem quando não ajuda. Há {about.yearsAtCompany} anos na {site.company}, fui de estagiário fullstack a{" "}
         {site.role}, passando pela fundação da área de DevOps.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2">
         <a
-          href={mailto("Projeto: site ou sistema")}
+          href={mailto(primarySubject)}
           className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-accent-ink"
         >
-          Falar sobre um projeto <ArrowUpRight size={15} />
+          Falar comigo <ArrowUpRight size={15} />
         </a>
         <Link
           to="/projetos"
@@ -99,7 +99,7 @@ export function AboutView() {
         </Link>
       </div>
 
-      <h2 className="label mt-10 text-muted">Como posso ajudar</h2>
+      <h2 className="label mt-10 text-muted">O que eu faço</h2>
       <ul className="mt-4 space-y-3">
         {services.map(({ id, icon: Icon, title, body, subject }) => (
           <li key={id} className="flex gap-4 rounded-lg border border-line-soft p-4">
@@ -165,10 +165,10 @@ export function ProjectsView() {
         ))}
       </ul>
       <a
-        href={mailto("Projeto: site ou sistema")}
+        href={mailto(primarySubject)}
         className="mt-6 flex items-center justify-between rounded-lg bg-accent px-4 py-3 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
       >
-        Tem um projeto? Me conta o que você precisa
+        Tem um processo travado? Me conta
         <ArrowUpRight size={15} />
       </a>
     </Pane>

@@ -16,7 +16,7 @@ export const OG_PAGES = [
     path: "projetos",
     label: "Projetos",
     title: "O que eu <em>construí.</em>",
-    sub: "Sites, sistemas e ferramentas com IA, do código à produção.",
+    sub: "Plataformas, ferramentas e sistemas, do código à produção.",
   },
   {
     path: "palestras",
@@ -46,7 +46,7 @@ export const OG_PAGES = [
     path: "contato",
     label: "Contato",
     title: "Me conta o que você <em>precisa.</em>",
-    sub: "Site ou sistema, consultoria de IA, palestra ou mentoria.",
+    sub: "Governança, IA, palestra, mentoria ou uma oportunidade.",
   },
   {
     path: "eduflow",

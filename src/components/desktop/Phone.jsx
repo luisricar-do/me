@@ -50,7 +50,7 @@ function HomeScreen() {
       </header>
 
       <p className="display mt-7 text-balance text-[1.75rem] leading-tight text-ink">
-        Construo software e ajudo empresas a usar IA <span className="italic text-accent">no lugar certo.</span>
+        Transformo burocracia em <span className="italic text-accent">sistema que roda.</span>
       </p>
       <p className="mt-3 text-sm text-muted">Toque em um ícone para abrir.</p>
 

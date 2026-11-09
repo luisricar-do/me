@@ -20,9 +20,8 @@ function useIsDesktop() {
   return desktop
 }
 
-const HOME_TITLE = `${site.name} | Desenvolvimento, cloud e IA aplicada`
-const HOME_DESCRIPTION =
-  "Luis Ricardo Santos desenvolve sites e sistemas, do front à nuvem, e ajuda empresas a usar IA com critério. Também faz palestras e mentoria."
+const HOME_TITLE = site.title
+const HOME_DESCRIPTION = site.description
 
 /** A versão interativa: desktop no computador, app no celular. Mesmo conteúdo, mesmas URLs. */
 export function OS() {

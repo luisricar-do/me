@@ -1,115 +1,83 @@
-# LinkedIn: o que muda para conversar com o site
+# LinkedIn: o técnico que faz a governança rodar
 
-A ideia é que o LinkedIn, o site e o Substack contem a mesma história com a
-mesma frase: **"Construo os sistemas que preciso governar."** Ela já está no
-seu "Sobre" e agora também está na capa.
+O LinkedIn, o site e o GitHub contam a mesma história com a mesma frase:
+**"Transformo burocracia em sistema que roda."** Ela está na capa, no
+título, no começo do "Sobre" e no topo do site.
 
-Tudo abaixo já foi aplicado no LinkedIn em 06/11/2026, incluindo o título e o "Sobre" do perfil em inglês.
+A meta de longo prazo é liderança técnica (CTO). Por isso o perfil mostra
+escopo de liderança e decisões, e não vende serviço avulso.
+
+Situação: aplicado no LinkedIn em 09/11/2026 (capa, título, Sobre, cargo
+atual e competências), só no perfil em português. O perfil em inglês ainda
+tem a versão de 06/11/2026, com "Construo os sistemas que preciso governar".
 
 ---
 
 ## 1. Capa
 
 `brand/linkedin/cover.png` (3168×792, ou seja, 1584×396 em 2x). O código-fonte
-está em `brand/linkedin/src/cover.html`, no mesmo visual dos banners do
-Substack e das imagens de compartilhamento do site. O texto fica à direita
-da foto de perfil e longe das bordas que o app corta.
+está em `brand/linkedin/src/cover.html`. Para regerar: `npm run brand -- linkedin`.
 
 ## 2. Título (headline)
 
-Hoje: `Gerente de Governança e IA na @techforhumans`
+> Gerente de Governança de TI e IA e DPO na Tech for Humans | Transformo burocracia em sistema que roda, com IA quando ajuda e sem quando não | Mestrando em IA na UNIFEI
 
-Proposta:
-
-> Gerente de Governança de TI e IA e DPO na Tech for Humans | Construo os sistemas que preciso governar | Mestrando em IA na UNIFEI
-
-O cargo fica escrito igual ao do site, e a frase da capa se repete.
+O cargo vem primeiro porque é o que recrutador e busca leem. A frase vem logo
+depois.
 
 ## 3. Sobre
 
-Hoje o texto tem um marcador esquecido: "pesquisando **[tema]**".
-
-Proposta:
-
-> Sou DPO e construo os sistemas que preciso governar.
+> Sou o técnico que gosta da parte que ninguém quer.
 >
-> Entrei na Tech for Humans em 2021, como estagiário fullstack, depois de ganhar um hackathon que pedia exatamente o que eu tinha feito no TCC do técnico. Fui para DevOps sem saber DevOps, montei a área do zero e hoje lidero governança de TI e IA na empresa.
+> LGPD, ISO, auditoria, política de acesso. Onde muita gente vê papelada, eu vejo um processo que dá pra automatizar. Então eu construo a ferramenta e o processo junto. Às vezes com IA, às vezes sem. Antes eu pergunto onde ela ajuda e quem responde se der errado.
 >
-> A pergunta que me ocupa agora é como colocar agente de IA em produção sem abrir mão de LGPD, rastreabilidade e segurança. Em processo que roda, com time usando.
+> Cheguei aqui meio por acidente. Em 2021 ganhei um hackathon que pedia praticamente o meu TCC do técnico, e o prêmio era um estágio na Tech for Humans. Fui dev fullstack, topei DevOps sem saber DevOps, montei a área do zero e virei DPO no caminho. Hoje sou Gerente de Governança de TI e IA, com um time de 8 pessoas.
 >
-> Na prática:
-> • Arquitetura de cloud e IA com os controles desde o desenho, e não parafusados no fim
-> • DPO: LGPD, ISO 27001 e ISO 27701 no ciclo inteiro de desenvolvimento
-> • FinOps: o custo real de nuvem e tecnologia da empresa
-> • Streamline: a plataforma de automação que nasceu do meu TCC e hoje é open source
+> O que saiu disso até agora:
+> • Streamline: a plataforma de automação de processos que nasceu do meu TCC, virou a plataforma oficial da empresa e já roda mais de 50 processos. É open source.
+> • A área de DevOps da empresa, do CI/CD à observabilidade.
+> • LGPD, ISO 27001 e ISO 27701 rodando dentro do ciclo de desenvolvimento.
+> • A Régua de autonomia, que levei pro HackTown 2026: seis perguntas que dizem quanta autonomia a IA pode ter numa tarefa.
 >
 > No mestrado em IA na UNIFEI, pesquiso chatbots com LLM no ensino superior: quando a IA ensina e quando ela só responde. Já são dois artigos no IEEE IISA.
 >
 > Escrevo a Big Rick no Substack, explicando IA sem jargão. O resto está em luisr.com.br.
 >
-> Se sua empresa está adotando IA e a pergunta "quem responde se isso der errado?" ainda não tem dono, me chama.
+> Se você quer conversar sobre governança, IA ou liderança técnica, me chama.
 
-O tema do mestrado saiu do artigo de 2026 e da ideia do tutor socrático;
-troque se a pesquisa for outra.
+## 4. Experiência: Gerente de Governança de TI e IA (atual)
 
-## 4. Dados de contato
+A descrição atual usa jargão ("liderança executiva", "orquestrador", "AI
+TRiSM", "validação macro") e não tem nenhum resultado concreto. Proposta:
+
+> Lidero a governança de tecnologia e IA da empresa e sou o DPO. São quatro frentes, com um time de 8 pessoas: DevOps e cloud, segurança e compliance, processos e inovação.
+>
+> Na prática:
+> • Coloco IA em produção com limite de autonomia e alguém respondendo por cada saída. A Régua de autonomia nasceu daqui.
+> • LGPD, ISO 27001 e ISO 27701 entram na esteira como processo e ferramenta.
+> • Respondo pelo custo de nuvem e tecnologia da empresa (FinOps).
+> • Valido as arquiteturas novas antes de irem pro ar.
+
+**Falta você completar:** um ou dois números deixam isso muito mais forte para
+quem contrata liderança. Por exemplo: quanto o FinOps economizou, quais
+auditorias ou certificações passaram, quantos agentes de IA estão em produção
+e quantos processos o Streamline roda hoje. Não coloquei nenhum número que eu
+não tenha visto em algum lugar.
+
+## 5. Competências principais
+
+**Governança de TI • Liderança de equipe • IA generativa • LGPD • DevOps**
+
+"Liderança de equipe" entra no lugar de "Azure", porque é a competência que um
+caminho para CTO precisa mostrar. Azure continua nas experiências.
+
+## 6. Em destaque
+
+Fica como está. O card do site passa a mostrar o título novo ("Governança de
+TI e IA que roda") assim que o site for publicado. Se o LinkedIn mantiver o
+card antigo em cache, remova o link e adicione de novo.
+
+## 7. Contato
 
 - Site: `https://luisr.com.br`
 - Segundo link: `https://obigrick.substack.com` (Big Rick)
-
-## 5. Em destaque
-
-Hoje são só posts. Proposta, nesta ordem:
-
-1. Link para `luisr.com.br` (o card usa a imagem de compartilhamento do site)
-2. Link para `luisr.com.br/ia`, a Régua de autonomia da palestra do HackTown
-3. O post do Streamline open source (já está)
-4. Link para `luisr.com.br/palestras`
-
-## 6. Competências principais
-
-Hoje: Azure • DevOps • IA generativa • Python • TypeScript
-
-Proposta: **Governança de TI • IA generativa • LGPD • Azure • DevOps**
-
-Hoje as cinco falam de dev; o título e o "Sobre" falam de governança.
-
-## 7. Experiência
-
-- **DevOps Manager & DPO** aparece como "o momento" junto com o cargo de
-  gerente. Proposta: encerrar em jun. de 2026, porque o cargo novo já inclui o
-  DPO.
-- **DevOps Engineer** (abr. de 2023 a fev. de 2024) está sem descrição.
-  Proposta:
-  > Fundei a área de DevOps da empresa. Montei as esteiras de CI/CD, levei a observabilidade para os serviços e padronizei os deploys em Azure.
-
-## 8. Seções vazias para preencher
-
-**Publicações** (nova seção)
-
-1. *LLM-Based Conversational Bots for Support and Question Answering in Higher Education: A Systematic Literature Review*. IEEE, IISA 2026, Rodos, Grécia. Com Adler Diniz de Souza e Bruno Guazzelli Batista. https://ieeexplore.ieee.org/document/11705513/
-2. *EduFlow: A System for Managing Final Paper Projects using Low-code*. IEEE, IISA 2025, Grécia. https://ieeexplore.ieee.org/document/11311235/
-
-**Reconhecimentos e prêmios**
-
-1. Vencedor do Tech4Hack, com o estágio na Tech for Humans como prêmio (julho de 2021)
-2. Orador da formatura da UNIFEI, pelos formandos da cerimônia da tarde (2025)
-
-**Idiomas**
-
-- Português: nativo
-- Inglês: intermediário
-
-**Voluntariado**, além do que já existe:
-
-- Mentor, Startup Weekend Itajubá (jun. de 2024)
-- Mentor, Startup Weekend Maker Itajubá (ago. de 2026)
-
-**Projetos**, além do que já existe:
-
-- Régua de autonomia (2026): link para `luisr.com.br/ia`
-- Vôlei Cidadão (2026): link para `voleicidadao.com.br`
-
-## 9. Formação
-
-O mestrado fica como 2025–2026: a previsão é terminar em 2026.
