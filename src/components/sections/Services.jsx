@@ -9,9 +9,9 @@ export function Services() {
     <section id="atuacao" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle
         index="02"
-        eyebrow="Serviços"
-        title="Onde eu posso ajudar."
-        lead="Pode ser um site, um sistema inteiro, uma dúvida sobre IA no seu negócio ou uma palestra. Se não estiver aqui, pergunta mesmo assim."
+        eyebrow="Atuação"
+        title="O que eu faço."
+        lead="Governança, ferramenta e processo, do papel à produção. Se quiser trocar ideia sobre qualquer um desses, me chama."
       />
 
       <ul className="mt-14 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:mt-20 md:grid-cols-2">

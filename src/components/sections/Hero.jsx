@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { ArrowUpRight } from "lucide-react"
-import { site, mailto } from "../../data/site"
+import { site, mailto, primarySubject } from "../../data/site"
 import { proof } from "../../data/about"
 import { Button } from "../ui/Button"
 import { Reveal } from "../ui/Reveal"
@@ -12,13 +12,13 @@ const COMMAND = "cat ~/me.txt"
 
 const OUTPUT = [
   { kind: "accent", text: "# whoami" },
-  { kind: "out", text: "dev fullstack · cloud · IA aplicada" },
+  { kind: "out", text: "técnico que faz a governança rodar" },
   { kind: "muted", text: `${site.role} · ${site.company}` },
   { kind: "blank", text: "" },
   { kind: "accent", text: "# o que eu faço" },
-  { kind: "muted", text: "sites e sistemas, do front à nuvem" },
-  { kind: "muted", text: "consultoria e soluções com IA" },
-  { kind: "muted", text: "CI/CD, observabilidade e LGPD na base" },
+  { kind: "muted", text: "LGPD, ISO e auditoria dentro da esteira" },
+  { kind: "muted", text: "ferramenta e processo, com ou sem IA" },
+  { kind: "muted", text: "time de 8: cloud, segurança, processos" },
 ]
 
 
@@ -46,8 +46,8 @@ export function Hero() {
             delay={0.08}
             className="display mt-6 text-balance text-[clamp(2.5rem,6.5vw,5rem)] leading-[1] text-ink"
           >
-            Construo software e ajudo empresas a usar IA{" "}
-            <span className="italic text-accent">no lugar certo.</span>
+            Transformo burocracia em{" "}
+            <span className="italic text-accent">sistema que roda.</span>
           </Reveal>
 
           <Reveal
@@ -55,14 +55,14 @@ export function Hero() {
             delay={0.2}
             className="mt-7 max-w-lg text-pretty text-lg leading-relaxed text-ink-soft"
           >
-            Sou Luis Ricardo. Faço sites e sistemas de ponta a ponta, do front à nuvem, e
-            ajudo quem quer colocar IA no trabalho sem perder o controle dos dados nem da
-            qualidade.
+            Sou Luis Ricardo, {site.role} e DPO na {site.company}. O técnico que gosta da
+            parte que ninguém quer: LGPD, ISO, auditoria, processo. Construo a ferramenta e o
+            processo junto, com IA quando ela ajuda e sem quando não ajuda.
           </Reveal>
 
           <Reveal delay={0.3} className="mt-9 flex flex-wrap gap-3">
-            <Button href={mailto("Projeto: site ou sistema")}>
-              Falar sobre um projeto
+            <Button href={mailto(primarySubject)}>
+              Falar comigo
               <ArrowUpRight size={16} />
             </Button>
             <Button href="#projetos" variant="outline">

@@ -9,6 +9,7 @@ import { Wallpaper } from "./Wallpaper"
 import { Widgets } from "./Widgets"
 import { Boot, ContextMenu, Screensaver, Toast } from "./Overlays"
 import { APP, APPS, appForPath } from "./apps"
+import { site } from "../../data/site"
 import { publications } from "../../data/publications"
 import { useNow } from "../../hooks/useNow"
 import { useTheme } from "../../hooks/useTheme"
@@ -513,7 +514,7 @@ export function DesktopScreen() {
         <h1 className="sr-only">
           {focusedApp && focusedId !== "sobre"
             ? (focusedApp.meta?.title ?? `${focusedApp.title} · Luis Ricardo Santos`)
-            : "Luis Ricardo Santos · Desenvolvimento, cloud e IA aplicada"}
+            : `${site.name} · ${site.role}`}
         </h1>
 
         {nothingOpen && (

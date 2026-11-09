@@ -28,9 +28,9 @@ const SECTIONS = [
 const FILES = {
   "me.txt": () => [
     { kind: "accent", text: "# whoami" },
-    { kind: "out", text: "dev fullstack · cloud · IA aplicada" },
+    { kind: "out", text: "técnico que faz a governança rodar" },
     { kind: "muted", text: `${site.role} · ${site.company}` },
-    { kind: "muted", text: "sites e sistemas, consultoria de IA, palestras" },
+    { kind: "muted", text: "ferramenta e processo, com ou sem IA" },
     { kind: "muted", text: `escrevo em ${site.substack}` },
   ],
   "palestras.md": () =>
@@ -119,9 +119,9 @@ export function runCommand(raw) {
       return {
         lines: [
           { kind: "out", text: site.name },
-          { kind: "accent", text: "dev fullstack · cloud · IA aplicada" },
+          { kind: "accent", text: "técnico que faz a governança rodar" },
           { kind: "muted", text: `${site.role} · ${site.company}, há ${about.yearsAtCompany} anos.` },
-          { kind: "muted", text: "Faço sites e sistemas e ajudo empresas a usar IA com critério." },
+          { kind: "muted", text: "Transformo burocracia em ferramenta e processo que rodam." },
           { kind: "muted", text: "cat projetos.md mostra o que eu construí." },
         ],
       }

@@ -3,7 +3,7 @@ import { SiteLink } from "../ui/SiteLink"
 import { SectionTitle } from "../ui/SectionTitle"
 import { Reveal } from "../ui/Reveal"
 import { projects } from "../../data/projects"
-import { mailto } from "../../data/site"
+import { mailto, primarySubject } from "../../data/site"
 
 export function Projects() {
   return (
@@ -12,7 +12,7 @@ export function Projects() {
         index="01"
         eyebrow="Projetos"
         title="O que eu construí."
-        lead="Sites, sistemas e ferramentas com IA, do código à produção. Alguns estão no ar, outros têm o código aberto."
+        lead="Plataformas, ferramentas e sistemas, do código à produção. Alguns estão no ar, outros têm o código aberto."
       />
 
       <ul className="mt-14 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:mt-20 md:grid-cols-2">
@@ -23,13 +23,13 @@ export function Projects() {
         ))}
         <Reveal as="li" delay={(projects.length % 2) * 0.06} className="flex">
           <a
-            href={mailto("Projeto: site ou sistema")}
+            href={mailto(primarySubject)}
             className="group flex w-full flex-col justify-between bg-accent-tint p-7 transition-colors hover:bg-accent hover:text-accent-ink md:p-8"
           >
             <p className="label text-accent transition-colors group-hover:text-accent-ink">Próximo</p>
             <div className="mt-10">
               <p className="display text-2xl text-ink transition-colors group-hover:text-accent-ink md:text-[1.75rem]">
-                O seu projeto.
+                O que está travando aí?
               </p>
               <p className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-ink-soft transition-colors group-hover:text-accent-ink">
                 Me conta o que você precisa

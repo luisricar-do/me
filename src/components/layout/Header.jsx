@@ -11,7 +11,7 @@ import { SIMPLE_BASE } from "../../lib/siteMode"
 
 const navLinks = [
   { id: "projetos", label: "Projetos" },
-  { id: "atuacao", label: "Serviços" },
+  { id: "atuacao", label: "Atuação" },
   { id: "palestras", label: "Palestras" },
   { id: "sobre", label: "Sobre" },
   { id: "destaques", label: "Pesquisa" },

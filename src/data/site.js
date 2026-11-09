@@ -1,6 +1,9 @@
 export const site = {
   name: "Luis Ricardo Santos",
-  tagline: "Desenvolvimento · Cloud · IA aplicada",
+  tagline: "Governança · Engenharia · IA",
+  title: "Luis Ricardo Santos | Governança de TI e IA que roda",
+  description:
+    "Luis Ricardo Santos é Gerente de Governança de TI e IA e DPO na Tech for Humans. Transforma burocracia em ferramenta e processo que rodam, com IA quando ela ajuda.",
   role: "Gerente de Governança de TI e IA",
   company: "Tech for Humans",
   email: "eu@luisr.com.br",
@@ -16,19 +19,16 @@ export function mailto(subject) {
   return `mailto:${site.email}?subject=${encodeURIComponent(subject)}`
 }
 
-/** Os motivos pelos quais alguém me escreve, na ordem em que mais acontecem. */
+/** Assunto do botão principal: a conversa que eu mais quero ter. */
+export const primarySubject = "Conversa sobre governança e IA"
+
+/** Os motivos pelos quais alguém me escreve. */
 export const contactIntents = [
   {
-    id: "projeto",
-    label: "Site ou sistema",
-    hint: "Um site novo, um sistema sob medida, uma integração",
-    subject: "Projeto: site ou sistema",
-  },
-  {
-    id: "ia",
-    label: "Consultoria de IA",
-    hint: "Onde aplicar IA, agentes, automações, governança",
-    subject: "Consultoria de IA",
+    id: "governanca",
+    label: "Governança e IA",
+    hint: "LGPD, ISO, processos e onde a IA entra",
+    subject: primarySubject,
   },
   {
     id: "palestra",
@@ -37,9 +37,15 @@ export const contactIntents = [
     subject: "Convite para palestra ou mentoria",
   },
   {
+    id: "oportunidade",
+    label: "Oportunidade",
+    hint: "Liderança técnica, parcerias e projetos",
+    subject: "Oportunidade",
+  },
+  {
     id: "outro",
     label: "Outro assunto",
-    hint: "Oportunidades, parcerias ou só uma dúvida",
+    hint: "Ou só uma dúvida",
     subject: "Contato pelo site",
   },
 ]

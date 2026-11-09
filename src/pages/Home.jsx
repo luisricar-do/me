@@ -16,10 +16,7 @@ import { site } from "../data/site"
 
 // O que construí → o que ofereço → prova → quem sou → como me chamar
 export function Home() {
-  usePageMeta(
-    `${site.name} | Desenvolvimento, cloud e IA aplicada`,
-    "Luis Ricardo Santos desenvolve sites e sistemas, do front à nuvem, e ajuda empresas a usar IA com critério. Também faz palestras, mentoria e escreve no Substack."
-  )
+  usePageMeta(site.title, site.description)
 
   return (
     <>

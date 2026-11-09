@@ -29,8 +29,8 @@ export function Contact() {
           {...photoGuard}
         />
         <p className="text-pretty text-lg leading-relaxed text-ink-soft md:text-xl">
-          Um site, um sistema, uma dúvida sobre IA no seu negócio, uma palestra. Escolha o
-          motivo e o email já sai com o assunto certo. Respondo pessoalmente.
+          Governança, IA, uma palestra ou uma oportunidade. Escolha o motivo e o email já
+          sai com o assunto certo. Respondo pessoalmente.
         </p>
       </Reveal>
 

@@ -15,7 +15,7 @@ const ORIGIN = "https://luisr.com.br"
 const SIMPLE = {
   title: "Luis Ricardo Santos | Versão simples",
   description:
-    "Luis Ricardo Santos, desenvolvimento, cloud e IA aplicada. Tudo numa página só: projetos, serviços, palestras, trajetória e contato.",
+    "Luis Ricardo Santos, Gerente de Governança de TI e IA e DPO. Tudo numa página só: projetos, atuação, palestras, trajetória e contato.",
 }
 
 const ROUTES = [
@@ -25,12 +25,12 @@ const ROUTES = [
     canonical: "",
     title: "Sobre mim · Luis Ricardo Santos",
     description:
-      "Quem sou e como posso ajudar: sites e sistemas, consultoria de IA, cloud e DevOps, palestras e mentoria.",
+      "Quem sou e o que eu faço: governança de TI e IA, ferramentas e processos, cloud e DevOps, palestras e mentoria.",
   },
   {
     path: "projetos",
     title: "Projetos · Luis Ricardo Santos",
-    description: "Sites, sistemas e ferramentas com IA que eu construí, do código à produção.",
+    description: "Plataformas, ferramentas e sistemas que eu construí, do código à produção.",
   },
   {
     path: "palestras",
@@ -55,7 +55,7 @@ const ROUTES = [
   {
     path: "contato",
     title: "Contato · Luis Ricardo Santos",
-    description: "Um site, um sistema, consultoria de IA, palestra ou mentoria: me conta o que você precisa.",
+    description: "Governança, IA, palestra, mentoria ou uma oportunidade: me conta o que você precisa.",
   },
   {
     path: "terminal",
