@@ -3,6 +3,7 @@ export const SECTION_APP = {
   hero: "sobre",
   projetos: "projetos",
   atuacao: "sobre",
+  "como-trabalho": "sobre",
   sobre: "sobre",
   palestras: "palestras",
   destaques: "publicacoes",

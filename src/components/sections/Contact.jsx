@@ -15,7 +15,7 @@ const links = [
 export function Contact() {
   return (
     <section id="contato" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-      <SectionTitle index="08" eyebrow="Contato" title="Me conta o que você precisa." />
+      <SectionTitle index="09" eyebrow="Contato" title="Me conta o que você precisa." />
 
       <Reveal className="mt-10 flex max-w-2xl items-center gap-5">
         <img

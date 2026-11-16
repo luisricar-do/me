@@ -10,8 +10,9 @@ import { openCommandPalette } from "../../lib/palette"
 import { SIMPLE_BASE } from "../../lib/siteMode"
 
 const navLinks = [
-  { id: "projetos", label: "Projetos" },
   { id: "atuacao", label: "Atuação" },
+  { id: "como-trabalho", label: "Método" },
+  { id: "projetos", label: "Projetos" },
   { id: "palestras", label: "Palestras" },
   { id: "sobre", label: "Sobre" },
   { id: "destaques", label: "Pesquisa" },
@@ -57,7 +58,7 @@ export function Header() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
         <Link
           to={SIMPLE_BASE}
-          className="group flex items-center gap-2.5 text-sm font-medium tracking-tight text-ink"
+          className="group flex shrink-0 items-center gap-2.5 whitespace-nowrap text-sm font-medium tracking-tight text-ink"
         >
           <Mark
             size={20}
@@ -67,7 +68,7 @@ export function Header() {
           {site.name}
         </Link>
 
-        <ul className="hidden items-center gap-6 lg:flex">
+        <ul className="hidden items-center gap-5 xl:flex">
           {navLinks.map((link) => (
             <li key={link.id}>
               <SectionLink
@@ -106,7 +107,7 @@ export function Header() {
           </Link>
           <Link
             to={`${SIMPLE_BASE}/ia`}
-            className={`hidden items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-[11px] transition-colors md:inline-flex ${
+            className={`hidden items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 font-mono text-[11px] transition-colors md:inline-flex ${
               pathname.replace(/\/+$/, "") === `${SIMPLE_BASE}/ia`
                 ? "border-accent bg-accent-tint text-accent"
                 : "border-line text-ink-soft hover:border-accent hover:text-accent"
@@ -125,7 +126,7 @@ export function Header() {
           <ThemeToggle />
           <button
             type="button"
-            className="grid h-9 w-9 place-items-center rounded-full border border-line text-ink lg:hidden"
+            className="grid h-9 w-9 place-items-center rounded-full border border-line text-ink xl:hidden"
             onClick={() => setOpen((value) => !value)}
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
@@ -138,7 +139,7 @@ export function Header() {
       <div data-scrollbar className="h-px bg-accent" aria-hidden />
 
       <div
-        className={`grid overflow-hidden border-t border-line bg-paper transition-[grid-template-rows] duration-300 lg:hidden ${
+        className={`grid overflow-hidden border-t border-line bg-paper transition-[grid-template-rows] duration-300 xl:hidden ${
           open ? "grid-rows-[1fr]" : "grid-rows-[0fr] border-t-transparent"
         }`}
       >
