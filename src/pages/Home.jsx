@@ -7,6 +7,7 @@ import { Highlights } from "../components/sections/Highlights"
 import { Writing } from "../components/sections/Writing"
 import { Timeline } from "../components/sections/Timeline"
 import { Contact } from "../components/sections/Contact"
+import { Method } from "../components/sections/Method"
 import { BuiltWith } from "../components/sections/BuiltWith"
 import { PullQuote } from "../components/ui/PullQuote"
 import { RulerTeaser } from "../components/ia/RulerTeaser"
@@ -14,17 +15,18 @@ import { quotes } from "../data/quotes"
 import { usePageMeta } from "../hooks/usePageMeta"
 import { site } from "../data/site"
 
-// O que construí → o que ofereço → prova → quem sou → como me chamar
+// Problema que eu resolvo → como trabalho → prova → quem sou → como me chamar
 export function Home() {
   usePageMeta(site.title, site.description)
 
   return (
     <>
       <Hero />
-      <Projects />
       <Services />
-      <Talks />
+      <Method />
+      <Projects />
       <RulerTeaser />
+      <Talks />
       <PullQuote {...quotes.repertorio} />
       <About />
       <Highlights />

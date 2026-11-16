@@ -15,8 +15,9 @@ export const LINE_CLASS = {
 }
 
 const SECTIONS = [
+  ["atuacao", "problemas que eu resolvo"],
+  ["como-trabalho", "do problema à coisa rodando"],
   ["projetos", "o que eu construí"],
-  ["atuacao", "onde eu posso ajudar"],
   ["palestras", "palcos, mentorias e presenças"],
   ["sobre", "quem sou"],
   ["destaques", "pesquisa e publicações"],
@@ -28,9 +29,9 @@ const SECTIONS = [
 const FILES = {
   "me.txt": () => [
     { kind: "accent", text: "# whoami" },
-    { kind: "out", text: "técnico que faz a governança rodar" },
+    { kind: "out", text: "engenheiro que faz a governança rodar" },
     { kind: "muted", text: `${site.role} · ${site.company}` },
-    { kind: "muted", text: "ferramenta e processo, com ou sem IA" },
+    { kind: "muted", text: "arquitetura, governança e IA com limite" },
     { kind: "muted", text: `escrevo em ${site.substack}` },
   ],
   "palestras.md": () =>

@@ -3,6 +3,7 @@ import { ArrowUpRight, Github, Linkedin, Mail, PenLine } from "lucide-react"
 import { site, contactIntents, mailto, primarySubject } from "../../data/site"
 import { about, proof } from "../../data/about"
 import { services } from "../../data/services"
+import { method, metrics, pitch } from "../../data/pitch"
 import { talks, talkKinds } from "../../data/talks"
 import { publications } from "../../data/publications"
 import { projects } from "../../data/projects"
@@ -74,14 +75,13 @@ export function AboutView() {
         <p className="label text-accent">Boas-vindas</p>
       </div>
       <h1 className="display mt-3 text-balance text-3xl text-ink md:text-4xl">
-        Transformo burocracia em{" "}
-        <span className="italic text-accent">sistema que roda.</span>
+        {pitch.headlineLead}{" "}
+        <span className="italic text-accent">{pitch.headlineAccent}</span>
       </h1>
-      <p className="mt-5 text-pretty leading-relaxed text-ink-soft">
-        Sou {site.name}, o técnico que gosta da parte que ninguém quer: LGPD, ISO,
-        auditoria, processo. Construo a ferramenta e o processo junto, com IA quando ela
-        ajuda e sem quando não ajuda. Há {about.yearsAtCompany} anos na {site.company}, fui de estagiário fullstack a{" "}
-        {site.role}, passando pela fundação da área de DevOps.
+      <p className="mt-5 text-pretty leading-relaxed text-ink-soft">{pitch.lead}</p>
+      <p className="mt-3 text-pretty text-sm leading-relaxed text-muted">
+        Sou {site.name}. Há {about.yearsAtCompany} anos na {site.company}, fui de estagiário
+        fullstack a {site.role} e DPO, passando pela fundação da área de DevOps.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2">
@@ -89,7 +89,7 @@ export function AboutView() {
           href={mailto(primarySubject)}
           className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-accent-ink"
         >
-          Falar comigo <ArrowUpRight size={15} />
+          {pitch.primaryCta} <ArrowUpRight size={15} />
         </a>
         <Link
           to="/projetos"
@@ -99,15 +99,26 @@ export function AboutView() {
         </Link>
       </div>
 
-      <h2 className="label mt-10 text-muted">O que eu faço</h2>
+      <dl className="mt-8 grid grid-cols-2 gap-x-5 gap-y-4 border-t border-line-soft pt-5">
+        {metrics.map((item) => (
+          <div key={item.label} className="min-w-0">
+            <dt className="sr-only">{item.label}</dt>
+            <dd className="display text-2xl text-ink tabular-nums">{item.value}</dd>
+            <dd className="mt-0.5 text-pretty text-xs leading-snug text-muted">{item.label}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <h2 className="label mt-10 text-muted">Problemas que eu resolvo</h2>
       <ul className="mt-4 space-y-3">
-        {services.map(({ id, icon: Icon, title, body, subject }) => (
+        {services.map(({ id, icon: Icon, title, problem, body, subject }) => (
           <li key={id} className="flex gap-4 rounded-lg border border-line-soft p-4">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent-tint text-accent">
               <Icon size={16} />
             </span>
             <div className="min-w-0">
-              <p className="font-medium text-ink">{title}</p>
+              <p className="text-pretty text-sm text-ink-soft">{problem}</p>
+              <p className="mt-1 font-medium text-ink">{title}</p>
               <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">{body}</p>
               <a
                 href={mailto(subject)}
@@ -119,6 +130,19 @@ export function AboutView() {
           </li>
         ))}
       </ul>
+
+      <h2 className="label mt-10 text-muted">Como eu trabalho</h2>
+      <ol className="mt-4 space-y-4">
+        {method.map(({ step, title, body }) => (
+          <li key={step} className="grid grid-cols-[2rem_1fr] gap-3">
+            <span className="pt-0.5 font-mono text-sm text-accent tabular-nums">{step}</span>
+            <div className="min-w-0">
+              <p className="font-medium text-ink">{title}</p>
+              <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">{body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
 
       <h2 className="label mt-10 text-muted">Já passei por</h2>
       <p className="mt-3 text-sm text-ink-soft">{proof.join(" · ")}</p>

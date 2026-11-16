@@ -7,7 +7,7 @@ import { writing } from "../../data/writing"
 export function Writing() {
   return (
     <section id="escrita" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-      <SectionTitle index="06" eyebrow="Escrita" title={writing.title} />
+      <SectionTitle index="07" eyebrow="Escrita" title={writing.title} />
 
       <Reveal className="mt-14 grid gap-10 rounded-xl border border-line p-7 md:mt-20 md:grid-cols-[1.2fr_0.8fr] md:items-end md:gap-14 md:p-10">
         <div className="min-w-0">

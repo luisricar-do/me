@@ -9,7 +9,7 @@ export function Projects() {
   return (
     <section id="projetos" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle
-        index="01"
+        index="03"
         eyebrow="Projetos"
         title="O que eu construí."
         lead="Plataformas, ferramentas e sistemas, do código à produção. Alguns estão no ar, outros têm o código aberto."

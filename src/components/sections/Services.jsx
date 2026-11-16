@@ -8,19 +8,20 @@ export function Services() {
   return (
     <section id="atuacao" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle
-        index="02"
+        index="01"
         eyebrow="Atuação"
-        title="O que eu faço."
-        lead="Governança, ferramenta e processo, do papel à produção. Se quiser trocar ideia sobre qualquer um desses, me chama."
+        title="Problemas que eu resolvo."
+        lead="Se algum desses parece com o seu dia, me chama. A primeira conversa serve para entender o problema."
       />
 
       <ul className="mt-14 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:mt-20 md:grid-cols-2">
-        {services.map(({ id, icon: Icon, title, body, proof, subject }, i) => (
+        {services.map(({ id, icon: Icon, title, problem, body, proof, subject }, i) => (
           <Reveal as="li" key={id} delay={i * 0.06} className="flex flex-col bg-paper p-7 md:p-8">
             <span className="grid h-9 w-9 place-items-center rounded-full bg-accent-tint text-accent">
               <Icon size={16} />
             </span>
-            <h3 className="display mt-6 text-2xl text-ink md:text-[1.75rem]">{title}</h3>
+            <p className="mt-6 text-pretty font-medium leading-snug text-ink">{problem}</p>
+            <h3 className="display mt-4 text-2xl text-ink md:text-[1.75rem]">{title}</h3>
             <p className="mt-3 flex-1 text-pretty leading-relaxed text-muted">{body}</p>
             <p className="mt-6 border-t border-line-soft pt-4 font-mono text-[11px] text-ink-soft">
               {proof}

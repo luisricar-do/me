@@ -53,7 +53,7 @@ export function Timeline() {
   return (
     <section id="trajetoria" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <SectionTitle
-        index="07"
+        index="08"
         eyebrow="Trajetória"
         title="Linha do tempo."
         lead="Nada disso estava no plano, porque nunca teve plano. Teve curiosidade e correção de rota."
